@@ -1,0 +1,600 @@
+<!doctype html>
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Register - WorkFlow</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed": "#ffdbcc",
+              "on-primary": "#ffffff",
+              "on-primary-fixed": "#0f0069",
+              "surface-container-high": "#e7e8e9",
+              "on-error": "#ffffff",
+              "glass-border": "rgba(255, 255, 255, 0.40)",
+              "secondary-container": "#5f5ffd",
+              primary: "#3525cd",
+              "surface-bright": "#f8f9fa",
+              "on-tertiary-fixed": "#351000",
+              "on-surface": "#191c1d",
+              "inverse-primary": "#c3c0ff",
+              "tertiary-container": "#a44100",
+              "surface-container": "#edeeef",
+              "secondary-fixed-dim": "#c1c1ff",
+              "on-tertiary": "#ffffff",
+              "surface-tint": "#4d44e3",
+              warning: "#F59E0B",
+              "glass-bg": "rgba(255, 255, 255, 0.75)",
+              "error-container": "#ffdad6",
+              "surface-dim": "#d9dadb",
+              success: "#10B981",
+              "primary-fixed": "#e2dfff",
+              "primary-container": "#4f46e5",
+              "on-secondary": "#ffffff",
+              "on-secondary-fixed-variant": "#2c24ce",
+              error: "#ba1a1a",
+              "tertiary-fixed-dim": "#ffb695",
+              "surface-container-low": "#f3f4f5",
+              "shadow-tint": "rgba(79, 70, 229, 0.15)",
+              danger: "#EF4444",
+              "surface-variant": "#e1e3e4",
+              "on-secondary-container": "#fffbff",
+              "inverse-surface": "#2e3132",
+              "on-primary-fixed-variant": "#3323cc",
+              "on-secondary-fixed": "#09006b",
+              "secondary-fixed": "#e1dfff",
+              "inverse-on-surface": "#f0f1f2",
+              secondary: "#4442e3",
+              "on-error-container": "#93000a",
+              "on-tertiary-container": "#ffd2be",
+              "outline-variant": "#c7c4d8",
+              tertiary: "#7e3000",
+              background: "#f8f9fa",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed-dim": "#c3c0ff",
+              "on-surface-variant": "#464555",
+              "surface-container-highest": "#e1e3e4",
+              outline: "#777587",
+              "on-primary-container": "#dad7ff",
+              "on-background": "#191c1d",
+              surface: "#f8f9fa",
+              "on-tertiary-fixed-variant": "#7b2f00",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              "stack-md": "16px",
+              "stack-lg": "32px",
+              "stack-sm": "8px",
+              "container-max": "1440px",
+              "margin-desktop": "32px",
+              "margin-mobile": "16px",
+              gutter: "24px",
+            },
+            fontFamily: {
+              "label-lg": ["Inter"],
+              "headline-md": ["Inter"],
+              "headline-lg": ["Inter"],
+              "body-lg": ["Inter"],
+              "headline-lg-mobile": ["Inter"],
+              "display-lg": ["Inter"],
+              "label-md": ["Inter"],
+              "body-md": ["Inter"],
+              "body-sm": ["Inter"],
+            },
+            fontSize: {
+              "label-lg": [
+                "14px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.25",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.5", fontWeight: "400" }],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.25", fontWeight: "600" },
+              ],
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-md": ["12px", { lineHeight: "1.2", fontWeight: "500" }],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+              "body-sm": ["14px", { lineHeight: "1.6", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f8f9fa;
+        
+      }
+      .glass-pane {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 20px 60px rgba(79, 70, 229, 0.15);
+      }
+      .ripple {
+        position: relative;
+        overflow: hidden;
+      }
+      .ripple::after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+        background-repeat: no-repeat;
+        background-position: 50%;
+        transform: scale(10, 10);
+        opacity: 0;
+        transition:
+          transform 0.5s,
+          opacity 1s;
+      }
+      .ripple:active::after {
+        transform: scale(0, 0);
+        opacity: 0.3;
+        transition: 0s;
+      }
+      .strength-meter-bar {
+        height: 4px;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen flex items-center justify-center p-4 md:p-8 bg-surface overflow-x-hidden"
+  >
+    <!-- Background Atmospheric Effect -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+      <div
+        class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px]"
+      ></div>
+      <div
+        class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/10 rounded-full blur-[120px]"
+      ></div>
+    </div>
+    <main
+      class="w-full max-w-container-max grid lg:grid-cols-2 gap-gutter items-center"
+    >
+      <!-- Left Side: Benefit List & Premium Element -->
+      <div class="hidden lg:flex flex-col gap-stack-lg pr-margin-desktop">
+        <div class="flex items-center gap-stack-sm mb-4">
+          <div
+            class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center shadow-lg shadow-shadow-tint"
+          >
+            <span
+              class="material-symbols-outlined text-white"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >widgets</span
+            >
+          </div>
+          <span
+            class="font-headline-md text-headline-md text-primary tracking-tight"
+            >WorkFlow</span
+          >
+        </div>
+        <div class="space-y-6">
+          <h1
+            class="font-display-lg text-display-lg text-on-surface leading-tight"
+          >
+            Elevate your team's
+            <span class="text-primary-container">productivity</span>.
+          </h1>
+          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+            Join over 50,000+ high-performance teams using WorkFlow to manage
+            complex projects with glass-clear visibility.
+          </p>
+        </div>
+        <div class="grid gap-6 mt-8">
+          <div class="flex items-start gap-4 p-6 glass-pane rounded-xl">
+            <span
+              class="material-symbols-outlined text-primary-container bg-primary/10 p-2 rounded-lg"
+              >bolt</span
+            >
+            <div>
+              <h3 class="font-label-lg text-label-lg text-on-surface">
+                Boost Productivity
+              </h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">
+                Intelligent task prioritization and automated daily stand-ups.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-6 glass-pane rounded-xl">
+            <span
+              class="material-symbols-outlined text-primary-container bg-primary/10 p-2 rounded-lg"
+              >groups</span
+            >
+            <div>
+              <h3 class="font-label-lg text-label-lg text-on-surface">
+                Collaborate Seamlessly
+              </h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">
+                Real-time multiplayer editing and integrated team communication.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-6 glass-pane rounded-xl">
+            <span
+              class="material-symbols-outlined text-primary-container bg-primary/10 p-2 rounded-lg"
+              >analytics</span
+            >
+            <div>
+              <h3 class="font-label-lg text-label-lg text-on-surface">
+                Deep Insights
+              </h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">
+                Visualize bottlenecks with professional-grade Kanban and Gantt
+                views.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Client Proof Mini-Carousel / Static Placeholder -->
+        <div class="mt-8 flex items-center gap-4">
+          <div class="flex -space-x-3">
+            <img
+              class="w-10 h-10 rounded-full border-2 border-white object-cover"
+              data-alt="A professional headshot of a smiling female executive in a modern bright office setting. Soft studio lighting, minimalist background with a slight blue tint, sharp focus on eyes, 8k resolution, premium corporate aesthetic."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpasJxsRPheXWnzd0uKOF5BIp0unTJ7DWhkKuXPZvMxmMXbhXGAPXkDNCpsOb-M4E9nge2kGtr333Ycv8caypzmUIjWUiaFBSochbMS1B54itNys6l6YNCnzZVPLzFGDoGIC6FldHZjUfCzWKBGmF3Uel2xM9uPmC2mHaB6t0U5CsvA_3SFIv_xKBxndPSmwJCRl-Z-kE_7v4DWk-KKVKQlmn74V9sX94NkGUypchtZNjX0iUzX4XnnFysbY5nDMnPDxxad7DG_co"
+            />
+            <img
+              class="w-10 h-10 rounded-full border-2 border-white object-cover"
+              data-alt="A professional headshot of a creative director with a minimalist workspace behind him. Natural morning light, shallow depth of field, high-end tech enthusiast aesthetic, soft pastel colors, 8k resolution."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoff06TeLdtosLceSUI3Qj0iVD7jnqhWkXR_C5i2q6aOVfY6T88vXm_JFiN__NDhFD1CsFVDq5p3wazNf3-3uTXtCclDqppDQQF75XhfC1APSQCa2E7kSjWtzJ5mskeYVvw9WFkFsu15l4Ac4SZ2LzvajLGcLdEaVbl-n_74iiSF8k1UK6M18B5rJCa12scsBImrBQiaxd-5gksfb-TPfOXknnERTSbB8qR_v2IIEYITOSCaxJjsPbtxtQitcRYXlDGVQGX_L2oDo"
+            />
+            <img
+              class="w-10 h-10 rounded-full border-2 border-white object-cover"
+              data-alt="A candid professional photo of a diverse young professional in a high-tech coworking space. Soft focused background with plants and glass walls, bright and airy lighting, sophisticated business casual style, 8k resolution."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-onLbaHLyRhE6708vnwtYWKen_4qBj31yoAIRyy5rcfOnhB-BZAKc8uU5yrwE-CLOO137DQkGpu3AaiC2nqtDUsTXlkjQcSCgWnAJ1-Z5GhWMqIFd09VmkWO_GmUDxKZPEicT-MTSRP2B6hxSZzEjdyd-X1k1yzyhdDFiSykNiN5mwwxigIelqyFgPLIzIyO4853AWL-hODGpsGz5CMf9B8u0Zo-kCIuyQ8Ewl-Hp9tG4jUFL49raak6FqSGLU9_ldjoX8ioxKlc"
+            />
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">
+            Trusted by leaders at
+            <span class="font-bold text-on-surface">Innovate Corp</span> and
+            <span class="font-bold text-on-surface">Nexus Labs</span>.
+          </p>
+        </div>
+      </div>
+      <!-- Right Side: Registration Card -->
+      <div class="flex justify-center lg:justify-end">
+        <div
+          class="glass-pane w-full max-w-md p-8 md:p-10 rounded-3xl flex flex-col gap-stack-md"
+        >
+          <div class="mb-4">
+            <h2 class="font-headline-lg text-headline-lg text-on-surface">
+              Create Account
+            </h2>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">
+              Start your 14-day free trial today.
+            </p>
+          </div>
+          <form class="flex flex-col gap-5" id="registrationForm">
+            <!-- Full Name -->
+            <div class="flex flex-col gap-2">
+              <label
+                class="font-label-lg text-label-lg text-on-surface"
+                for="fullName"
+                >Full Name</label
+              >
+              <div class="relative">
+                <span
+                  class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-[20px]"
+                  >person</span
+                >
+                <input
+                  class="w-full pl-12 pr-4 py-3 bg-white/50 border border-glass-border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-body-md text-body-md"
+                  id="fullName"
+                  placeholder="Jane Cooper"
+                  required=""
+                  type="text"
+                />
+              </div>
+            </div>
+            <!-- Email -->
+            <div class="flex flex-col gap-2">
+              <label
+                class="font-label-lg text-label-lg text-on-surface"
+                for="email"
+                >Email Address</label
+              >
+              <div class="relative">
+                <span
+                  class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-[20px]"
+                  >mail</span
+                >
+                <input
+                  class="w-full pl-12 pr-4 py-3 bg-white/50 border border-glass-border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-body-md text-body-md"
+                  id="email"
+                  placeholder="jane@workflow.so"
+                  required=""
+                  type="email"
+                />
+              </div>
+            </div>
+            <!-- Password -->
+            <div class="flex flex-col gap-2">
+              <label
+                class="font-label-lg text-label-lg text-on-surface"
+                for="password"
+                >Password</label
+              >
+              <div class="relative">
+                <span
+                  class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-[20px]"
+                  >lock</span
+                >
+                <input
+                  class="w-full pl-12 pr-12 py-3 bg-white/50 border border-glass-border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-body-md text-body-md"
+                  id="password"
+                  placeholder="••••••••"
+                  required=""
+                  type="password"
+                />
+                <button
+                  class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors"
+                  onclick="togglePassword()"
+                  type="button"
+                >
+                  <span
+                    class="material-symbols-outlined text-[20px]"
+                    id="passwordToggleIcon"
+                    >visibility</span
+                  >
+                </button>
+              </div>
+              <!-- Strength Meter -->
+              <div class="mt-1 flex flex-col gap-1.5">
+                <div class="flex gap-1">
+                  <div
+                    class="strength-meter-bar flex-1 bg-surface-variant"
+                    id="meter1"
+                  ></div>
+                  <div
+                    class="strength-meter-bar flex-1 bg-surface-variant"
+                    id="meter2"
+                  ></div>
+                  <div
+                    class="strength-meter-bar flex-1 bg-surface-variant"
+                    id="meter3"
+                  ></div>
+                  <div
+                    class="strength-meter-bar flex-1 bg-surface-variant"
+                    id="meter4"
+                  ></div>
+                </div>
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  id="strengthLabel"
+                  >Password must be at least 8 characters</span
+                >
+              </div>
+            </div>
+            <!-- Terms Checkbox -->
+            <label class="flex items-start gap-3 cursor-pointer group mt-2">
+              <div class="relative flex items-center">
+                <input
+                  class="peer h-5 w-5 rounded border-glass-border text-primary-container focus:ring-primary-container/20"
+                  required=""
+                  type="checkbox"
+                />
+              </div>
+              <span
+                class="font-body-sm text-body-sm text-on-surface-variant select-none"
+              >
+                I agree to the
+                <a
+                  class="text-primary-container font-semibold hover:underline"
+                  href="#"
+                  >Terms of Service</a
+                >
+                and
+                <a
+                  class="text-primary-container font-semibold hover:underline"
+                  href="#"
+                  >Privacy Policy</a
+                >.
+              </span>
+            </label>
+            <!-- Sign Up Button -->
+            <button
+              class="ripple mt-4 w-full bg-primary-container text-white py-4 rounded-xl font-label-lg text-label-lg shadow-lg shadow-shadow-tint hover:bg-primary transition-all active:scale-[0.98]"
+              type="submit"
+            >
+              Sign Up
+            </button>
+          </form>
+          <!-- Footer Links -->
+          <div class="mt-4 text-center">
+            <p class="font-body-sm text-body-sm text-on-surface-variant">
+              Already have an account?
+              <a
+                class="text-primary-container font-bold hover:underline"
+                href="#"
+                >Log In</a
+              >
+            </p>
+          </div>
+          <!-- Divider -->
+          <div class="flex items-center gap-4 my-2">
+            <div class="h-px flex-1 bg-glass-border"></div>
+            <span class="font-label-md text-label-md text-outline">OR</span>
+            <div class="h-px flex-1 bg-glass-border"></div>
+          </div>
+          <!-- Social Sign Up -->
+          <div class="grid grid-cols-2 gap-4">
+            <button
+              class="flex items-center justify-center gap-2 py-3 px-4 bg-white/50 border border-glass-border rounded-xl hover:bg-white transition-all font-label-lg text-label-lg"
+            >
+              <svg class="w-5 h-5" viewBox="0 0 24 24">
+                <path
+                  d="M12.48 10.92v3.28h7.84c-.24 1.84-.9 3.34-2.1 4.46-1.5 1.5-3.8 3.08-7.74 3.08-6.14 0-11-4.96-11-11.1s4.86-11.1 11-11.1c3.28 0 5.76 1.28 7.54 3L21 4.7C18.8 2.6 15.6 1.1 12.48 1.1 6.58 1.1 1.48 6.2 1.48 12.1s5.1 11 11 11c3.12 0 5.76-1.02 7.84-3.08 2.1-2.1 2.84-5.1 2.84-7.6 0-.54-.04-1.06-.12-1.5H12.48z"
+                  fill="#EA4335"
+                ></path>
+              </svg>
+              Google
+            </button>
+            <button
+              class="flex items-center justify-center gap-2 py-3 px-4 bg-white/50 border border-glass-border rounded-xl hover:bg-white transition-all font-label-lg text-label-lg"
+            >
+              <svg class="w-5 h-5" viewBox="0 0 24 24">
+                <path
+                  d="M16.365 1.43H13c-3.526 0-5.32 2.374-5.32 5.56v2.565h-2.92v3.91h2.92v9.1h4.15v-9.1h3.33l.42-3.91h-3.75v-2.1c0-1.07.24-1.63 1.62-1.63h2.1V1.43z"
+                  fill="#000000"
+                ></path>
+              </svg>
+              Github
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      // Password Visibility Toggle
+      function togglePassword() {
+        const passwordInput = document.getElementById("password");
+        const icon = document.getElementById("passwordToggleIcon");
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          icon.textContent = "visibility_off";
+        } else {
+          passwordInput.type = "password";
+          icon.textContent = "visibility";
+        }
+      }
+
+      // Password Strength Meter Logic
+      const passwordInput = document.getElementById("password");
+      const meters = [
+        document.getElementById("meter1"),
+        document.getElementById("meter2"),
+        document.getElementById("meter3"),
+        document.getElementById("meter4"),
+      ];
+      const strengthLabel = document.getElementById("strengthLabel");
+
+      passwordInput.addEventListener("input", (e) => {
+        const val = e.target.value;
+        let strength = 0;
+
+        if (val.length >= 8) strength++;
+        if (val.match(/[A-Z]/)) strength++;
+        if (val.match(/[0-9]/)) strength++;
+        if (val.match(/[^A-Za-z0-9]/)) strength++;
+
+        // Reset meters
+        meters.forEach((m) => {
+          m.className = "strength-meter-bar flex-1 bg-surface-variant";
+        });
+
+        if (val.length > 0) {
+          if (strength <= 1) {
+            meters[0].className = "strength-meter-bar flex-1 bg-error";
+            strengthLabel.textContent = "Weak password";
+            strengthLabel.className = "font-label-md text-label-md text-error";
+          } else if (strength === 2) {
+            meters[0].className = "strength-meter-bar flex-1 bg-warning";
+            meters[1].className = "strength-meter-bar flex-1 bg-warning";
+            strengthLabel.textContent = "Moderate password";
+            strengthLabel.className =
+              "font-label-md text-label-md text-warning";
+          } else if (strength === 3) {
+            meters[0].className =
+              "strength-meter-bar flex-1 bg-primary-container";
+            meters[1].className =
+              "strength-meter-bar flex-1 bg-primary-container";
+            meters[2].className =
+              "strength-meter-bar flex-1 bg-primary-container";
+            strengthLabel.textContent = "Strong password";
+            strengthLabel.className =
+              "font-label-md text-label-md text-primary-container";
+          } else {
+            meters.forEach(
+              (m) => (m.className = "strength-meter-bar flex-1 bg-success"),
+            );
+            strengthLabel.textContent = "Excellent password";
+            strengthLabel.className =
+              "font-label-md text-label-md text-success";
+          }
+        } else {
+          strengthLabel.textContent = "Password must be at least 8 characters";
+          strengthLabel.className =
+            "font-label-md text-label-md text-on-surface-variant";
+        }
+      });
+
+      // Simple form submit feedback
+      document
+        .getElementById("registrationForm")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          const btn = e.target.querySelector('button[type="submit"]');
+          const originalText = btn.textContent;
+          btn.textContent = "Creating Account...";
+          btn.disabled = true;
+          btn.style.opacity = "0.7";
+
+          setTimeout(() => {
+            alert("Welcome to WorkFlow! Registration successful.");
+            btn.textContent = originalText;
+            btn.disabled = false;
+            btn.style.opacity = "1";
+          }, 1500);
+        });
+    </script>
+  </body>
+</html>

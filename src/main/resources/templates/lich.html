@@ -1,0 +1,1023 @@
+<!doctype html>
+
+<html class="light" lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>WorkFlow - Calendar Management</title>
+    <!-- Material Symbols -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts: Inter -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Custom Theme Configuration -->
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-primary": "#c3c0ff",
+              primary: "#3525cd",
+              "surface-container-low": "#f3f4f5",
+              surface: "#f8f9fa",
+              "primary-fixed-dim": "#c3c0ff",
+              background: "#f8f9fa",
+              "on-surface-variant": "#464555",
+              "on-secondary-container": "#fffbff",
+              "on-surface": "#191c1d",
+              "on-tertiary": "#ffffff",
+              "on-error": "#ffffff",
+              tertiary: "#7e3000",
+              "glass-border": "rgba(255, 255, 255, 0.40)",
+              "inverse-on-surface": "#f0f1f2",
+              "on-primary-fixed": "#0f0069",
+              "on-primary-container": "#dad7ff",
+              "on-primary-fixed-variant": "#3323cc",
+              "on-tertiary-fixed": "#351000",
+              "shadow-tint": "rgba(79, 70, 229, 0.15)",
+              "surface-container": "#edeeef",
+              "surface-container-highest": "#e1e3e4",
+              "tertiary-container": "#a44100",
+              secondary: "#4442e3",
+              "secondary-container": "#5f5ffd",
+              "on-primary": "#ffffff",
+              "on-tertiary-fixed-variant": "#7b2f00",
+              error: "#ba1a1a",
+              "inverse-surface": "#2e3132",
+              "on-tertiary-container": "#ffd2be",
+              "tertiary-fixed-dim": "#ffb695",
+              "on-background": "#191c1d",
+              "primary-fixed": "#e2dfff",
+              "tertiary-fixed": "#ffdbcc",
+              "primary-container": "#4f46e5",
+              success: "#10B981",
+              "secondary-fixed-dim": "#c1c1ff",
+              "surface-container-lowest": "#ffffff",
+              "surface-variant": "#e1e3e4",
+              outline: "#777587",
+              "surface-container-high": "#e7e8e9",
+              "on-secondary-fixed-variant": "#2c24ce",
+              "surface-tint": "#4d44e3",
+              danger: "#EF4444",
+              warning: "#F59E0B",
+              "surface-bright": "#f8f9fa",
+              "error-container": "#ffdad6",
+              "on-error-container": "#93000a",
+              "surface-dim": "#d9dadb",
+              "glass-bg": "rgba(255, 255, 255, 0.75)",
+              "outline-variant": "#c7c4d8",
+              "on-secondary": "#ffffff",
+              "secondary-fixed": "#e1dfff",
+              "on-secondary-fixed": "#09006b",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              "margin-desktop": "32px",
+              "stack-sm": "8px",
+              "stack-md": "16px",
+              "margin-mobile": "16px",
+              "container-max": "1440px",
+              gutter: "24px",
+              "stack-lg": "32px",
+            },
+            fontFamily: {
+              "headline-lg": ["Inter"],
+              "headline-md": ["Inter"],
+              "display-lg": ["Inter"],
+              "headline-lg-mobile": ["Inter"],
+              "body-md": ["Inter"],
+              "body-sm": ["Inter"],
+              "label-lg": ["Inter"],
+              "label-md": ["Inter"],
+              "body-lg": ["Inter"],
+            },
+            fontSize: {
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.25",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.25", fontWeight: "600" },
+              ],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+              "body-sm": ["14px", { lineHeight: "1.6", fontWeight: "400" }],
+              "label-lg": [
+                "14px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-md": ["12px", { lineHeight: "1.2", fontWeight: "500" }],
+              "body-lg": ["18px", { lineHeight: "1.5", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 20px 60px rgba(79, 70, 229, 0.15);
+      }
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .active {
+        background-color: rgb(53 37 205 / 0.1);
+        border-left-width: 4px;
+        --tw-border-opacity: 1;
+        border-color: rgb(53 37 205 / var(--tw-border-opacity, 1));
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background font-body-md text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed"
+  >
+    <!-- Sidebar Navigation -->
+    <aside
+      th:replace="~{fragments/layout :: sidebar(activePage='lich')}"
+    ></aside>
+    <!-- Main Content Area -->
+    <main class="ml-64 min-h-screen relative">
+      <!-- Top Navbar -->
+      <header
+        class="fixed top-0 right-0 left-64 h-16 bg-glass-bg backdrop-blur-xl border-b border-glass-border z-30 flex items-center justify-between px-margin-desktop"
+      >
+        <div class="flex items-center flex-1 max-w-xl">
+          <div class="relative w-full group">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors"
+              data-icon="search"
+              >search</span
+            >
+            <input
+              class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-transparent focus:border-primary focus:ring-0 rounded-lg text-sm transition-all outline-none"
+              placeholder="Tìm kiếm công việc, dự án... (⌘K)"
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button
+            class="p-2 hover:bg-surface-container rounded-full transition-colors text-on-surface-variant"
+          >
+            <span class="material-symbols-outlined" data-icon="dark_mode"
+              >dark_mode</span
+            >
+          </button>
+          <button
+            class="p-2 hover:bg-surface-container rounded-full transition-colors text-on-surface-variant relative"
+          >
+            <span class="material-symbols-outlined" data-icon="notifications"
+              >notifications</span
+            >
+            <div
+              class="absolute top-2 right-2 w-2 h-2 bg-danger rounded-full"
+            ></div>
+          </button>
+          <div
+            class="flex items-center gap-3 pl-4 border-l border-glass-border ml-2"
+          >
+            <div class="text-right">
+              <p class="font-semibold text-sm">Nguyễn Văn An</p>
+              <p class="text-xs text-on-surface-variant">Product Manager</p>
+            </div>
+            <img
+              class="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover"
+              data-alt="A professional headshot of a young male Vietnamese product manager in a sleek, modern office environment. The lighting is bright and clean, emphasizing a professional yet approachable personality. He is wearing a minimalist dark polo shirt. The background is slightly blurred with soft cool tones of indigo and white."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWerCGPNmCT6IAC7kL16gKIcftXxthLqu4kcbEZiyyT1kkdCS64EUgp3SQhk3Xs-nhb7dIc_fOB0mNZl0bdQRYQxG-jg37pKgPfbAt6VlRjOcozYI5IVqAH0XXYhwTLLHVY7Jvi79STBcnZnrw8Myva_b60nYPlgC5jEpVQ0m53IGLf15acCknB0eqAtNS5ir8a235y9dVNjS_u1JMUKJhYjOZIwVWB1RA2Ab9PPHQkljT1U271rIFdFoWwpTGVtu6ADr3Opp2rrQ"
+            />
+          </div>
+          <button
+            class="bg-primary hover:bg-primary-container text-white px-5 py-2 rounded-lg text-sm font-semibold transition-all active:scale-95 shadow-lg shadow-shadow-tint flex items-center gap-2"
+          >
+            <span class="material-symbols-outlined text-[18px]" data-icon="add"
+              >add</span
+            >
+            Thêm mới
+          </button>
+        </div>
+      </header>
+      <!-- Page Content -->
+      <div class="pt-24 pb-10 px-margin-desktop">
+        <div class="flex flex-col lg:flex-row gap-gutter">
+          <!-- Main Calendar View (Left/Center) -->
+          <div class="flex-1">
+            <div class="glass-card rounded-3xl p-6 mb-6">
+              <div class="flex items-center justify-between mb-8">
+                <div>
+                  <h1 class="font-headline-md text-headline-md text-primary">
+                    Lịch làm việc
+                  </h1>
+                  <p class="text-on-surface-variant font-body-sm mt-1">
+                    Tháng 6, 2024 • Hôm nay là ngày 19
+                  </p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="flex bg-surface-container-low p-1 rounded-xl">
+                    <button
+                      class="px-4 py-1.5 text-xs font-semibold rounded-lg bg-white shadow-sm text-primary"
+                    >
+                      Tháng
+                    </button>
+                    <button
+                      class="px-4 py-1.5 text-xs font-semibold rounded-lg text-on-surface-variant hover:text-primary transition-colors"
+                    >
+                      Tuần
+                    </button>
+                    <button
+                      class="px-4 py-1.5 text-xs font-semibold rounded-lg text-on-surface-variant hover:text-primary transition-colors"
+                    >
+                      Ngày
+                    </button>
+                  </div>
+                  <div
+                    class="flex items-center gap-1 border-l border-glass-border ml-2 pl-2"
+                  >
+                    <button
+                      class="p-2 hover:bg-surface-container rounded-lg transition-colors"
+                    >
+                      <span
+                        class="material-symbols-outlined"
+                        data-icon="chevron_left"
+                        >chevron_left</span
+                      >
+                    </button>
+                    <button
+                      class="p-2 hover:bg-surface-container rounded-lg transition-colors"
+                    >
+                      <span
+                        class="material-symbols-outlined"
+                        data-icon="chevron_right"
+                        >chevron_right</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Calendar Grid -->
+              <div
+                class="border border-glass-border rounded-2xl overflow-hidden"
+              >
+                <div
+                  class="calendar-grid bg-surface-container-low border-b border-glass-border"
+                >
+                  <div
+                    class="py-4 text-center font-semibold text-xs text-on-surface-variant"
+                  >
+                    THỨ 2
+                  </div>
+                  <div
+                    class="py-4 text-center font-semibold text-xs text-on-surface-variant"
+                  >
+                    THỨ 3
+                  </div>
+                  <div
+                    class="py-4 text-center font-semibold text-xs text-on-surface-variant"
+                  >
+                    THỨ 4
+                  </div>
+                  <div
+                    class="py-4 text-center font-semibold text-xs text-on-surface-variant"
+                  >
+                    THỨ 5
+                  </div>
+                  <div
+                    class="py-4 text-center font-semibold text-xs text-on-surface-variant"
+                  >
+                    THỨ 6
+                  </div>
+                  <div
+                    class="py-4 text-center font-semibold text-xs text-on-surface-variant"
+                  >
+                    THỨ 7
+                  </div>
+                  <div
+                    class="py-4 text-center font-semibold text-xs text-secondary font-bold"
+                  >
+                    CHỦ NHẬT
+                  </div>
+                </div>
+                <div class="calendar-grid bg-white">
+                  <!-- Calendar Cells (Simulation) -->
+                  <!-- Row 1 -->
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border opacity-30 text-xs font-medium"
+                  >
+                    27
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border opacity-30 text-xs font-medium"
+                  >
+                    28
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border opacity-30 text-xs font-medium"
+                  >
+                    29
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border opacity-30 text-xs font-medium"
+                  >
+                    30
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border opacity-30 text-xs font-medium"
+                  >
+                    31
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium"
+                  >
+                    1
+                  </div>
+                  <div
+                    class="h-32 p-3 border-b border-glass-border text-xs font-medium text-secondary"
+                  >
+                    2
+                  </div>
+                  <!-- Row 2 -->
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium"
+                  >
+                    3
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium group hover:bg-surface-container-low transition-colors cursor-pointer"
+                  >
+                    <span>4</span>
+                    <div
+                      class="mt-2 p-1.5 bg-primary/10 border-l-2 border-primary text-[10px] text-primary font-bold rounded"
+                    >
+                      Họp Team Mobile
+                    </div>
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium"
+                  >
+                    5
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium"
+                  >
+                    6
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium"
+                  >
+                    7
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium"
+                  >
+                    8
+                  </div>
+                  <div
+                    class="h-32 p-3 border-b border-glass-border text-xs font-medium text-secondary"
+                  >
+                    9
+                  </div>
+                  <!-- Row 3 -->
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium"
+                  >
+                    10
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium group hover:bg-surface-container-low transition-colors cursor-pointer"
+                  >
+                    <span>11</span>
+                    <div
+                      class="mt-2 p-1.5 bg-warning/10 border-l-2 border-warning text-[10px] text-warning font-bold rounded"
+                    >
+                      Review Design
+                    </div>
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium"
+                  >
+                    12
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium"
+                  >
+                    13
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium group hover:bg-surface-container-low transition-colors cursor-pointer"
+                  >
+                    <span>14</span>
+                    <div
+                      class="mt-2 p-1.5 bg-danger/10 border-l-2 border-danger text-[10px] text-danger font-bold rounded"
+                    >
+                      Deadline API
+                    </div>
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium"
+                  >
+                    15
+                  </div>
+                  <div
+                    class="h-32 p-3 border-b border-glass-border text-xs font-medium text-secondary"
+                  >
+                    16
+                  </div>
+                  <!-- Row 4 (Current Week) -->
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium"
+                  >
+                    17
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium"
+                  >
+                    18
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium bg-primary/5 ring-2 ring-primary ring-inset z-10"
+                  >
+                    <span
+                      class="bg-primary text-white w-6 h-6 flex items-center justify-center rounded-full"
+                      >19</span
+                    >
+                    <div class="mt-2 space-y-1">
+                      <div
+                        class="p-1.5 bg-primary border-l-2 border-white text-[10px] text-white font-bold rounded shadow-sm"
+                      >
+                        Họp Chiến Lược
+                      </div>
+                      <div
+                        class="p-1.5 bg-success/10 border-l-2 border-success text-[10px] text-success font-bold rounded"
+                      >
+                        Release Beta
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium"
+                  >
+                    20
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium group hover:bg-surface-container-low transition-colors cursor-pointer"
+                  >
+                    <span>21</span>
+                    <div
+                      class="mt-2 p-1.5 bg-warning/10 border-l-2 border-warning text-[10px] text-warning font-bold rounded"
+                    >
+                      Demo Sprint
+                    </div>
+                  </div>
+                  <div
+                    class="h-32 p-3 border-r border-b border-glass-border text-xs font-medium"
+                  >
+                    22
+                  </div>
+                  <div
+                    class="h-32 p-3 border-b border-glass-border text-xs font-medium text-secondary"
+                  >
+                    23
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Activity Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="glass-card rounded-3xl p-6">
+                <h3
+                  class="font-semibold text-primary mb-4 flex items-center gap-2"
+                >
+                  <span
+                    class="material-symbols-outlined"
+                    data-icon="event_available"
+                    >event_available</span
+                  >
+                  Sự kiện trong ngày
+                </h3>
+                <div class="space-y-4">
+                  <div
+                    class="flex gap-4 p-4 rounded-2xl bg-surface-container-low border border-glass-border"
+                  >
+                    <div class="text-center min-w-[50px]">
+                      <p class="text-lg font-bold text-primary">09:00</p>
+                      <p
+                        class="text-[10px] uppercase font-bold text-on-surface-variant"
+                      >
+                        AM
+                      </p>
+                    </div>
+                    <div class="flex-1">
+                      <h4 class="text-sm font-bold">Họp Chiến Lược Sản Phẩm</h4>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Phòng họp 02 • 45 phút
+                      </p>
+                    </div>
+                    <img
+                      class="w-10 h-10 rounded-full object-cover"
+                      data-alt="A small group of diverse colleagues in a high-tech glass-walled meeting room, looking at a digital whiteboard. Soft blue lighting reflects off the glass surfaces, creating a collaborative and modern atmosphere. The focus is on a professional young man and woman discussing a project plan."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaHmjbINPqsnR4qt2fZLVyt8ryr-Ed9gtgU4xrDZjxCVhxkB1tPnV57YrMSVfOGfNtPzGJFZ0RDH5tDIyfPANSIT72sTheXUhkWNsY-ZHjQqLz0O0kwsmcFJfaKZ9LJfGO8W6UJkQ8qDrC8_5Nnxgs3VLLoMY8lEN4l3lDpTJ1WRK1yNJQlQGz99K-PGOtrIPHSZYvhJ4RDQraUeiyG1plJSHEP5QdECwUpQnPOKY5LzocD2CRUkUTFZ7BoOAn3WqNANCP-j4w_i4"
+                    />
+                  </div>
+                  <div
+                    class="flex gap-4 p-4 rounded-2xl border border-glass-border hover:bg-surface-container transition-colors"
+                  >
+                    <div class="text-center min-w-[50px]">
+                      <p class="text-lg font-bold text-on-surface-variant">
+                        02:30
+                      </p>
+                      <p
+                        class="text-[10px] uppercase font-bold text-on-surface-variant"
+                      >
+                        PM
+                      </p>
+                    </div>
+                    <div class="flex-1">
+                      <h4 class="text-sm font-bold">Review Design Sprint 4</h4>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Google Meet • 1 giờ
+                      </p>
+                    </div>
+                    <div class="flex -space-x-2">
+                      <div
+                        class="w-8 h-8 rounded-full border-2 border-white bg-slate-200 flex items-center justify-center text-[10px] font-bold"
+                      >
+                        AN
+                      </div>
+                      <div
+                        class="w-8 h-8 rounded-full border-2 border-white bg-indigo-200 flex items-center justify-center text-[10px] font-bold"
+                      >
+                        LH
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="glass-card rounded-3xl p-6">
+                <h3
+                  class="font-semibold text-primary mb-4 flex items-center gap-2"
+                >
+                  <span
+                    class="material-symbols-outlined"
+                    data-icon="format_list_bulleted"
+                    >format_list_bulleted</span
+                  >
+                  Deadline quan trọng
+                </h3>
+                <div class="space-y-3">
+                  <div
+                    class="flex items-center justify-between p-3 border-b border-glass-border group cursor-pointer"
+                  >
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 rounded-full bg-danger"></div>
+                      <p
+                        class="text-sm font-medium group-hover:text-primary transition-colors"
+                      >
+                        Hoàn thành API thanh toán
+                      </p>
+                    </div>
+                    <span
+                      class="text-[10px] bg-danger/10 text-danger px-2 py-1 rounded-full font-bold"
+                      >2 Giờ tới</span
+                    >
+                  </div>
+                  <div
+                    class="flex items-center justify-between p-3 border-b border-glass-border group cursor-pointer"
+                  >
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 rounded-full bg-warning"></div>
+                      <p
+                        class="text-sm font-medium group-hover:text-primary transition-colors"
+                      >
+                        Báo cáo tuần 24
+                      </p>
+                    </div>
+                    <span
+                      class="text-[10px] bg-warning/10 text-warning px-2 py-1 rounded-full font-bold"
+                      >Hôm nay</span
+                    >
+                  </div>
+                  <div
+                    class="flex items-center justify-between p-3 border-b border-glass-border group cursor-pointer"
+                  >
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 rounded-full bg-success"></div>
+                      <p
+                        class="text-sm font-medium group-hover:text-primary transition-colors"
+                      >
+                        Update Mobile App UI
+                      </p>
+                    </div>
+                    <span
+                      class="text-[10px] bg-success/10 text-success px-2 py-1 rounded-full font-bold"
+                      >Ngày mai</span
+                    >
+                  </div>
+                </div>
+                <button
+                  class="w-full mt-4 py-2 text-primary font-bold text-xs hover:bg-primary/5 transition-colors rounded-xl border border-dashed border-primary/30"
+                >
+                  + Thêm nhắc nhở
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Sidebar Content (Right) -->
+          <aside class="w-full lg:w-80 flex flex-col gap-6">
+            <!-- Mini Calendar -->
+            <div class="glass-card rounded-3xl p-6">
+              <div class="flex items-center justify-between mb-4">
+                <h4 class="font-bold text-sm">Tháng 6, 2024</h4>
+                <div class="flex gap-1">
+                  <button
+                    class="p-1 hover:bg-surface-container rounded transition-colors"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[18px]"
+                      data-icon="chevron_left"
+                      >chevron_left</span
+                    >
+                  </button>
+                  <button
+                    class="p-1 hover:bg-surface-container rounded transition-colors"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[18px]"
+                      data-icon="chevron_right"
+                      >chevron_right</span
+                    >
+                  </button>
+                </div>
+              </div>
+              <div class="grid grid-cols-7 gap-1 text-center mb-2">
+                <span class="text-[10px] text-on-surface-variant font-bold"
+                  >T2</span
+                >
+                <span class="text-[10px] text-on-surface-variant font-bold"
+                  >T3</span
+                >
+                <span class="text-[10px] text-on-surface-variant font-bold"
+                  >T4</span
+                >
+                <span class="text-[10px] text-on-surface-variant font-bold"
+                  >T5</span
+                >
+                <span class="text-[10px] text-on-surface-variant font-bold"
+                  >T6</span
+                >
+                <span class="text-[10px] text-on-surface-variant font-bold"
+                  >T7</span
+                >
+                <span class="text-[10px] text-secondary font-bold">CN</span>
+              </div>
+              <div class="grid grid-cols-7 gap-1 text-center">
+                <!-- Empty fillers -->
+                <span class="h-7 w-7"></span><span class="h-7 w-7"></span
+                ><span class="h-7 w-7"></span><span class="h-7 w-7"></span
+                ><span class="h-7 w-7"></span>
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium"
+                  >1</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium text-secondary"
+                  >2</span
+                >
+                <!-- Row 2 -->
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium"
+                  >3</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium relative"
+                  ><div
+                    class="absolute bottom-0.5 w-1 h-1 bg-primary rounded-full"
+                  ></div>
+                  4</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium"
+                  >5</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium"
+                  >6</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium"
+                  >7</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium"
+                  >8</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium text-secondary"
+                  >9</span
+                >
+                <!-- Row 3 -->
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium"
+                  >10</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium relative"
+                  ><div
+                    class="absolute bottom-0.5 w-1 h-1 bg-warning rounded-full"
+                  ></div>
+                  11</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium"
+                  >12</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium"
+                  >13</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium relative"
+                  ><div
+                    class="absolute bottom-0.5 w-1 h-1 bg-danger rounded-full"
+                  ></div>
+                  14</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium"
+                  >15</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium text-secondary"
+                  >16</span
+                >
+                <!-- Row 4 -->
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium"
+                  >17</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium"
+                  >18</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-bold bg-primary text-white rounded-lg"
+                  >19</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium"
+                  >20</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium relative"
+                  ><div
+                    class="absolute bottom-0.5 w-1 h-1 bg-warning rounded-full"
+                  ></div>
+                  21</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium"
+                  >22</span
+                >
+                <span
+                  class="text-[11px] h-7 w-7 flex items-center justify-center font-medium text-secondary"
+                  >23</span
+                >
+              </div>
+            </div>
+            <!-- Category Filters -->
+            <div class="glass-card rounded-3xl p-6">
+              <h4 class="font-bold text-sm mb-4">Lọc lịch hiển thị</h4>
+              <div class="space-y-3">
+                <label class="flex items-center gap-3 cursor-pointer group">
+                  <input
+                    checked=""
+                    class="rounded text-primary focus:ring-primary h-4 w-4"
+                    type="checkbox"
+                  />
+                  <span
+                    class="text-sm font-medium text-on-surface-variant group-hover:text-on-surface"
+                    >Cuộc họp &amp; Sự kiện</span
+                  >
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer group">
+                  <input
+                    checked=""
+                    class="rounded text-warning focus:ring-warning h-4 w-4"
+                    type="checkbox"
+                  />
+                  <span
+                    class="text-sm font-medium text-on-surface-variant group-hover:text-on-surface"
+                    >Review công việc</span
+                  >
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer group">
+                  <input
+                    checked=""
+                    class="rounded text-danger focus:ring-danger h-4 w-4"
+                    type="checkbox"
+                  />
+                  <span
+                    class="text-sm font-medium text-on-surface-variant group-hover:text-on-surface"
+                    >Deadline quan trọng</span
+                  >
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer group">
+                  <input
+                    class="rounded text-secondary focus:ring-secondary h-4 w-4"
+                    type="checkbox"
+                  />
+                  <span
+                    class="text-sm font-medium text-on-surface-variant group-hover:text-on-surface"
+                    >Cá nhân</span
+                  >
+                </label>
+              </div>
+            </div>
+            <!-- Upcoming Section -->
+            <div class="glass-card rounded-3xl p-6 flex-1">
+              <div class="flex items-center justify-between mb-4">
+                <h4 class="font-bold text-sm">Sắp tới</h4>
+                <a
+                  class="text-[10px] text-primary font-bold hover:underline"
+                  href="#"
+                  >Xem tất cả</a
+                >
+              </div>
+              <div class="space-y-4">
+                <div class="relative pl-6 border-l-2 border-primary">
+                  <div
+                    class="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-primary ring-4 ring-white shadow-sm"
+                  ></div>
+                  <p
+                    class="text-[10px] font-bold text-on-surface-variant uppercase"
+                  >
+                    Ngày mai • 10:00 AM
+                  </p>
+                  <h5 class="text-xs font-bold mt-1">
+                    Phát triển Module Thanh toán
+                  </h5>
+                  <p class="text-[10px] text-on-surface-variant mt-0.5">
+                    Dự án: E-Commerce App
+                  </p>
+                </div>
+                <div class="relative pl-6 border-l-2 border-warning">
+                  <div
+                    class="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-warning ring-4 ring-white shadow-sm"
+                  ></div>
+                  <p
+                    class="text-[10px] font-bold text-on-surface-variant uppercase"
+                  >
+                    22/06 • 02:00 PM
+                  </p>
+                  <h5 class="text-xs font-bold mt-1">
+                    Review UX/UI Mobile App
+                  </h5>
+                  <p class="text-[10px] text-on-surface-variant mt-0.5">
+                    Dự án: Internal Suite
+                  </p>
+                </div>
+                <div class="relative pl-6 border-l-2 border-slate-300">
+                  <div
+                    class="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-slate-300 ring-4 ring-white shadow-sm"
+                  ></div>
+                  <p
+                    class="text-[10px] font-bold text-on-surface-variant uppercase"
+                  >
+                    25/06 • 09:30 AM
+                  </p>
+                  <h5 class="text-xs font-bold mt-1">
+                    Monthly All-Hands Meeting
+                  </h5>
+                  <p class="text-[10px] text-on-surface-variant mt-0.5">
+                    Cả công ty
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Visual Accent Card -->
+            <div
+              class="relative overflow-hidden rounded-3xl p-6 bg-primary text-white shadow-xl shadow-primary/20 min-h-[160px] flex flex-col justify-end"
+            >
+              <div
+                class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8 blur-2xl"
+              ></div>
+              <div
+                class="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full -ml-16 -mb-16 blur-xl"
+              ></div>
+              <span
+                class="material-symbols-outlined text-4xl opacity-50 mb-4"
+                data-icon="rocket_launch"
+                >rocket_launch</span
+              >
+              <h4 class="font-bold text-lg leading-tight">
+                Nâng cấp hiệu suất của bạn.
+              </h4>
+              <p class="text-[11px] text-white/80 mt-2">
+                Sử dụng phím tắt ⌘K để mở nhanh thanh tìm kiếm và lệnh điều
+                hướng.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+    <!-- Floating Action Button (Mobile Context) -->
+    <button
+      class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center lg:hidden hover:scale-110 active:scale-95 transition-all z-50"
+    >
+      <span class="material-symbols-outlined text-2xl" data-icon="add"
+        >add</span
+      >
+    </button>
+    <script>
+      // Micro-interaction for sidebar links
+      document.querySelectorAll("nav a").forEach((link) => {
+        link.addEventListener("click", function (e) {
+          // Not performing actual navigation, just UI demonstration
+          if (this.getAttribute("href") === "#") e.preventDefault();
+
+          document.querySelectorAll("nav a").forEach((l) => {
+            l.classList.remove(
+              "bg-primary/10",
+              "text-primary",
+              "border-l-4",
+              "border-primary",
+              "rounded-r-xl",
+            );
+            l.classList.add("text-on-surface-variant");
+          });
+
+          this.classList.add(
+            "bg-primary/10",
+            "text-primary",
+            "border-l-4",
+            "border-primary",
+            "rounded-r-xl",
+          );
+          this.classList.remove("text-on-surface-variant");
+        });
+      });
+
+      document.querySelectorAll(".calendar-grid .h-32").forEach((day) => {
+        day.addEventListener("mouseenter", function () {
+          this.classList.add("shadow-inner");
+        });
+        day.addEventListener("mouseleave", function () {
+          this.classList.remove("shadow-inner");
+        });
+      });
+    </script>
+  </body>
+</html>

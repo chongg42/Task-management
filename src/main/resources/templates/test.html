@@ -1,0 +1,428 @@
+<!doctype html>
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Login | WorkFlow Productivity Suite</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed": "#ffdbcc",
+              "on-primary": "#ffffff",
+              "on-primary-fixed": "#0f0069",
+              "surface-container-high": "#e7e8e9",
+              "on-error": "#ffffff",
+              "glass-border": "rgba(255, 255, 255, 0.40)",
+              "secondary-container": "#5f5ffd",
+              primary: "#3525cd",
+              "surface-bright": "#f8f9fa",
+              "on-tertiary-fixed": "#351000",
+              "on-surface": "#191c1d",
+              "inverse-primary": "#c3c0ff",
+              "tertiary-container": "#a44100",
+              "surface-container": "#edeeef",
+              "secondary-fixed-dim": "#c1c1ff",
+              "on-tertiary": "#ffffff",
+              "surface-tint": "#4d44e3",
+              warning: "#F59E0B",
+              "glass-bg": "rgba(255, 255, 255, 0.75)",
+              "error-container": "#ffdad6",
+              "surface-dim": "#d9dadb",
+              success: "#10B981",
+              "primary-fixed": "#e2dfff",
+              "primary-container": "#4f46e5",
+              "on-secondary": "#ffffff",
+              "on-secondary-fixed-variant": "#2c24ce",
+              error: "#ba1a1a",
+              "tertiary-fixed-dim": "#ffb695",
+              "surface-container-low": "#f3f4f5",
+              "shadow-tint": "rgba(79, 70, 229, 0.15)",
+              danger: "#EF4444",
+              "surface-variant": "#e1e3e4",
+              "on-secondary-container": "#fffbff",
+              "inverse-surface": "#2e3132",
+              "on-primary-fixed-variant": "#3323cc",
+              "on-secondary-fixed": "#09006b",
+              "secondary-fixed": "#e1dfff",
+              "inverse-on-surface": "#f0f1f2",
+              secondary: "#4442e3",
+              "on-error-container": "#93000a",
+              "on-tertiary-container": "#ffd2be",
+              "outline-variant": "#c7c4d8",
+              tertiary: "#7e3000",
+              background: "#f8f9fa",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed-dim": "#c3c0ff",
+              "on-surface-variant": "#464555",
+              "surface-container-highest": "#e1e3e4",
+              outline: "#777587",
+              "on-primary-container": "#dad7ff",
+              "on-background": "#191c1d",
+              surface: "#f8f9fa",
+              "on-tertiary-fixed-variant": "#7b2f00",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              "2xl": "1.25rem",
+              "3xl": "1.5rem",
+              full: "9999px",
+            },
+            fontFamily: {
+              "label-lg": ["Inter"],
+              "headline-md": ["Inter"],
+              "headline-lg": ["Inter"],
+              "body-lg": ["Inter"],
+              "display-lg": ["Inter"],
+              "label-md": ["Inter"],
+              "body-md": ["Inter"],
+              "body-sm": ["Inter"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f8f9fa;
+        overflow: hidden;
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 20px 60px rgba(79, 70, 229, 0.15);
+      }
+
+      .blob {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: linear-gradient(135deg, #4f46e5 0%, #3525cd 100%);
+        filter: blur(80px);
+        border-radius: 50%;
+        z-index: -1;
+        opacity: 0.15;
+        animation: move 20s infinite alternate;
+      }
+
+      .blob-2 {
+        background: linear-gradient(135deg, #7e3000 0%, #ffdbcc 100%);
+        width: 400px;
+        height: 400px;
+        right: -100px;
+        bottom: -100px;
+        animation: move-reverse 25s infinite alternate;
+      }
+
+      @keyframes move {
+        from {
+          transform: translate(-10%, -10%) rotate(0deg);
+        }
+        to {
+          transform: translate(20%, 20%) rotate(360deg);
+        }
+      }
+
+      @keyframes move-reverse {
+        from {
+          transform: translate(10%, 10%) rotate(360deg);
+        }
+        to {
+          transform: translate(-20%, -20%) rotate(0deg);
+        }
+      }
+
+      .ripple-btn {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .ripple {
+        position: absolute;
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple 600ms linear;
+        background-color: rgba(255, 255, 255, 0.7);
+      }
+
+      @keyframes ripple {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex items-center justify-center p-6">
+    <!-- Animated Background Blobs -->
+    <div class="blob left-[-100px] top-[-100px]"></div>
+    <div class="blob blob-2"></div>
+    <main class="w-full max-w-[480px] z-10">
+      <!-- Login Card -->
+      <div
+        class="glass-card rounded-3xl p-8 md:p-12 transition-all duration-300"
+      >
+        <!-- Header Section -->
+        <div class="flex flex-col items-center mb-10">
+          <div class="flex items-center gap-3 mb-6">
+            <div
+              class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center shadow-lg shadow-shadow-tint"
+            >
+              <span
+                class="material-symbols-outlined text-white"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >dashboard</span
+              >
+            </div>
+            <span
+              class="font-headline-md text-headline-md font-black text-primary tracking-tight"
+              >WorkFlow</span
+            >
+          </div>
+          <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">
+            Welcome Back
+          </h1>
+          <p
+            class="font-body-md text-body-md text-on-surface-variant text-center"
+          >
+            Enter your details to continue your productive streak.
+          </p>
+        </div>
+        <!-- Form Section -->
+        <form class="space-y-6" id="loginForm">
+          <!-- Email Field -->
+          <div class="space-y-2">
+            <label
+              class="font-label-lg text-label-lg text-on-surface block"
+              for="email"
+              >Email Address</label
+            >
+            <div class="relative group">
+              <div
+                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors"
+              >
+                <span class="material-symbols-outlined text-[20px]">mail</span>
+              </div>
+              <input
+                class="w-full bg-white/50 border border-glass-border rounded-xl py-3.5 pl-12 pr-4 font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
+                id="email"
+                name="email"
+                placeholder="name@company.com"
+                required=""
+                type="email"
+              />
+            </div>
+          </div>
+          <!-- Password Field -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <label
+                class="font-label-lg text-label-lg text-on-surface block"
+                for="password"
+                >Password</label
+              >
+              <a
+                class="font-label-md text-label-md text-primary hover:underline transition-all"
+                href="#"
+                >Forgot password?</a
+              >
+            </div>
+            <div class="relative group">
+              <div
+                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors"
+              >
+                <span class="material-symbols-outlined text-[20px]">lock</span>
+              </div>
+              <input
+                class="w-full bg-white/50 border border-glass-border rounded-xl py-3.5 pl-12 pr-12 font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
+                id="password"
+                name="password"
+                placeholder="••••••••"
+                required=""
+                type="password"
+              />
+              <button
+                class="absolute inset-y-0 right-0 pr-4 flex items-center text-outline hover:text-on-surface transition-colors"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[20px]"
+                  >visibility</span
+                >
+              </button>
+            </div>
+          </div>
+          <!-- Remember Me -->
+          <div class="flex items-center">
+            <input
+              class="w-4 h-4 text-primary bg-white/50 border-glass-border rounded focus:ring-primary/20 transition-all"
+              id="remember"
+              type="checkbox"
+            />
+            <label
+              class="ml-2 font-body-sm text-body-sm text-on-surface-variant cursor-pointer"
+              for="remember"
+              >Stay logged in for 30 days</label
+            >
+          </div>
+          <!-- Submit Button -->
+          <button
+            class="ripple-btn w-full bg-primary-container text-on-primary py-4 rounded-xl font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-lg shadow-shadow-tint hover:bg-primary transition-all transform active:scale-[0.98] mt-2"
+            type="submit"
+          >
+            Login to Workspace
+            <span class="material-symbols-outlined text-[18px]"
+              >arrow_forward</span
+            >
+          </button>
+        </form>
+        <!-- Divider -->
+        <div class="relative my-8">
+          <div class="absolute inset-0 flex items-center">
+            <span class="w-full border-t border-surface-variant"></span>
+          </div>
+          <div class="relative flex justify-center text-xs uppercase">
+            <span
+              class="bg-surface-container-lowest px-4 text-outline font-label-md"
+              >Or continue with</span
+            >
+          </div>
+        </div>
+        <!-- Social Logins -->
+        <div class="grid grid-cols-2 gap-4">
+          <button
+            class="flex items-center justify-center gap-3 py-3 px-4 bg-white/50 border border-glass-border rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-white hover:shadow-sm transition-all duration-200"
+          >
+            <img
+              alt="Google"
+              class="w-5 h-5"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuASbK2lJKP5S5lMW5FLckl2JntIWXV9qk7QiqvWE8IAunncHuo-dMB9ZM-74CHn08sTRKVTm1L5XfhcI8ESp7pOe3KhsVdlbz_TMXLqbHgQS5ErfmkhS_EB4pekR7BEmDuwE0zDXueaoAAUzumpMJ8gQ5cj3b_E_u5r2MOYX9AaXDsCL1fvTuiQZqWgGPr8uA62hGn7GP7ct54POl8_Y4OdRfjyzpKdnBfiZsAegN18_rAulMriqojbvQ0PgT1R4LAqK8VzAPAFq68"
+            />
+            Google
+          </button>
+          <button
+            class="flex items-center justify-center gap-3 py-3 px-4 bg-white/50 border border-glass-border rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-white hover:shadow-sm transition-all duration-200"
+          >
+            <svg class="w-5 h-5 fill-on-surface" viewBox="0 0 24 24">
+              <path
+                d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"
+              ></path>
+            </svg>
+            GitHub
+          </button>
+        </div>
+        <!-- Footer Link -->
+        <p
+          class="mt-8 text-center font-body-sm text-body-sm text-on-surface-variant"
+        >
+          Don't have an account?
+          <a
+            class="text-primary font-label-lg hover:underline transition-all"
+            href="#"
+            >Create free workspace</a
+          >
+        </p>
+      </div>
+      <!-- System Status Placeholder -->
+      <div
+        class="mt-8 flex items-center justify-center gap-4 text-outline font-label-md"
+      >
+        <div class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-success"></span>
+          Systems Operational
+        </div>
+        <span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+        <div class="flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[14px]">shield_lock</span>
+          SSL Secured
+        </div>
+      </div>
+    </main>
+    <script>
+      // Ripple Effect Logic
+      const buttons = document.querySelectorAll(".ripple-btn");
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", function (e) {
+          const x = e.clientX - e.target.offsetLeft;
+          const y = e.clientY - e.target.offsetTop;
+
+          const ripple = document.createElement("span");
+          ripple.classList.add("ripple");
+          ripple.style.left = `${x}px`;
+          ripple.style.top = `${y}px`;
+
+          this.appendChild(ripple);
+
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
+      });
+
+      // Form Submission Intercept (Visual feedback)
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const btn = this.querySelector('button[type="submit"]');
+          const originalContent = btn.innerHTML;
+
+          btn.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Verifying...
+            `;
+          btn.disabled = true;
+          btn.classList.add("opacity-80");
+
+          setTimeout(() => {
+            btn.innerHTML = `<span class="material-symbols-outlined">check_circle</span> Success! Redirecting...`;
+            btn.classList.replace("bg-primary-container", "bg-success");
+          }, 1500);
+        });
+
+      // Password Visibility Toggle
+      const togglePass = document.querySelector('button[type="button"]');
+      const passInput = document.getElementById("password");
+
+      togglePass.addEventListener("click", () => {
+        const type =
+          passInput.getAttribute("type") === "password" ? "text" : "password";
+        passInput.setAttribute("type", type);
+        togglePass.querySelector("span").textContent =
+          type === "password" ? "visibility" : "visibility_off";
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <aside th:fragment="sidebar(activePage)">
+      <aside
+        class="h-screen w-64 border-r border-glass-border fixed left-0 top-0 z-40 bg-glass-bg backdrop-blur-xl flex flex-col py-6 transition-all duration-300"
+      >
+        <div
+          class="px-6 mb-10 flex items-center gap-2 text-headline-md font-headline-md font-black text-primary"
+        >
+          <span
+            class="material-symbols-outlined text-3xl"
+            style="font-variation-settings: &quot;FILL&quot; 1"
+            >task_alt</span
+          >
+          <span>WorkFlow</span>
+        </div>
+        <nav class="flex-1 space-y-1">
+         <a th:classappend="${activePage=='tongQuan'}?'active text-primary'" th:href="@{/tongquan}"
+            class="flex items-center gap-3 px-4 py-3 rounded-r-xl transition-all duration-200 hover:text-primary text-on-surface-variant"
+          >
+            <span
+              class="material-symbols-outlined"
+              >dashboard</span
+            >
+            <span class="font-label-lg text-label-lg">Tổng quan</span>
+        </a>
+         <a th:classappend="${activePage=='duAn'}?'active text-primary'" th:href="@{/duan}"
+            class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:text-primary transition-colors hover:bg-primary/5 cursor-pointer"
+          >
+            <span class="material-symbols-outlined">folder_copy</span>
+            <span class="font-label-lg text-label-lg">Dự án</span>
+        </a>
+         <a th:classappend="${activePage=='congViec'}?'active text-primary'" th:href="@{/congviec}"
+            class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:text-primary transition-colors hover:bg-primary/5 cursor-pointer"
+          >
+            <span class="material-symbols-outlined">view_kanban</span>
+            <span class="font-label-lg text-label-lg">Công việc</span>
+        </a>
+         <a th:classappend="${activePage=='lich'}?'active text-primary'" th:href="@{/lichtrinh}"
+            class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:text-primary transition-colors hover:bg-primary/5 cursor-pointer"
+          >
+            <span class="material-symbols-outlined">calendar_today</span>
+            <span class="font-label-lg text-label-lg">Lịch</span>
+        </a>
+         <a th:classappend="${activePage=='thongBao'}?'active text-primary'" th:href="@{/thongbao}"
+            class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:text-primary transition-colors hover:bg-primary/5 cursor-pointer relative"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+            <span class="font-label-lg text-label-lg">Thông báo</span>
+            <span
+              class="ml-auto bg-primary text-white text-[10px] px-1.5 py-0.5 rounded-full"
+              >5</span
+            >
+        </a>
+         <a th:classappend="${activePage=='thanhVien'}?'active text-primary'" th:href="@{/thanhvien}"
+            class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:text-primary transition-colors hover:bg-primary/5 cursor-pointer"
+          >
+            <span class="material-symbols-outlined">group</span>
+            <span class="font-label-lg text-label-lg">Thành viên</span>
+        </a>
+         <a th:classappend="${activePage=='baoCao'}?'active text-primary'" th:href="@{/baocao}"
+            class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:text-primary transition-colors hover:bg-primary/5 cursor-pointer"
+          >
+            <span class="material-symbols-outlined">analytics</span>
+            <span class="font-label-lg text-label-lg">Báo cáo</span>
+        </a>
+         <a th:classappend="${activePage=='caiDat'}?'active text-primary'" th:href="@{/caidat}" 
+            class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:text-primary transition-colors hover:bg-primary/5 cursor-pointer"
+          >
+            <span class="material-symbols-outlined">settings</span>
+            <span class="font-label-lg text-label-lg">Cài đặt</span>
+        </a>
+        </nav>
+        <div class="px-4 mt-auto">
+          <div
+            class="p-4 glass-card rounded-xl mb-4 border border-glass-border"
+          >
+            <div class="flex items-center gap-3 mb-3">
+              <img
+                class="w-10 h-10 rounded-full object-cover"
+                data-alt="Close up portrait of a professional male manager with a friendly smile, clean-cut appearance, set against a soft blurred office background with cool tones. High quality professional headshot with soft studio lighting."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgJCsbP2fmmRYQWfCS3vbCQHa4w9H_u892Mo7Z9CJVTUNcxuYqMrexOcYaQZjtqRSQgUyNjgtNYTUxoPKpCGym5ph21HvJBkeGWK3yWOliKvPF_w1rKJCjgETHim2eDPAH_xhoWRu9CNwbBbGJm4Kf6sZ6PQZ4FtL5WKvy8CjRcSdovPjTLsQm5kZRyRVVHLcSlXo1ZrMdgXmiF6m68CU1ArHTylitT_qPh-Sp0qrMeQsmZBA_tEaYxpaxQTy_HAptkOfBoG4ShYw"
+              />
+              <div>
+                <p class="font-label-lg text-label-lg text-on-surface">
+                  Nguyễn Văn An
+                </p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Product Manager
+                </p>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div
+                class="flex justify-between text-[10px] text-on-surface-variant"
+              >
+                <span>Bộ nhớ lưu trữ</span>
+                <span>2.4 GB / 10 GB</span>
+              </div>
+              <div
+                class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden"
+              >
+                <div class="w-[24%] h-full bg-primary"></div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex items-center gap-3 text-error px-4 py-3 hover:bg-error/5 rounded-lg transition-colors cursor-pointer"
+          >
+            <span class="material-symbols-outlined">logout</span>
+            <span class="font-label-lg text-label-lg">Đăng xuất</span>
+          </div>
+        </div>
+      </aside>
+    </aside>
+  </body>
+</html>
