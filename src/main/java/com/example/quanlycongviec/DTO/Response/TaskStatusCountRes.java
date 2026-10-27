@@ -1,6 +1,6 @@
 package com.example.quanlycongviec.DTO.Response;
 
-import com.example.quanlycongviec.Entity.list.TaskStatus;
+import com.example.quanlycongviec.Entity.enums.TaskStatus;
 
 import lombok.Builder;
 import lombok.Data;

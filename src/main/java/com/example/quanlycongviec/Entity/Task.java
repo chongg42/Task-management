@@ -6,17 +6,20 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import com.example.quanlycongviec.Entity.list.TaskStatus;
+import com.example.quanlycongviec.Entity.enums.TaskStatus;
 
 @Entity
 @Table(name = "task")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Task {
 
     @Id
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -37,6 +40,8 @@ public class Task {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+    @Column
+    private Integer progress;
 
     @ManyToOne
     @JoinColumn(name = "projects_id")
@@ -53,6 +58,7 @@ public class Task {
     inverseJoinColumns = @JoinColumn(name="tag_id"))
     private Set<Tag> tags;
 
-    @OneToMany(mappedBy = "task")
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL,
+           orphanRemoval = true)
     private Set<TaskAssignees> taskAssignees;
-}
+}   

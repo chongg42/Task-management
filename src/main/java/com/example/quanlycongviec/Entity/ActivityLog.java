@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ActivityLog {
 
     @Id
@@ -19,24 +20,18 @@ public class ActivityLog {
 
     private String action;
 
+    private String resource;
     private String description;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", updatable = false)
+    @org.hibernate.annotations.CreationTimestamp // Tự động điền thời gian khi insert
     private LocalDateTime createdAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id")
     private User user;
+    private Integer resourceId;
 
-    @ManyToOne
-    @JoinColumn(name = "projects_id")
-    private Project project;
-
-    @ManyToOne
-    @JoinColumn(name = "notifications_id")
-    private Notification notification;
-
-    @ManyToOne
-    @JoinColumn(name = "task_id")
-    private Task task;
+    @Column(length = 20)
+    private String status;
 }

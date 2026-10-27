@@ -5,6 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>WorkFlow - Dự án</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script th:src="@{/js/tailwind-config.js}"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
       rel="stylesheet"
@@ -17,124 +18,15 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
     />
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "inverse-primary": "#c3c0ff",
-              primary: "#3525cd",
-              "surface-container-low": "#f3f4f5",
-              surface: "#f8f9fa",
-              "primary-fixed-dim": "#c3c0ff",
-              background: "#f8f9fa",
-              "on-surface-variant": "#464555",
-              "on-secondary-container": "#fffbff",
-              "on-surface": "#191c1d",
-              "on-tertiary": "#ffffff",
-              "on-error": "#ffffff",
-              tertiary: "#7e3000",
-              "glass-border": "rgba(255, 255, 255, 0.40)",
-              "inverse-on-surface": "#f0f1f2",
-              "on-primary-fixed": "#0f0069",
-              "on-primary-container": "#dad7ff",
-              "on-primary-fixed-variant": "#3323cc",
-              "on-tertiary-fixed": "#351000",
-              "shadow-tint": "rgba(79, 70, 229, 0.15)",
-              "surface-container": "#edeeef",
-              "surface-container-highest": "#e1e3e4",
-              "tertiary-container": "#a44100",
-              secondary: "#4442e3",
-              "secondary-container": "#5f5ffd",
-              "on-primary": "#ffffff",
-              "on-tertiary-fixed-variant": "#7b2f00",
-              error: "#ba1a1a",
-              "inverse-surface": "#2e3132",
-              "on-tertiary-container": "#ffd2be",
-              "tertiary-fixed-dim": "#ffb695",
-              "on-background": "#191c1d",
-              "primary-fixed": "#e2dfff",
-              "tertiary-fixed": "#ffdbcc",
-              "primary-container": "#4f46e5",
-              success: "#10B981",
-              "secondary-fixed-dim": "#c1c1ff",
-              "surface-container-lowest": "#ffffff",
-              "surface-variant": "#e1e3e4",
-              outline: "#777587",
-              "surface-container-high": "#e7e8e9",
-              "on-secondary-fixed-variant": "#2c24ce",
-              "surface-tint": "#4d44e3",
-              danger: "#EF4444",
-              warning: "#F59E0B",
-              "surface-bright": "#f8f9fa",
-              "error-container": "#ffdad6",
-              "on-error-container": "#93000a",
-              "surface-dim": "#d9dadb",
-              "glass-bg": "rgba(255, 255, 255, 0.75)",
-              "outline-variant": "#c7c4d8",
-              "on-secondary": "#ffffff",
-              "secondary-fixed": "#e1dfff",
-              "on-secondary-fixed": "#09006b",
-            },
-            borderRadius: {
-              DEFAULT: "0.25rem",
-              lg: "0.5rem",
-              xl: "0.75rem",
-              full: "9999px",
-            },
-            spacing: {
-              "margin-desktop": "32px",
-              "stack-sm": "8px",
-              "stack-md": "16px",
-              "margin-mobile": "16px",
-              "container-max": "1440px",
-              gutter: "24px",
-              "stack-lg": "32px",
-            },
-            fontFamily: {
-              "headline-lg": ["Inter"],
-              "headline-md": ["Inter"],
-              "display-lg": ["Inter"],
-              "body-md": ["Inter"],
-              "body-sm": ["Inter"],
-              "label-lg": ["Inter"],
-            },
-            fontSize: {
-              "headline-lg": [
-                "32px",
-                {
-                  lineHeight: "1.25",
-                  letterSpacing: "-0.01em",
-                  fontWeight: "600",
-                },
-              ],
-              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
-              "display-lg": [
-                "48px",
-                {
-                  lineHeight: "1.2",
-                  letterSpacing: "-0.02em",
-                  fontWeight: "700",
-                },
-              ],
-              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
-              "body-sm": ["14px", { lineHeight: "1.6", fontWeight: "400" }],
-              "label-lg": [
-                "14px",
-                {
-                  lineHeight: "1.2",
-                  letterSpacing: "0.05em",
-                  fontWeight: "600",
-                },
-              ],
-            },
-          },
-        },
-      };
-    </script>
-    <link rel="stylesheet" href="/css/main.css" />
+
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
     <style>
+      .parent:has(.status:checked) {
+        --tw-text-opacity: 1;
+        color: rgb(53 37 205 / var(--tw-text-opacity, 1));
+        --tw-bg-opacity: 1;
+        background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+      }
       .glass-card {
         background: rgba(255, 255, 255, 0.75);
         backdrop-filter: blur(12px);
@@ -183,6 +75,7 @@
             >search</span
           >
           <input
+            id="searchInput"
             class="w-full pl-10 pr-12 py-2 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary/20 text-body-sm transition-all"
             placeholder="Tìm kiếm dự án, công việc..."
             type="text"
@@ -282,26 +175,55 @@
           <div
             class="flex items-center gap-2 bg-surface-container p-1 rounded-xl w-fit"
           >
-            <button
-              class="px-6 py-2 bg-white shadow-sm rounded-lg font-label-lg text-primary"
+            <label
+              class="parent px-6 py-2 hover:bg-white/50 rounded-lg font-label-lg text-on-surface-variant transition-all"
             >
               Tất cả
-            </button>
-            <button
-              class="px-6 py-2 hover:bg-white/50 rounded-lg font-label-lg text-on-surface-variant transition-all"
+              <input
+                class="hidden status"
+                type="radio"
+                id="all"
+                name="status"
+                value=""
+                checked
+              />
+            </label>
+            <label
+              class="parent px-6 py-2 hover:bg-white/50 rounded-lg font-label-lg text-on-surface-variant transition-all"
             >
               Đang chạy
-            </button>
-            <button
-              class="px-6 py-2 hover:bg-white/50 rounded-lg font-label-lg text-on-surface-variant transition-all"
+              <input
+                class="hidden status"
+                type="radio"
+                id="dang-chay"
+                name="status"
+                value="DANG_THUC_HIEN"
+              />
+            </label>
+            <label
+              class="parent px-6 py-2 hover:bg-white/50 rounded-lg font-label-lg text-on-surface-variant transition-all"
             >
-              Tạm dừng
-            </button>
-            <button
-              class="px-6 py-2 hover:bg-white/50 rounded-lg font-label-lg text-on-surface-variant transition-all"
+              Của tôi
+              <input
+                class="hidden status"
+                type="radio"
+                id="dang-chay"
+                name="status"
+                value="DANG_THUC_HIEN"
+              />
+            </label>
+            <label
+              class="parent px-6 py-2 hover:bg-white/50 rounded-lg font-label-lg text-on-surface-variant transition-all"
             >
-              Lưu trữ
-            </button>
+              Hoàn thành
+              <input
+                class="hidden status"
+                type="radio"
+                id="hoan-thanh"
+                name="status"
+                value="HOAN_THANH"
+              />
+            </label>
           </div>
           <div class="flex items-center gap-3">
             <div
@@ -323,257 +245,14 @@
           </div>
         </div>
         <!-- Project Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          id="projects"
+        >
           <!-- Project Card 1 -->
-          <div
-            class="glass-card rounded-2xl overflow-hidden flex flex-col group relative group"
-          >
-            <div
-              class="hidden items-center gap-2 absolute top-0 right-0 z-50 p-2 group-hover:flex"
-            >
-              <button
-                class="flex items-center gap-2 rounded-lg border border-blue-500 px-1.5 py-1 text-blue-500 transition hover:bg-blue-500 hover:text-white"
-                onclick="openModal()"
-              >
-                <span class="material-symbols-outlined">edit</span>
-              </button>
-
-              <button
-                class="flex items-center gap-2 rounded-lg border border-red-500 px-1.5 py-1 text-red-500 transition hover:bg-red-500 hover:text-white"
-              >
-                <span class="material-symbols-outlined">delete</span>
-              </button>
-            </div>
-            <div class="relative h-48">
-              <div
-                class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                data-alt="A high-resolution interface design prototype for a mobile e-commerce application displayed on a sleek smartphone. The design features a vibrant purple and blue gradient background with glassmorphism elements. Soft lighting from the top-right creates a professional, high-end digital design studio atmosphere."
-                style="
-                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuD7aob7zm8yslUKUl-RNhl7-yEdq8fFCiLlbpxJUb5Rr9RxtBR_-xtnDliUT29YdjljcMZfcSBhewCu3CEhLCbNLon6Q7EaN9txGz1clBxHh0Ot2wp0awuuOU7zPH6hW6vcNnKIp6X0VP2US06noLeDMNb0Of9cEO09XBLF__HEtuZjy6tsnCafSL9zQ0ho3xdMXcalLCOTUQhmJvUmT14XwmQV-8EFvJPYK8Zh9lpWVBxIKN8o7otBTt0L8xPgQjfNfWT5C3R_jss&quot;);
-                "
-              ></div>
-              <div class="absolute top-4 left-4">
-                <span
-                  class="bg-success/20 backdrop-blur-md text-success text-[10px] font-bold px-3 py-1 rounded-full uppercase border border-success/30"
-                  >Đang chạy</span
-                >
-              </div>
-            </div>
-            <div class="p-6 flex-1 flex flex-col">
-              <div class="flex justify-between items-start mb-2">
-                <h3 class="font-headline-md text-lg truncate pr-2">
-                  Website Bán Điện Thoại
-                </h3>
-                <button
-                  class="material-symbols-outlined text-outline hover:text-primary transition-colors"
-                >
-                  more_vert
-                </button>
-              </div>
-              <p class="text-body-sm text-on-surface-variant line-clamp-2 mb-6">
-                Xây dựng hệ thống quản lý bán hàng đa kênh và website giới thiệu
-                sản phẩm tối ưu SEO.
-              </p>
-              <div class="mt-auto">
-                <div class="flex justify-between text-xs mb-2">
-                  <span class="font-bold text-outline">Tiến độ</span>
-                  <span class="font-bold text-primary">75%</span>
-                </div>
-                <div
-                  class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden mb-6"
-                >
-                  <div
-                    class="h-full bg-gradient-to-r from-primary to-secondary"
-                    style="width: 75%"
-                  ></div>
-                </div>
-                <div
-                  class="flex items-center justify-between border-t border-glass-border pt-4"
-                >
-                  <div class="flex -space-x-2">
-                    <img
-                      class="w-8 h-8 rounded-full border-2 border-white"
-                      data-alt="A portrait of a female software engineer smiling warmly. She is in a contemporary tech office with a bright, airy feel. The lighting is soft and natural, emphasizing a modern, professional light-mode aesthetic. Her appearance is professional and friendly, ideal for a collaborative team environment."
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgKU9Hd5kZIrxN3LpIJYgxVeUCfRm1av6pkA7xp-PbiATd8cmrsxOzOl449LcL6v4m2bmrhFBl_qoJvZnSd-MvKeuEiIm2oijG-5XQHtLuLR2RBwRxA_veLw6vW-4nPdgzVOgt0PYD4Pp6F2TYC044IfnH0t9d-Ag8mHMNhviz1rr8LqU__1PsZkhlgR19PLj0FX6LRoJ737Qo2stXn1jGQ5AsC256LbiI2IuxdeRTqb6CSDIIBPdwneD4LJ7CgwxZSWHZ9dgXHPI"
-                    />
-                    <img
-                      class="w-8 h-8 rounded-full border-2 border-white"
-                      data-alt="A portrait of a male product designer with a thoughtful expression. He is positioned in a creative workspace filled with soft, diffused morning light. The background features high-end minimalist furniture and subtle tech accents. The overall mood is focused and innovative, fitting a premium SaaS brand."
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqBXcXENV3SzDJkXdYVOhvnwBDuFm4dnges3OXZiIg5GPY_X2MZgry3TxDnV-iHkKPwM7_d8a64DWAM4l5U7TfAZ2R_qqNle5M595YukE1hGczq4cFoJ0ucXRl8_gBYEbi9Hho_3BEPicvBztbsGpExKsK23YEDAjv1o3XrKvB0szgot-YOP_uUWx9T34sxVGJD63DJJbm6acB2Zd5vGhJkZ-g15lYNlQlLF-LriGgR7iWKFySE9BgL7p-Xxgy02LzJPnv8wT1LKE"
-                    />
-                    <div
-                      class="w-8 h-8 rounded-full bg-surface-container-highest border-2 border-white flex items-center justify-center text-[10px] font-bold"
-                    >
-                      +3
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-2 text-outline">
-                    <span class="material-symbols-outlined text-sm"
-                      >calendar_month</span
-                    >
-                    <span class="text-xs">25/08/2024</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <!-- Project Card 2 -->
-          <div
-            class="glass-card rounded-2xl overflow-hidden flex flex-col group"
-          >
-            <div class="relative h-48">
-              <div
-                class="bg-cover bg-center w-full h-48"
-                data-alt="A clean, minimalist 3D rendering of a cloud server architecture with glowing blue pathways. The aesthetic is futuristic and high-tech, using soft-touch materials and subtle shadows. The lighting is balanced and crisp, evoking a sense of reliability and modern performance, perfect for a backend infrastructure project."
-                style="
-                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBvhMslrGYBSBdYn5gDdTswyLPUf2WrELb9zikWhF430cslw8D4uPCH-mp784QOVP-MTfIC02g8mvhNHJ5bwjf8G2NbeNlPttNWHz0ovococmvYoUj0GONqexhroFBmStv388eSb7OF7ztUwNXdQ5rIg0MO9v8-DPPGcFJNjWXM0JSHLrINu9sqnXlqnsLxEW5VxY4me4t-0e-3PkpQjkE2d1_IZeeMGF4YphI-lApUiQQKByOePhhz0KC3Wm4-QreL1k-ASC9e1CI&quot;);
-                "
-              ></div>
-              <div class="absolute top-4 right-4">
-                <span
-                  class="bg-primary/20 backdrop-blur-md text-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase border border-primary/30"
-                  >Mới tạo</span
-                >
-              </div>
-            </div>
-            <div class="p-6 flex-1 flex flex-col">
-              <div class="flex justify-between items-start mb-2">
-                <h3 class="font-headline-md text-lg truncate pr-2">
-                  Xây dựng API Xác thực
-                </h3>
-                <button
-                  class="material-symbols-outlined text-outline hover:text-primary transition-colors"
-                >
-                  more_vert
-                </button>
-              </div>
-              <p class="text-body-sm text-on-surface-variant line-clamp-2 mb-6">
-                Thiết kế và triển khai hệ thống xác thực người dùng bảo mật cao
-                cho ứng dụng di động.
-              </p>
-              <div class="mt-auto">
-                <div class="flex justify-between text-xs mb-2">
-                  <span class="font-bold text-outline">Tiến độ</span>
-                  <span class="font-bold text-primary">12%</span>
-                </div>
-                <div
-                  class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden mb-6"
-                >
-                  <div
-                    class="h-full bg-gradient-to-r from-primary to-secondary"
-                    style="width: 12%"
-                  ></div>
-                </div>
-                <div
-                  class="flex items-center justify-between border-t border-glass-border pt-4"
-                >
-                  <div class="flex -space-x-2">
-                    <img
-                      class="w-8 h-8 rounded-full border-2 border-white"
-                      data-alt="A focused portrait of a male full-stack developer in a high-tech studio environment. The lighting consists of soft blue and white hues, highlighting his concentrated look. The background shows blurred code on multiple monitors, reinforcing a serious yet efficient tech brand identity."
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuA435vI6YC5FybywqcrxIVwfhUUDiPHVdn1erN-WBaJbfXVf9cT7TbXbLUAP2aiKduiSoDu20oiYhYv7a_JDGpTZAC19Fcj5fPAwkTiC-dVRcQeUaIgqH6Dmb6NT55idnYHdl0SymiCRXMEtFQISYXunl_-LRL7VDxLE2Xvh-gVMQ542qiqDrlLPZRJCtrm7_wgkLf5C_9dLBxGm9URRgixQ1dS4jTYAfI8KaVRxjVDFju_rnOXpAm87NH-hkehtTabRMAEfeWo3as"
-                    />
-                    <div
-                      class="w-8 h-8 rounded-full bg-surface-container-highest border-2 border-white flex items-center justify-center text-[10px] font-bold"
-                    >
-                      +1
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-2 text-outline">
-                    <span class="material-symbols-outlined text-sm"
-                      >calendar_month</span
-                    >
-                    <span class="text-xs">10/09/2024</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <!-- Project Card 3 -->
-          <div
-            class="glass-card rounded-2xl overflow-hidden flex flex-col group"
-          >
-            <div class="relative h-48">
-              <div
-                class="bg-cover bg-center w-full h-48"
-                data-alt="An abstract digital art composition of floating crystalline structures in shades of indigo and white. The background is a soft, illuminated gradient. This visual represents clarity, information hierarchy, and data visualization in a premium SaaS environment, using light-mode friendly color palettes."
-                style="
-                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuC0WMQj7UJY74L23uuYQaiZiD62B6ls5vb69yuOCVji5eVR5UDFFiGpVDEsMwuWZmg6rD0QhrjRB2quHYDNRn3_GQPkeM_Gl8saOWHzDYiiuwtYNxOfMT_qN-m0Xq7pIJPRbpZmHYp8il5xals4fTuPv7SEafA-q4srVaAJvc_XI_AKTfd52QeQS3LkQyxNufEJ4mEwycftBBA1tyJWOEUHjygHOc1yyMrg3W4GMCfaJ_nB1_pEFhlxHkUKXcdpY1OgvFpcjSeV5r4&quot;);
-                "
-              ></div>
-              <div class="absolute top-4 right-4">
-                <span
-                  class="bg-danger/20 backdrop-blur-md text-danger text-[10px] font-bold px-3 py-1 rounded-full uppercase border border-danger/30"
-                  >Trễ hạn</span
-                >
-              </div>
-            </div>
-            <div class="p-6 flex-1 flex flex-col">
-              <div class="flex justify-between items-start mb-2">
-                <h3 class="font-headline-md text-lg truncate pr-2">
-                  Viết báo cáo quý 2
-                </h3>
-                <button
-                  class="material-symbols-outlined text-outline hover:text-primary transition-colors"
-                >
-                  more_vert
-                </button>
-              </div>
-              <p class="text-body-sm text-on-surface-variant line-clamp-2 mb-6">
-                Tổng hợp dữ liệu kinh doanh và phân tích hiệu suất dự án trong
-                quý 2 năm 2024.
-              </p>
-              <div class="mt-auto">
-                <div class="flex justify-between text-xs mb-2">
-                  <span class="font-bold text-outline">Tiến độ</span>
-                  <span class="font-bold text-danger">90%</span>
-                </div>
-                <div
-                  class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden mb-6"
-                >
-                  <div class="h-full bg-danger" style="width: 90%"></div>
-                </div>
-                <div
-                  class="flex items-center justify-between border-t border-glass-border pt-4"
-                >
-                  <div class="flex -space-x-2">
-                    <img
-                      class="w-8 h-8 rounded-full border-2 border-white"
-                      data-alt="A portrait of a female data analyst looking directly at the camera with a confident smile. The environment is a brightly lit, professional office with a sleek, minimalist aesthetic. The image is captured with high-key lighting, maintaining a clean and airy feeling consistent with a modern SaaS platform."
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0ShRgh6NJAh1E-BCvgmt-bk56BekEpPerL0U48JiVsMR636RG78pD-aABV_ipEMhmJwlzpF03CZLPGR11xlRGlUQDd0z6j4BrZHg_gAGSNJfkRaPkiHGaXBP1Ikzi9PGp3ln28uVUpBJJHfW-IclIKq74U6BD1qPdBzjfb42u28AtD5pOKW3CV3AaP9YYp1i73UpGYq3-7tb7WhZNg-SzU1gVJch8cW9DQxrLW13JJ4o3ZnhvbMmv9QAO79Kso4xSwZiPe2Lnp3s"
-                    />
-                  </div>
-                  <div class="flex items-center gap-2 text-danger font-bold">
-                    <span class="material-symbols-outlined text-sm"
-                      >warning</span
-                    >
-                    <span class="text-xs">Trễ 3 ngày</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <!-- Add New Project Skeleton -->
-          <div
-            class="border-2 border-dashed border-outline-variant rounded-2xl flex flex-col items-center justify-center p-8 hover:bg-surface-container hover:border-primary transition-all group cursor-pointer h-full min-h-[400px]"
-          >
-            <div
-              class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors"
-            >
-              <span
-                class="material-symbols-outlined text-3xl text-outline group-hover:text-primary"
-                >add</span
-              >
-            </div>
-            <p
-              class="font-headline-md text-lg text-outline group-hover:text-primary"
-            >
-              Thêm dự án mới
-            </p>
-            <p class="text-body-sm text-outline-variant text-center mt-2 px-8">
-              Bắt đầu một hành trình mới cùng đội ngũ của bạn ngay hôm nay.
-            </p>
-          </div>
         </div>
         <div
           class="mt-8 flex flex-col md:flex-row items-center justify-between gap-4 p-4 bg-white/70 backdrop-blur-xl border border-white/40 rounded-2xl shadow-sm"
@@ -582,35 +261,7 @@
             Hiển thị <span class="font-bold text-on-surface">1-9</span> trong số
             <span class="font-bold text-on-surface">12</span> dự án
           </div>
-          <div class="flex items-center gap-2">
-            <button
-              class="p-2 hover:bg-surface-container rounded-lg transition-colors text-outline hover:text-primary"
-            >
-              <span class="material-symbols-outlined">chevron_left</span>
-            </button>
-            <div class="flex items-center gap-1">
-              <button
-                class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold shadow-lg shadow-primary/20"
-              >
-                1
-              </button>
-              <button
-                class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container transition-colors font-label-lg"
-              >
-                2
-              </button>
-              <button
-                class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container transition-colors font-label-lg"
-              >
-                3
-              </button>
-            </div>
-            <button
-              class="p-2 hover:bg-surface-container rounded-lg transition-colors text-outline hover:text-primary"
-            >
-              <span class="material-symbols-outlined">chevron_right</span>
-            </button>
-          </div>
+          <div class="flex items-center gap-2" id="pagination"></div>
           <div class="flex items-center gap-2">
             <span class="text-body-sm text-on-surface-variant">Số hàng:</span>
             <div
@@ -772,6 +423,7 @@
         opacity: 1;
       }
     </style>
+    <script src="js/project.js"></script>
     <script src="js/modal.js"></script>
   </body>
 </html>

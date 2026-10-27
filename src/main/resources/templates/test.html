@@ -1,428 +1,319 @@
-<!doctype html>
-<html class="light" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Login | WorkFlow Productivity Suite</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "tertiary-fixed": "#ffdbcc",
-              "on-primary": "#ffffff",
-              "on-primary-fixed": "#0f0069",
-              "surface-container-high": "#e7e8e9",
-              "on-error": "#ffffff",
-              "glass-border": "rgba(255, 255, 255, 0.40)",
-              "secondary-container": "#5f5ffd",
-              primary: "#3525cd",
-              "surface-bright": "#f8f9fa",
-              "on-tertiary-fixed": "#351000",
-              "on-surface": "#191c1d",
-              "inverse-primary": "#c3c0ff",
-              "tertiary-container": "#a44100",
-              "surface-container": "#edeeef",
-              "secondary-fixed-dim": "#c1c1ff",
-              "on-tertiary": "#ffffff",
-              "surface-tint": "#4d44e3",
-              warning: "#F59E0B",
-              "glass-bg": "rgba(255, 255, 255, 0.75)",
-              "error-container": "#ffdad6",
-              "surface-dim": "#d9dadb",
-              success: "#10B981",
-              "primary-fixed": "#e2dfff",
-              "primary-container": "#4f46e5",
-              "on-secondary": "#ffffff",
-              "on-secondary-fixed-variant": "#2c24ce",
-              error: "#ba1a1a",
-              "tertiary-fixed-dim": "#ffb695",
-              "surface-container-low": "#f3f4f5",
-              "shadow-tint": "rgba(79, 70, 229, 0.15)",
-              danger: "#EF4444",
-              "surface-variant": "#e1e3e4",
-              "on-secondary-container": "#fffbff",
-              "inverse-surface": "#2e3132",
-              "on-primary-fixed-variant": "#3323cc",
-              "on-secondary-fixed": "#09006b",
-              "secondary-fixed": "#e1dfff",
-              "inverse-on-surface": "#f0f1f2",
-              secondary: "#4442e3",
-              "on-error-container": "#93000a",
-              "on-tertiary-container": "#ffd2be",
-              "outline-variant": "#c7c4d8",
-              tertiary: "#7e3000",
-              background: "#f8f9fa",
-              "surface-container-lowest": "#ffffff",
-              "primary-fixed-dim": "#c3c0ff",
-              "on-surface-variant": "#464555",
-              "surface-container-highest": "#e1e3e4",
-              outline: "#777587",
-              "on-primary-container": "#dad7ff",
-              "on-background": "#191c1d",
-              surface: "#f8f9fa",
-              "on-tertiary-fixed-variant": "#7b2f00",
-            },
-            borderRadius: {
-              DEFAULT: "0.25rem",
-              lg: "0.5rem",
-              xl: "0.75rem",
-              "2xl": "1.25rem",
-              "3xl": "1.5rem",
-              full: "9999px",
-            },
-            fontFamily: {
-              "label-lg": ["Inter"],
-              "headline-md": ["Inter"],
-              "headline-lg": ["Inter"],
-              "body-lg": ["Inter"],
-              "display-lg": ["Inter"],
-              "label-md": ["Inter"],
-              "body-md": ["Inter"],
-              "body-sm": ["Inter"],
-            },
-          },
-        },
-      };
-    </script>
-    <style>
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: #f8f9fa;
-        overflow: hidden;
-      }
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý dự án - Mobile Shop</title>
+    <!-- Nhúng Tailwind CSS qua CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Nhúng FontAwesome để dùng các icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 min-h-screen">
 
-      .glass-card {
-        background: rgba(255, 255, 255, 0.75);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        box-shadow: 0 20px 60px rgba(79, 70, 229, 0.15);
-      }
-
-      .blob {
-        position: absolute;
-        width: 500px;
-        height: 500px;
-        background: linear-gradient(135deg, #4f46e5 0%, #3525cd 100%);
-        filter: blur(80px);
-        border-radius: 50%;
-        z-index: -1;
-        opacity: 0.15;
-        animation: move 20s infinite alternate;
-      }
-
-      .blob-2 {
-        background: linear-gradient(135deg, #7e3000 0%, #ffdbcc 100%);
-        width: 400px;
-        height: 400px;
-        right: -100px;
-        bottom: -100px;
-        animation: move-reverse 25s infinite alternate;
-      }
-
-      @keyframes move {
-        from {
-          transform: translate(-10%, -10%) rotate(0deg);
-        }
-        to {
-          transform: translate(20%, 20%) rotate(360deg);
-        }
-      }
-
-      @keyframes move-reverse {
-        from {
-          transform: translate(10%, 10%) rotate(360deg);
-        }
-        to {
-          transform: translate(-20%, -20%) rotate(0deg);
-        }
-      }
-
-      .ripple-btn {
-        position: relative;
-        overflow: hidden;
-      }
-
-      .ripple {
-        position: absolute;
-        border-radius: 50%;
-        transform: scale(0);
-        animation: ripple 600ms linear;
-        background-color: rgba(255, 255, 255, 0.7);
-      }
-
-      @keyframes ripple {
-        to {
-          transform: scale(4);
-          opacity: 0;
-        }
-      }
-
-      .material-symbols-outlined {
-        font-variation-settings:
-          "FILL" 0,
-          "wght" 400,
-          "GRAD" 0,
-          "opsz" 24;
-      }
-    </style>
-  </head>
-  <body class="min-h-screen flex items-center justify-center p-6">
-    <!-- Animated Background Blobs -->
-    <div class="blob left-[-100px] top-[-100px]"></div>
-    <div class="blob blob-2"></div>
-    <main class="w-full max-w-[480px] z-10">
-      <!-- Login Card -->
-      <div
-        class="glass-card rounded-3xl p-8 md:p-12 transition-all duration-300"
-      >
-        <!-- Header Section -->
-        <div class="flex flex-col items-center mb-10">
-          <div class="flex items-center gap-3 mb-6">
-            <div
-              class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center shadow-lg shadow-shadow-tint"
-            >
-              <span
-                class="material-symbols-outlined text-white"
-                style="font-variation-settings: &quot;FILL&quot; 1"
-                >dashboard</span
-              >
+    <div class="max-w-7xl mx-auto px-6 py-8">
+        
+        <!-- ================= HEADER DỰ ÁN ================= -->
+        <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
+            <div>
+                <div class="flex items-center gap-3 text-xs font-semibold mb-2">
+                    <span class="bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded">PROJECT ID: #WF-2024-08</span>
+                    <span class="text-gray-500"><i class="fa-regular fa-calendar mr-1"></i> Hạn: 30/08/2024</span>
+                </div>
+                <h1 class="text-4xl font-extrabold text-gray-950 mb-3">Website bán điện thoại - Mobile Shop</h1>
+                <p class="text-gray-600 max-w-2xl leading-relaxed">
+                    Dự án tái thiết kế và phát triển nền tảng thương mại điện tử chuyên biệt cho các thiết bị di động, tập trung vào trải nghiệm mua sắm mượt mà và thanh toán an toàn.
+                </p>
             </div>
-            <span
-              class="font-headline-md text-headline-md font-black text-primary tracking-tight"
-              >WorkFlow</span
-            >
-          </div>
-          <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">
-            Welcome Back
-          </h1>
-          <p
-            class="font-body-md text-body-md text-on-surface-variant text-center"
-          >
-            Enter your details to continue your productive streak.
-          </p>
-        </div>
-        <!-- Form Section -->
-        <form class="space-y-6" id="loginForm">
-          <!-- Email Field -->
-          <div class="space-y-2">
-            <label
-              class="font-label-lg text-label-lg text-on-surface block"
-              for="email"
-              >Email Address</label
-            >
-            <div class="relative group">
-              <div
-                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors"
-              >
-                <span class="material-symbols-outlined text-[20px]">mail</span>
-              </div>
-              <input
-                class="w-full bg-white/50 border border-glass-border rounded-xl py-3.5 pl-12 pr-4 font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
-                id="email"
-                name="email"
-                placeholder="name@company.com"
-                required=""
-                type="email"
-              />
+            
+            <!-- Nút hành động -->
+            <div class="flex items-center gap-3 self-end md:self-start">
+                <button class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition">
+                    <i class="fa-solid fa-share-nodes"></i> Chia sẻ
+                </button>
+                <button class="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium shadow-sm transition">
+                    <i class="fa-solid fa-plus"></i> Thêm công việc
+                </button>
             </div>
-          </div>
-          <!-- Password Field -->
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <label
-                class="font-label-lg text-label-lg text-on-surface block"
-                for="password"
-                >Password</label
-              >
-              <a
-                class="font-label-md text-label-md text-primary hover:underline transition-all"
-                href="#"
-                >Forgot password?</a
-              >
+        </div>
+
+        <!-- Tiến độ & Thành viên -->
+        <div class="flex flex-wrap items-center gap-6 mb-8 border-b border-gray-200 pb-6">
+            <!-- Nhóm avatar -->
+            <div class="flex -space-x-2">
+                <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" alt="Avatar">
+                <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="Avatar">
+                <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150" alt="Avatar">
+                <div class="flex items-center justify-center w-8 h-8 rounded-full border-2 border-white bg-indigo-600 text-white text-xs font-semibold">+12</div>
             </div>
-            <div class="relative group">
-              <div
-                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors"
-              >
-                <span class="material-symbols-outlined text-[20px]">lock</span>
-              </div>
-              <input
-                class="w-full bg-white/50 border border-glass-border rounded-xl py-3.5 pl-12 pr-12 font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
-                id="password"
-                name="password"
-                placeholder="••••••••"
-                required=""
-                type="password"
-              />
-              <button
-                class="absolute inset-y-0 right-0 pr-4 flex items-center text-outline hover:text-on-surface transition-colors"
-                type="button"
-              >
-                <span class="material-symbols-outlined text-[20px]"
-                  >visibility</span
-                >
-              </button>
+            <!-- Thanh tiến độ -->
+            <div class="flex items-center gap-3 w-64">
+                <span class="text-xs font-medium text-gray-500 whitespace-nowrap">Tiến độ tổng thể</span>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-teal-500 h-2 rounded-full" style="width: 75%"></div>
+                </div>
+                <span class="text-xs font-bold text-indigo-600">75%</span>
             </div>
-          </div>
-          <!-- Remember Me -->
-          <div class="flex items-center">
-            <input
-              class="w-4 h-4 text-primary bg-white/50 border-glass-border rounded focus:ring-primary/20 transition-all"
-              id="remember"
-              type="checkbox"
-            />
-            <label
-              class="ml-2 font-body-sm text-body-sm text-on-surface-variant cursor-pointer"
-              for="remember"
-              >Stay logged in for 30 days</label
-            >
-          </div>
-          <!-- Submit Button -->
-          <button
-            class="ripple-btn w-full bg-primary-container text-on-primary py-4 rounded-xl font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-lg shadow-shadow-tint hover:bg-primary transition-all transform active:scale-[0.98] mt-2"
-            type="submit"
-          >
-            Login to Workspace
-            <span class="material-symbols-outlined text-[18px]"
-              >arrow_forward</span
-            >
-          </button>
-        </form>
-        <!-- Divider -->
-        <div class="relative my-8">
-          <div class="absolute inset-0 flex items-center">
-            <span class="w-full border-t border-surface-variant"></span>
-          </div>
-          <div class="relative flex justify-center text-xs uppercase">
-            <span
-              class="bg-surface-container-lowest px-4 text-outline font-label-md"
-              >Or continue with</span
-            >
-          </div>
         </div>
-        <!-- Social Logins -->
-        <div class="grid grid-cols-2 gap-4">
-          <button
-            class="flex items-center justify-center gap-3 py-3 px-4 bg-white/50 border border-glass-border rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-white hover:shadow-sm transition-all duration-200"
-          >
-            <img
-              alt="Google"
-              class="w-5 h-5"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuASbK2lJKP5S5lMW5FLckl2JntIWXV9qk7QiqvWE8IAunncHuo-dMB9ZM-74CHn08sTRKVTm1L5XfhcI8ESp7pOe3KhsVdlbz_TMXLqbHgQS5ErfmkhS_EB4pekR7BEmDuwE0zDXueaoAAUzumpMJ8gQ5cj3b_E_u5r2MOYX9AaXDsCL1fvTuiQZqWgGPr8uA62hGn7GP7ct54POl8_Y4OdRfjyzpKdnBfiZsAegN18_rAulMriqojbvQ0PgT1R4LAqK8VzAPAFq68"
-            />
-            Google
-          </button>
-          <button
-            class="flex items-center justify-center gap-3 py-3 px-4 bg-white/50 border border-glass-border rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-white hover:shadow-sm transition-all duration-200"
-          >
-            <svg class="w-5 h-5 fill-on-surface" viewBox="0 0 24 24">
-              <path
-                d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"
-              ></path>
-            </svg>
-            GitHub
-          </button>
+
+        <!-- ================= HỆ THỐNG TABS ================= -->
+        <div class="flex border-b border-gray-200 mb-8 overflow-x-auto no-scrollbar">
+            <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn px-4 py-2.5 font-medium text-sm border-b-2 border-indigo-600 text-indigo-600 whitespace-nowrap">Overview</button>
+            <button onclick="switchTab('tasks')" id="tab-tasks" class="tab-btn px-4 py-2.5 font-medium text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 whitespace-nowrap">Tasks (128)</button>
+            <button onclick="switchTab('board')" id="tab-board" class="tab-btn px-4 py-2.5 font-medium text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 whitespace-nowrap">Board</button>
+            <button onclick="switchTab('calendar')" id="tab-calendar" class="tab-btn px-4 py-2.5 font-medium text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 whitespace-nowrap">Calendar</button>
+            <button onclick="switchTab('files')" id="tab-files" class="tab-btn px-4 py-2.5 font-medium text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 whitespace-nowrap">Files (42)</button>
+            <button onclick="switchTab('members')" id="tab-members" class="tab-btn px-4 py-2.5 font-medium text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 whitespace-nowrap">Members</button>
+            <button onclick="switchTab('activity')" id="tab-activity" class="tab-btn px-4 py-2.5 font-medium text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 whitespace-nowrap">Activity</button>
         </div>
-        <!-- Footer Link -->
-        <p
-          class="mt-8 text-center font-body-sm text-body-sm text-on-surface-variant"
-        >
-          Don't have an account?
-          <a
-            class="text-primary font-label-lg hover:underline transition-all"
-            href="#"
-            >Create free workspace</a
-          >
-        </p>
-      </div>
-      <!-- System Status Placeholder -->
-      <div
-        class="mt-8 flex items-center justify-center gap-4 text-outline font-label-md"
-      >
-        <div class="flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-success"></span>
-          Systems Operational
+
+        <!-- ================= NỘI DUNG CÁC MÀN HÌNH ================= -->
+        
+        <!-- MÀN HÌNH 1: OVERVIEW -->
+        <div id="content-overview" class="tab-content block animate-fade-in">
+            <!-- Grid 4 thẻ thống kê nhanh -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <!-- Tổng công việc -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-lg"><i class="fa-regular fa-clipboard"></i></div>
+                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded flex items-center gap-0.5"><i class="fa-solid fa-arrow-up"></i> 12%</span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 mb-1">Tổng công việc</p>
+                        <h3 class="text-3xl font-bold text-gray-900">128</h3>
+                    </div>
+                </div>
+                <!-- Đã hoàn thành -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-lg"><i class="fa-regular fa-circle-check"></i></div>
+                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded flex items-center gap-0.5"><i class="fa-solid fa-arrow-up"></i> 18%</span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 mb-1">Đã hoàn thành</p>
+                        <h3 class="text-3xl font-bold text-gray-900">78</h3>
+                    </div>
+                </div>
+                <!-- Đang thực hiện -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-10 h-10 bg-amber-50 text-amber-500 rounded-xl flex items-center justify-center text-lg"><i class="fa-regular fa-clock"></i></div>
+                        <span class="text-xs font-medium text-gray-400">Không đổi</span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 mb-1">Đang thực hiện</p>
+                        <h3 class="text-3xl font-bold text-gray-900">32</h3>
+                    </div>
+                </div>
+                <!-- Quá hạn -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-10 h-10 bg-rose-50 text-rose-500 rounded-xl flex items-center justify-center text-lg"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <span class="text-xs font-semibold text-rose-600 bg-rose-50 px-2 py-0.5 rounded flex items-center gap-0.5"><i class="fa-solid fa-arrow-down"></i> 5%</span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 mb-1">Quá hạn</p>
+                        <h3 class="text-3xl font-bold text-gray-900">18</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid hàng dưới: Hoạt động & Hiệu suất -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Hoạt động gần đây -->
+                <div class="lg:col-span-2 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                    <h3 class="text-lg font-bold mb-4">Hoạt động gần đây</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <img class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="">
+                            <p class="text-sm text-gray-600"><span class="font-semibold text-gray-900">Nguyễn Văn An</span> đã hoàn thành công việc <a href="#" class="text-indigo-600 font-medium hover:underline">Xây dựng API xác thực</a></p>
+                            <span class="text-xs text-gray-400 ml-auto">5 phút trước</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <img class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" alt="">
+                            <p class="text-sm text-gray-600"><span class="font-semibold text-gray-900">Trần Thị B</span> đã tải lên tài liệu thiết kế <a href="#" class="text-indigo-600 font-medium hover:underline">UI_MobileShop_v2.fig</a></p>
+                            <span class="text-xs text-gray-400 ml-auto">1 giờ trước</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Hiệu suất dự án -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center justify-center">
+                    <h3 class="text-base font-bold text-gray-900 mb-4 self-start">HIỆU SUẤT DỰ ÁN</h3>
+                    <div class="relative w-36 h-36 flex items-center justify-center">
+                        <!-- Vòng tròn tiến độ đơn giản -->
+                        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                            <path class="text-gray-100" stroke-width="3" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="text-indigo-600" stroke-dasharray="85, 100" stroke-width="3" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        </svg>
+                        <div class="absolute text-center">
+                            <span class="text-2xl font-bold text-gray-900">85%</span>
+                            <p class="text-[10px] text-gray-400 font-medium uppercase tracking-wider">Tốt</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <span class="w-1 h-1 rounded-full bg-outline-variant"></span>
-        <div class="flex items-center gap-1.5">
-          <span class="material-symbols-outlined text-[14px]">shield_lock</span>
-          SSL Secured
+
+        <!-- MÀN HÌNH 2: TASKS -->
+        <div id="content-tasks" class="tab-content hidden animate-fade-in">
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <!-- Thanh công cụ lọc nhanh -->
+                <div class="p-4 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div class="relative w-full sm:w-72">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                        <input type="text" placeholder="Tìm kiếm công việc..." class="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div class="flex gap-2">
+                        <select class="px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-600 focus:outline-none bg-white">
+                            <option>Tất cả trạng thái</option>
+                            <option>Đang thực hiện</option>
+                            <option>Quá hạn</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Bảng danh sách công việc -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 border-b border-gray-100 text-xs font-semibold uppercase tracking-wider text-gray-500">
+                                <th class="py-3.5 px-6">Tên công việc</th>
+                                <th class="py-3.5 px-6">Người thực hiện</th>
+                                <th class="py-3.5 px-6">Hạn chót</th>
+                                <th class="py-3.5 px-6">Độ ưu tiên</th>
+                                <th class="py-3.5 px-6 text-right">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 text-sm text-gray-600">
+                            <tr>
+                                <td class="py-4 px-6 font-medium text-gray-900">Xây dựng API xác thực người dùng</td>
+                                <td class="py-4 px-6 flex items-center gap-2">
+                                    <img class="w-6 h-6 rounded-full object-cover" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="">
+                                    <span>Nguyễn Văn An</span>
+                                </td>
+                                <td class="py-4 px-6">15/08/2024</td>
+                                <td class="py-4 px-6"><span class="px-2 py-0.5 rounded text-xs font-semibold bg-rose-50 text-rose-600">Cao</span></td>
+                                <td class="py-4 px-6 text-right text-gray-400 hover:text-gray-600 cursor-pointer"><i class="fa-solid fa-ellipsis"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-6 font-medium text-gray-900">Thiết kế Mockup màn hình Giỏ hàng</td>
+                                <td class="py-4 px-6 flex items-center gap-2">
+                                    <img class="w-6 h-6 rounded-full object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" alt="">
+                                    <span>Trần Thị B</span>
+                                </td>
+                                <td class="py-4 px-6 text-rose-500 font-medium">10/08/2024 (Quá hạn)</td>
+                                <td class="py-4 px-6"><span class="px-2 py-0.5 rounded text-xs font-semibold bg-amber-50 text-amber-600">Trung bình</span></td>
+                                <td class="py-4 px-6 text-right text-gray-400 hover:text-gray-600 cursor-pointer"><i class="fa-solid fa-ellipsis"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
-    </main>
+
+        <!-- MÀN HÌNH 3: KANBAN BOARD -->
+        <div id="content-board" class="tab-content hidden animate-fade-in">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Cột: To Do -->
+                <div class="bg-gray-100 p-4 rounded-xl min-h-[400px]">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-bold text-gray-700 text-sm">CẦN LÀM (To Do)</h4>
+                        <span class="bg-gray-200 text-gray-600 text-xs font-bold px-2 py-0.5 rounded-full">1</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 space-y-3 cursor-pointer hover:shadow-md transition">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-blue-600">Nghiên cứu</span>
+                        <h5 class="font-semibold text-gray-900 text-sm">Phân tích đối thủ cạnh tranh</h5>
+                        <div class="flex justify-between items-center pt-2">
+                            <span class="text-xs text-gray-400"><i class="fa-regular fa-calendar"></i> 28/08</span>
+                            <img class="w-5 h-5 rounded-full object-cover" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150" alt="">
+                        </div>
+                    </div>
+                </div>
+                <!-- Cột: In Progress -->
+                <div class="bg-amber-50 p-4 rounded-xl min-h-[400px]">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-bold text-amber-800 text-sm">ĐANG THỰC HIỆN</h4>
+                        <span class="bg-amber-100 text-amber-700 text-xs font-bold px-2 py-0.5 rounded-full">32</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-amber-100 space-y-3 cursor-pointer hover:shadow-md transition">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600">Backend</span>
+                        <h5 class="font-semibold text-gray-900 text-sm">Xây dựng API xác thực</h5>
+                        <div class="flex justify-between items-center pt-2">
+                            <span class="text-xs text-gray-400"><i class="fa-regular fa-calendar"></i> 15/08</span>
+                            <img class="w-5 h-5 rounded-full object-cover" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="">
+                        </div>
+                    </div>
+                </div>
+                <!-- Cột: Done -->
+                <div class="bg-emerald-50 p-4 rounded-xl min-h-[400px]">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-bold text-emerald-800 text-sm">ĐÃ HOÀN THÀNH</h4>
+                        <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-0.5 rounded-full">78</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm opacity-75 border border-emerald-100 space-y-3">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-600 line-through">UI/UX Design</span>
+                        <h5 class="font-semibold text-gray-500 text-sm line-through">Phác thảo Wireframe Homepage</h5>
+                        <div class="flex justify-between items-center pt-2">
+                            <span class="text-xs text-emerald-600 font-medium"><i class="fa-solid fa-check"></i> Hoàn thành</span>
+                            <img class="w-5 h-5 rounded-full object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CÁC TAB KHÁC (FILES, MEMBERS, CALENDAR, ACTIVITY...) -->
+        <div id="content-calendar" class="tab-content hidden p-8 text-center text-gray-400 border border-dashed rounded-2xl bg-white">
+            <i class="fa-regular fa-calendar-days text-4xl mb-2"></i><p>Giao diện Lịch (Calendar) đang phát triển...</p>
+        </div>
+        <div id="content-files" class="tab-content hidden p-8 text-center text-gray-400 border border-dashed rounded-2xl bg-white">
+            <i class="fa-regular fa-folder-open text-4xl mb-2"></i><p>Quản lý tài liệu (42 Files) đang phát triển...</p>
+        </div>
+        <div id="content-members" class="tab-content hidden p-8 text-center text-gray-400 border border-dashed rounded-2xl bg-white">
+            <i class="fa-solid fa-users text-4xl mb-2"></i><p>Quản lý Thành viên đang phát triển...</p>
+        </div>
+        <div id="content-activity" class="tab-content hidden p-8 text-center text-gray-400 border border-dashed rounded-2xl bg-white">
+            <i class="fa-solid fa-chart-line text-4xl mb-2"></i><p>Nhật ký hoạt động (Activity) đang phát triển...</p>
+        </div>
+
+    </div>
+
+    <!-- ================= JAVASCRIPT ĐIỀU HƯỚNG TABS ================= -->
     <script>
-      // Ripple Effect Logic
-      const buttons = document.querySelectorAll(".ripple-btn");
+        function switchTab(tabName) {
+            // 1. Ẩn tất cả các khối nội dung
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.add('hidden'));
+            
+            // 2. Bỏ trạng thái active (màu xanh indigo) ở tất cả các nút tab
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => {
+                tab.classList.remove('border-indigo-600', 'text-indigo-600');
+                tab.classList.add('border-transparent', 'text-gray-500');
+            });
 
-      buttons.forEach((button) => {
-        button.addEventListener("click", function (e) {
-          const x = e.clientX - e.target.offsetLeft;
-          const y = e.clientY - e.target.offsetTop;
+            // 3. Hiển thị nội dung của tab được chọn
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
 
-          const ripple = document.createElement("span");
-          ripple.classList.add("ripple");
-          ripple.style.left = `${x}px`;
-          ripple.style.top = `${y}px`;
-
-          this.appendChild(ripple);
-
-          setTimeout(() => {
-            ripple.remove();
-          }, 600);
-        });
-      });
-
-      // Form Submission Intercept (Visual feedback)
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
-          const btn = this.querySelector('button[type="submit"]');
-          const originalContent = btn.innerHTML;
-
-          btn.innerHTML = `
-                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Verifying...
-            `;
-          btn.disabled = true;
-          btn.classList.add("opacity-80");
-
-          setTimeout(() => {
-            btn.innerHTML = `<span class="material-symbols-outlined">check_circle</span> Success! Redirecting...`;
-            btn.classList.replace("bg-primary-container", "bg-success");
-          }, 1500);
-        });
-
-      // Password Visibility Toggle
-      const togglePass = document.querySelector('button[type="button"]');
-      const passInput = document.getElementById("password");
-
-      togglePass.addEventListener("click", () => {
-        const type =
-          passInput.getAttribute("type") === "password" ? "text" : "password";
-        passInput.setAttribute("type", type);
-        togglePass.querySelector("span").textContent =
-          type === "password" ? "visibility" : "visibility_off";
-      });
+            // 4. Kích hoạt trạng thái active cho nút bấm tương ứng
+            const activeTab = document.getElementById(`tab-${tabName}`);
+            activeTab.classList.remove('border-transparent', 'text-gray-500');
+            activeTab.classList.add('border-indigo-600', 'text-indigo-600');
+        }
     </script>
-  </body>
+
+    <!-- Style bổ sung cho hiệu ứng chuyển tab nhẹ nhàng & ẩn thanh cuộn ngang nếu có -->
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.2s ease-out forwards;
+        }
+    </style>
+</body>
 </html>

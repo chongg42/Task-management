@@ -27,6 +27,16 @@ public class UserMap {
                 .gender(user.getGender())
                 .build();
     }
+    public User toUser(UserRes user){
+        return User.builder()
+                .id(user.getId())
+                .avatar(user.getAvatar())
+                .fullName(user.getFullName())
+                .email(user.getEmail())
+                .birthday(user.getBirthday())
+                .gender(user.getGender())
+                .build();
+    }
     public Set<UserRes> toUserResSet(Set<User> users) {
 
     return users.stream()

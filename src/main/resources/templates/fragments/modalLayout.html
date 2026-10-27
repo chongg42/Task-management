@@ -36,7 +36,10 @@
             >
               <div class="stepper-line"></div>
               <!-- Step 1: Active -->
-              <div class="relative z-10 flex flex-col items-center gap-2 step-icon">
+              <div
+                class="relative z-10 flex flex-col items-center gap-2 step-icon"
+                onclick="getStep(1)"
+              >
                 <div
                   class="w-10 h-10 rounded-full flex items-center justify-center shadow-indigo-200 shadow-lg text-white bg-indigo-600 transition-all duration-300 easi-in"
                 >
@@ -55,10 +58,13 @@
                     <line x1="12" x2="12.01" y1="16" y2="16"></line>
                   </svg>
                 </div>
-                <span class="text-xs font-medium text-gray-400">Thông tin</span>
+                <span class="text-xs font-medium text-gray-400">Dự án</span>
               </div>
               <!-- Step 2: Inactive -->
-              <div class="relative z-10 flex flex-col items-center gap-2 step-icon">
+              <div
+                class="relative z-10 flex flex-col items-center gap-2 step-icon"
+                onclick="getStep( 2)"
+              >
                 <div
                   class="w-10 h-10 rounded-full bg-white border-2 border-gray-200 text-gray-400 flex items-center justify-center transition-all duration-300 easi-in"
                 >
@@ -80,10 +86,13 @@
                     <line x1="3" x2="3.01" y1="18" y2="18"></line>
                   </svg>
                 </div>
-                <span class="text-xs font-medium text-gray-400">Quy trình</span>
+                <span class="text-xs font-medium text-gray-400">Công việc</span>
               </div>
               <!-- Step 3: Inactive -->
-              <div class="relative z-10 flex flex-col items-center gap-2 step-icon">
+              <div
+                class="relative z-10 flex flex-col items-center gap-2 step-icon"
+                onclick="getStep(3)"
+              >
                 <div
                   class="w-10 h-10 rounded-full bg-white border-2 border-gray-200 text-gray-400 flex items-center justify-center transition-all duration-300 easi-in"
                 >
@@ -103,8 +112,10 @@
                     <line x1="23" x2="17" y1="11" y2="11"></line>
                   </svg>
                 </div>
-                <span class="text-xs font-medium text-gray-400"
-                  >Thành viên</span
+                <span class="text-xs font-medium text-gray-400">Hoàn tất</span>
+                <span
+                  class="absolute top-0 right-0 flex items-center justify-center w-4 h-4 bg-red-500 rounded-full text-white text-xs hidden" id="totalTask"
+                  ></span
                 >
               </div>
             </div>
@@ -125,6 +136,7 @@
           </div>
         </div>
       </div>
+      <script th:src="@{/js/files.js}" defer></script>
     </div>
   </body>
 </html>

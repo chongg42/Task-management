@@ -2,10 +2,8 @@ package com.example.quanlycongviec.DTO.Response;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
-import com.example.quanlycongviec.Entity.list.Gender;
+import com.example.quanlycongviec.Entity.enums.Gender;
 
 import lombok.Builder;
 import lombok.Data;

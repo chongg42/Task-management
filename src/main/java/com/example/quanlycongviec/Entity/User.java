@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.hibernate.annotations.ManyToAny;
 
-import com.example.quanlycongviec.Entity.list.Gender;
+import com.example.quanlycongviec.Entity.enums.Gender;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

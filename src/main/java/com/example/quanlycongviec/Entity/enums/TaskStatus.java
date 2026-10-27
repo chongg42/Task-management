@@ -1,4 +1,4 @@
-package com.example.quanlycongviec.Entity.list;
+package com.example.quanlycongviec.Entity.enums;
 
 public enum TaskStatus {
     QUA_HAN,

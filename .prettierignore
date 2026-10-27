@@ -1,0 +1,7 @@
+# Bỏ qua các thư mục build của Java
+/target/
+/.settings/
+/.mvn/
+
+# Bỏ qua các file thư viện tĩnh bên ngoài nếu có (như jquery, bootstrap)
+src/main/resources/static/js/plugins/

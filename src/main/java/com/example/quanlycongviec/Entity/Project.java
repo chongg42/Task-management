@@ -2,50 +2,54 @@ package com.example.quanlycongviec.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.security.PrivilegedAction;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.example.quanlycongviec.Entity.list.ProjectStatus;
+import com.example.quanlycongviec.Entity.enums.ProjectStatus;
 
 @Entity
 @Table(name = "projects")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Project {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-    private String name;
+  private String name;
 
-    private String description;
+  private String description;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+  @Column(name = "created_at")
+  private LocalDateTime createdAt;
 
-    private Boolean deleted;
-    
-    @Enumerated(EnumType.STRING)
-    private ProjectStatus status;
+  private Boolean deleted;
 
-    @ManyToMany(mappedBy = "memberProject")
-    private Set<User> members;
+  @Enumerated(EnumType.STRING)
+  private ProjectStatus status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by", nullable = false)
-    private User owner;
-    @OneToMany(mappedBy = "project")
-    private Set<Task> tasks = new HashSet<>();
+  private LocalDateTime dueDate;
 
-    @OneToMany(mappedBy = "project")
-    private Set<Attachment> attachments = new HashSet<>();
+  private LocalDateTime startDate;
+  @ManyToMany(mappedBy = "memberProject")
+  private Set<User> members;
 
-    @OneToMany(mappedBy = "project")
-    private Set<ActivityLog> activityLogs = new HashSet<>();
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "created_by", nullable = false)
+  private User owner;
+
+  @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Task> tasks = new HashSet<>();
+
+  @OneToMany(mappedBy = "project")
+  private Set<Attachment> attachments = new HashSet<>();
+
+  // @OneToMany(mappedBy = "project")
+  // private Set<ActivityLog> activityLogs = new HashSet<>();
 }

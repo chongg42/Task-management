@@ -1,14 +1,18 @@
 package com.example.quanlycongviec.DTO.Response;
 
 import java.time.LocalDateTime;
-import java.util.List;
-
-import com.example.quanlycongviec.Entity.list.TaskStatus;
+import java.util.Set;
+import com.example.quanlycongviec.Entity.enums.TaskStatus;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Builder
 public class TaskRes {
 
@@ -30,8 +34,8 @@ public class TaskRes {
 
     private String createdByName;
 
-    private List<UserRes> members;
-
+    private Set<Integer> assigneeIds;
+  private Integer progress;
     // private List<TagResponse> tags;
 
     private LocalDateTime createdAt;

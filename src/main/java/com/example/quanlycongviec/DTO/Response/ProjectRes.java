@@ -1,14 +1,18 @@
 package com.example.quanlycongviec.DTO.Response;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
-
-import com.example.quanlycongviec.Entity.ActivityLog;
-import com.example.quanlycongviec.Entity.list.ProjectStatus;
+import com.example.quanlycongviec.Entity.enums.ProjectStatus;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Builder
 public class ProjectRes {
 
@@ -16,9 +20,13 @@ public class ProjectRes {
     private String name;
     private String description;
     private ProjectStatus status;
-
     private UserRes owner;
-
-    private Set<UserRes> members;
-    private Set<TaskRes> taskRes;
+    @Builder.Default
+    private Set<UserRes> members=new HashSet<>();
+    @Builder.Default
+    private Set<TaskRes> taskRes =new HashSet<>();
+    @Builder.Default
+    private Set<AttachmentRes>attachments=new HashSet<>();
+    private LocalDateTime dueDate;
+    private LocalDateTime startDate;
 }
