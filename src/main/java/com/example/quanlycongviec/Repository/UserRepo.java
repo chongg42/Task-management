@@ -10,5 +10,6 @@ import com.example.quanlycongviec.Entity.User;
 
 public interface UserRepo extends JpaRepository<User, Integer> {
    
-    Optional<User> findByEmail(String email);;
+    Optional<User> findByEmail(String email);
+    Boolean existsByEmail(String email);
 }

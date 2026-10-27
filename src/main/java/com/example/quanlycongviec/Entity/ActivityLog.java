@@ -31,7 +31,8 @@ public class ActivityLog {
     @JoinColumn(name = "users_id")
     private User user;
     private Integer resourceId;
-
+     
+   private Integer projectId; 
     @Column(length = 20)
     private String status;
 }

@@ -1,13 +1,11 @@
 <!doctype html>
-
-<html class="light" lang="vi">
+<html class="light" lang="vi" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>WorkFlow - Productivity Suite</title>
-   
+    <title>WorkFlow - Tổng quan</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-      <script th:src="@{/js/tailwind-config.js}"></script>
+    <script th:src="@{/js/tailwind-config.js}"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
       rel="stylesheet"
@@ -16,264 +14,130 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
-   <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
   </head>
   <body class="bg-background text-on-surface">
-    <!-- Sidebar Navigation -->
     <div th:replace="~{fragments/layout :: sidebar(activePage='tongQuan')}"></div>
-    <!-- Top Navigation Bar -->
     <header th:replace="~{fragments/layout :: header}"></header>
 
-    <!-- Main Content -->
     <main class="ml-64 pt-20 px-margin-desktop pb-12 min-h-screen">
       <div class="grid grid-cols-12 gap-gutter">
-        <!-- Welcome Hero Section -->
-        <section class="col-span-9 space-y-6">
-          <div
-            class="glass-card p-8 rounded-3xl relative overflow-hidden flex items-center justify-between"
-          >
+        <section class="col-span-12 xl:col-span-9 space-y-6">
+          <!-- Lời chào -->
+          <div class="glass-card p-8 rounded-3xl relative overflow-hidden flex items-center justify-between">
             <div class="relative z-10 space-y-2">
-              <h1
-                class="font-display-lg text-display-lg text-on-surface leading-tight"
-              >
-                Chào buổi sáng, Nguyễn Văn An! 👋
-              </h1>
-              <p
-                class="font-body-lg text-body-lg text-on-surface-variant max-w-lg"
-              >
-                Hôm nay là một ngày tuyệt vời để hoàn thành mục tiêu của bạn. Có
-                4 công việc quan trọng cần xử lý.
-              </p>
+              <h1 id="greeting-title" class="font-display-lg text-display-lg text-on-surface leading-tight">Xin chào! 👋</h1>
+              <p id="greeting-sub" class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">Đang tải công việc của bạn...</p>
             </div>
-            <div class="relative w-64 h-48 animate-float">
-              <img
-                class="object-contain w-full h-full"
-                data-alt="A 3D character illustration of a male professional working at a laptop with a modern, minimalist floating workstation. Soft pastel colors, clean lines, and a high-key bright atmosphere consistent with a premium SaaS brand aesthetic. Floating geometric UI elements like charts and icons surround him."
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU9dmk8XVAOvUdShquGkttAfnpt0YoYAfZMrfQGyvqetlTec7UcCuUEzZbQ97zGI-hhfk2xgJK5ky9b-RKvfF4xvrzv48D3ss-82R9rJY8Iiy9YsnxQ2womW18jPFdqxikQNWGFlGvOWCf5L216UsUGGIuuWlggzePQ2qI6FyQZjcNXdqwxpAO-aw54TceZj7LfhZ69LNJfn4roEGaxfKoLiB6AEtFV1yeOB12V9thM-IHFSV-vcwhItllloC2KR7lU8JiV1TjRDI"
-              />
+            <div class="relative w-64 h-48 animate-float hidden md:block">
+              <img class="object-contain w-full h-full" alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU9dmk8XVAOvUdShquGkttAfnpt0YoYAfZMrfQGyvqetlTec7UcCuUEzZbQ97zGI-hhfk2xgJK5ky9b-RKvfF4xvrzv48D3ss-82R9rJY8Iiy9YsnxQ2womW18jPFdqxikQNWGFlGvOWCf5L216UsUGGIuuWlggzePQ2qI6FyQZjcNXdqwxpAO-aw54TceZj7LfhZ69LNJfn4roEGaxfKoLiB6AEtFV1yeOB12V9thM-IHFSV-vcwhItllloC2KR7lU8JiV1TjRDI" />
             </div>
-            <!-- Decorative shapes -->
-            <div
-              class="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"
-            ></div>
-            <div
-              class="absolute bottom-0 right-1/4 w-32 h-32 bg-secondary/5 rounded-full blur-2xl"
-            ></div>
+            <div class="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-1/4 w-32 h-32 bg-secondary/5 rounded-full blur-2xl"></div>
           </div>
-          <!-- Stats Grid -->
-          <div class="grid grid-cols-4 gap-4">
-            <div
-              class="glass-card p-6 rounded-2xl sparkle-container group hover:-translate-y-1 transition-transform"
-            >
-              <div
-                class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
-              >
-                <span
-                  class="material-symbols-outlined text-primary"
-                  style="font-variation-settings: &quot;FILL&quot; 1"
-                  >assignment</span
-                >
+
+          <!-- Thống kê -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="glass-card p-6 rounded-2xl">
+              <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1">assignment</span>
               </div>
-              <p class="text-on-surface-variant font-label-md">
-                Tổng công việc
-              </p>
-              <h3 class="text-headline-lg font-headline-lg">128</h3>
-              <p class="text-success text-xs font-bold mt-2">
-                ↑ 12%
-                <span class="font-normal text-on-surface-variant"
-                  >so với tuần trước</span
-                >
-              </p>
+              <p class="text-on-surface-variant font-label-md">Tổng công việc</p>
+              <h3 id="stat-total" class="text-headline-lg font-headline-lg">—</h3>
+              <p id="stat-total-sub" class="text-xs text-on-surface-variant mt-2"></p>
             </div>
-            <div
-              class="glass-card p-6 rounded-2xl group hover:-translate-y-1 transition-transform"
-            >
-              <div
-                class="w-12 h-12 bg-success/10 rounded-xl flex items-center justify-center mb-4"
-              >
-                <span
-                  class="material-symbols-outlined text-success"
-                  style="font-variation-settings: &quot;FILL&quot; 1"
-                  >check_circle</span
-                >
+            <div class="glass-card p-6 rounded-2xl">
+              <div class="w-12 h-12 bg-success/10 rounded-xl flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-success" style="font-variation-settings: 'FILL' 1">check_circle</span>
               </div>
               <p class="text-on-surface-variant font-label-md">Đã hoàn thành</p>
-              <h3 class="text-headline-lg font-headline-lg">78</h3>
-              <p class="text-success text-xs font-bold mt-2">
-                ↑ 18%
-                <span class="font-normal text-on-surface-variant"
-                  >so với tuần trước</span
-                >
-              </p>
+              <h3 id="stat-done" class="text-headline-lg font-headline-lg">—</h3>
+              <p id="stat-done-sub" class="text-xs text-success font-semibold mt-2"></p>
             </div>
-            <div
-              class="glass-card p-6 rounded-2xl group hover:-translate-y-1 transition-transform"
-            >
-              <div
-                class="w-12 h-12 bg-warning/10 rounded-xl flex items-center justify-center mb-4"
-              >
-                <span
-                  class="material-symbols-outlined text-warning"
-                  style="font-variation-settings: &quot;FILL&quot; 1"
-                  >pending</span
-                >
+            <div class="glass-card p-6 rounded-2xl">
+              <div class="w-12 h-12 bg-warning/10 rounded-xl flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-warning" style="font-variation-settings: 'FILL' 1">pending</span>
               </div>
-              <p class="text-on-surface-variant font-label-md">
-                Đang thực hiện
-              </p>
-              <h3 class="text-headline-lg font-headline-lg">32</h3>
-              <p class="text-on-surface-variant text-xs mt-2">→ Không đổi</p>
+              <p class="text-on-surface-variant font-label-md">Đang thực hiện</p>
+              <h3 id="stat-doing" class="text-headline-lg font-headline-lg">—</h3>
+              <p id="stat-doing-sub" class="text-xs text-on-surface-variant mt-2"></p>
             </div>
-            <div
-              class="glass-card p-6 rounded-2xl group hover:-translate-y-1 transition-transform"
-            >
-              <div
-                class="w-12 h-12 bg-danger/10 rounded-xl flex items-center justify-center mb-4"
-              >
-                <span
-                  class="material-symbols-outlined text-danger"
-                  style="font-variation-settings: &quot;FILL&quot; 1"
-                  >event_busy</span
-                >
+            <div class="glass-card p-6 rounded-2xl">
+              <div class="w-12 h-12 bg-danger/10 rounded-xl flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-danger" style="font-variation-settings: 'FILL' 1">event_busy</span>
               </div>
               <p class="text-on-surface-variant font-label-md">Quá hạn</p>
-              <h3 class="text-headline-lg font-headline-lg">18</h3>
-              <p class="text-danger text-xs font-bold mt-2">
-                ↑ 5%
-                <span class="font-normal text-on-surface-variant"
-                  >so với tuần trước</span
-                >
-              </p>
+              <h3 id="stat-late" class="text-headline-lg font-headline-lg">—</h3>
+              <p id="stat-late-sub" class="text-xs text-danger font-semibold mt-2"></p>
             </div>
           </div>
-          <!-- My Tasks -->
+
+          <!-- Công việc của tôi -->
           <div class="glass-card p-6 rounded-3xl space-y-6">
-            <div class="flex items-center justify-between">
-              <h2 class="font-headline-md text-headline-md">
-                Công việc của tôi
-              </h2>
-              <div class="flex gap-2">
-                <button
-                  class="bg-primary/5 text-primary px-3 py-1.5 rounded-lg text-sm font-medium"
-                >
-                  Tất cả
-                </button>
-                <button
-                  class="text-on-surface-variant px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-surface-container transition-colors"
-                >
-                  Đang thực hiện
-                </button>
-                <button
-                  class="text-on-surface-variant px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-surface-container transition-colors"
-                >
-                  Chờ xử lý
-                </button>
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <h2 class="font-headline-md text-headline-md">Công việc của tôi</h2>
+              <div id="task-tabs" class="flex gap-2">
+                <button data-status="" class="px-3 py-1.5 rounded-lg text-sm font-medium">Tất cả</button>
+                <button data-status="CAN_LAM" class="px-3 py-1.5 rounded-lg text-sm font-medium">Cần làm</button>
+                <button data-status="DANG_LAM" class="px-3 py-1.5 rounded-lg text-sm font-medium">Đang làm</button>
+                <button data-status="QUA_HAN" class="px-3 py-1.5 rounded-lg text-sm font-medium">Quá hạn</button>
               </div>
             </div>
-            <div class="space-y-4" id="listCongViecs">
-              <!-- Task Item 1 -->
+            <div id="listCongViecs" class="space-y-3">
+              <p class="py-6 text-center text-sm text-on-surface-variant">Đang tải...</p>
+            </div>
+            <div id="task-pager" class="flex items-center justify-between text-sm text-on-surface-variant"></div>
           </div>
         </section>
-        <!-- Sidebar Widgets -->
-        <aside class="col-span-3 space-y-gutter">
-          <!-- Primary Action -->
-          <button
+
+        <!-- Cột phải -->
+        <aside class="col-span-12 xl:col-span-3 space-y-gutter">
+          <a
+            th:href="@{/duan}"
             class="w-full py-4 bg-primary text-white rounded-2xl shadow-lg shadow-primary/30 font-label-lg flex items-center justify-center gap-2 hover:bg-primary-container active:scale-95 transition-all"
           >
             <span class="material-symbols-outlined">add_circle</span>
             <span>Thêm công việc mới</span>
-          </button>
-          <!-- Overall Progress Widget -->
+          </a>
+
           <div class="glass-card p-6 rounded-3xl text-center">
-            <h4 class="font-label-lg text-label-lg text-left mb-6">
-              Tiến độ tổng quan
-            </h4>
+            <h4 class="font-label-lg text-label-lg text-left mb-6">Tiến độ tổng quan</h4>
             <div class="relative inline-flex items-center justify-center mb-6">
-              <!-- Simulated Circular Chart -->
-              <svg class="w-32 h-32 transform -rotate-90">
-                <circle
-                  class="text-surface-container"
-                  cx="64"
-                  cy="64"
-                  fill="transparent"
-                  r="54"
-                  stroke="currentColor"
-                  stroke-width="12"
-                ></circle>
-                <circle
-                  class="text-primary"
-                  cx="64"
-                  cy="64"
-                  fill="transparent"
-                  r="54"
-                  stroke="currentColor"
-                  stroke-dasharray="339"
-                  stroke-dashoffset="108"
-                  stroke-linecap="round"
-                  stroke-width="12"
-                ></circle>
+              <svg class="w-32 h-32 -rotate-90" viewBox="0 0 128 128">
+                <circle cx="64" cy="64" r="54" fill="none" stroke="#edeeef" stroke-width="12"></circle>
+                <circle id="ring" cx="64" cy="64" r="54" fill="none" stroke="#3525cd" stroke-width="12" stroke-linecap="round"
+                  stroke-dasharray="339.3" stroke-dashoffset="339.3" class="transition-all duration-700"></circle>
               </svg>
-              <div
-                class="absolute inset-0 flex flex-col items-center justify-center"
-              >
-                <span class="text-2xl font-bold">68%</span>
-                <span class="text-[10px] text-on-surface-variant uppercase"
-                  >Hoàn thành</span
-                >
+              <div class="absolute inset-0 flex flex-col items-center justify-center">
+                <span id="ring-pct" class="text-2xl font-bold">0%</span>
+                <span class="text-[10px] text-on-surface-variant">hoàn thành</span>
               </div>
             </div>
-            <div class="space-y-3 text-left">
-              <div class="flex items-center justify-between text-xs">
-                <div class="flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-success"></span>
-                  <span>Hoàn thành</span>
-                </div>
-                <span class="font-bold">78</span>
-              </div>
-              <div class="flex items-center justify-between text-xs">
-                <div class="flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-primary"></span>
-                  <span>Đang thực hiện</span>
-                </div>
-                <span class="font-bold">32</span>
-              </div>
-              <div class="flex items-center justify-between text-xs">
-                <div class="flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-warning"></span>
-                  <span>Chờ xử lý</span>
-                </div>
-                <span class="font-bold">18</span>
-              </div>
-            </div>
-            <p
-              class="text-[10px] text-on-surface-variant mt-6 border-t border-glass-border pt-4"
-            >
-              Tổng cộng <span class="font-bold">128</span> công việc
-            </p>
+            <div id="legend" class="space-y-3 text-left"></div>
+            <p id="legend-total" class="text-[11px] text-on-surface-variant mt-6 border-t border-glass-border pt-4"></p>
           </div>
-          <!-- Mini Calendar Widget -->
+
           <div class="glass-card p-6 rounded-3xl">
             <div class="flex items-center justify-between mb-4">
               <h4 class="font-label-lg text-label-lg">Lịch làm việc</h4>
-              <div class="flex items-center gap-2 text-on-surface-variant">
-                <span class="text-[10px] font-bold">Tháng 6, 2024</span>
-                <span class="material-symbols-outlined text-sm cursor-pointer"
-                  >chevron_left</span
-                >
-                <span class="material-symbols-outlined text-sm cursor-pointer"
-                  >chevron_right</span
-                >
+              <div class="flex items-center gap-1 text-on-surface-variant">
+                <span id="mini-title" class="text-[11px] font-bold mr-1"></span>
+                <button data-mini="prev" aria-label="Tháng trước" class="hover:text-primary"><span class="material-symbols-outlined text-base">chevron_left</span></button>
+                <button data-mini="next" aria-label="Tháng sau" class="hover:text-primary"><span class="material-symbols-outlined text-base">chevron_right</span></button>
               </div>
             </div>
+            <div class="grid grid-cols-7 gap-1 text-center mb-2 text-[10px] font-bold text-on-surface-variant">
+              <span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span class="text-secondary">CN</span>
+            </div>
+            <div id="mini-grid" class="grid grid-cols-7 gap-1 text-center"></div>
+            <h5 class="text-xs font-bold text-on-surface-variant mt-5 mb-2">Sắp đến hạn</h5>
+            <div id="upcoming" class="space-y-1"></div>
+            <a th:href="@{/lichtrinh}" class="block text-center text-xs font-bold text-primary mt-4 hover:underline">Xem lịch đầy đủ</a>
           </div>
         </aside>
       </div>
     </main>
-    <script src="js/tongQuan.js"></script>
+
+    <script th:src="@{/js/tongQuan.js}"></script>
   </body>
-  
 </html>

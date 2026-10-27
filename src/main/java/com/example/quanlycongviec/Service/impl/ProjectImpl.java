@@ -15,23 +15,25 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 
 import com.example.quanlycongviec.DTO.Request.ProjectReq;
 import com.example.quanlycongviec.DTO.Request.TaskReq;
 import com.example.quanlycongviec.DTO.Response.ProjectRes;
-import com.example.quanlycongviec.DTO.Response.TaskRes;
+
 import com.example.quanlycongviec.Entity.Project;
 import com.example.quanlycongviec.Entity.Task;
 import com.example.quanlycongviec.Entity.User;
 import com.example.quanlycongviec.Entity.enums.ProjectStatus;
 import com.example.quanlycongviec.Mapper.ProjectMap;
-import com.example.quanlycongviec.Mapper.TaskMap;
+
 import com.example.quanlycongviec.Repository.ProjectRepo;
 import com.example.quanlycongviec.Service.AttachmentService;
 import com.example.quanlycongviec.Service.IProject;
+import com.example.quanlycongviec.Service.ITask;
+import com.example.quanlycongviec.Utils.SecurityUtils;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -42,8 +44,8 @@ public class ProjectImpl implements IProject {
     private final UserRepo userRepo;
     private final ProjectRepo projectRepo;
     private final ProjectMap projectMap;
-    private final TaskMap taskMap;
-    private final TaskService taskService;
+
+    private final ITask taskService;
     private final AttachmentService attachmentService;
     @Value("${storage.upload-dir}")
     private String dir;
@@ -99,6 +101,13 @@ public class ProjectImpl implements IProject {
     public ProjectRes updateProject(Integer id, ProjectReq projectReq, MultipartFile[] files) {
         Project project = projectRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Khoong tim thay sanr pham nao"));
+
+        if (!Objects.equals(
+                project.getOwner().getId(),
+                SecurityUtils.getCurrentUserId())) {
+            throw new AccessDeniedException(
+                    "Bạn không có quyền cập nhật dự án này");
+        }
         project.setName(projectReq.getName());
         project.setDescription(projectReq.getDescription());
         project.setStatus(projectReq.getStatus());
@@ -113,11 +122,11 @@ public class ProjectImpl implements IProject {
                 Task processedTask = taskService.saveOrUpdateTask(project, taskReq);
 
                 if (processedTask != null) {
-                //    TaskRes taskRes = taskMap.toTaskRes(processedTask);
-                     updatedTasks.add(processedTask);
+                    // TaskRes taskRes = taskMap.toTaskRes(processedTask);
+                    updatedTasks.add(processedTask);
                 }
                 member.addAll(userRepo.findAllById(taskReq.getAssigneeIds()));
-              
+
             }
         project.setMembers(member.stream().collect(Collectors.toSet()));
 
@@ -143,6 +152,12 @@ public class ProjectImpl implements IProject {
     public void deleteProject(Integer id) {
         Project project = projectRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Khong tim thay san pham voi id: " + id));
+        if (!Objects.equals(
+                project.getOwner().getId(),
+                SecurityUtils.getCurrentUserId())) {
+            throw new AccessDeniedException(
+                    "Bạn không có quyền cập nhật dự án này");
+        }
         project.setDeleted(true);
         projectRepo.save(project);
     }

@@ -3,7 +3,7 @@ package com.example.quanlycongviec.Controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class DHController {
@@ -44,5 +44,8 @@ public class DHController {
     public String caiDat() {
         return "caiDat";
     }
-
-}
+ @GetMapping("/login")
+    public String Login() {
+        return "login";
+    }
+}   

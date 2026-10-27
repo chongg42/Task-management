@@ -117,12 +117,12 @@ member_btn.addEventListener("click", async (e) => {
     return;
   }
   const user = await res.json();
-  if (member.findIndex(m=>m.user== user) != -1) {
+
+  if (member.findIndex((m) => m.id === user.id) === -1) {
     member.push(user);
     input.value = "";
     renderMember(member);
-  }
-  else alert("Đã có user này rồi!");
+  } else alert("Đã có user này rồi!");
 });
 function deleteUser(id) {
   var index = member.findIndex((u) => u.id == id);
@@ -214,7 +214,7 @@ function renderTotalTask(tasks) {
   }
   document
     .getElementById("totalTask")
-    .classList.toggle("hidden", tasks.length < 0);
+    .classList.toggle("hidden", tasks.length <= 0);
 }
 function resetInput() {
   taskId.value = "";
@@ -227,6 +227,7 @@ function resetInput() {
   projectDesc.value = "";
   startDate.value = "";
   endDate.value = "";
+  myFiles = [];
 }
 
 function renderListTask(tasks) {
@@ -378,14 +379,14 @@ async function saveProject() {
     startDate: startDate.value + "T00:00:00",
     dueDate: endDate.value + "T23:59:59",
     tasks: tasks,
+    deleteFileIds:deletedFileIds
   };
   formData.append(
     "project",
     new Blob([JSON.stringify(project)], { type: "application/json" }),
   );
 
-  const input = document.getElementById("fileInput");
-  for (const file of input.files) {
+  for (const file of myFiles) {
     formData.append("files", file);
   }
   const response = await fetch(url, {
@@ -418,8 +419,20 @@ document
 
     const data = await res.json();
     console.log(data);
-    document.getElementById("project-id").value = data.id;
 
+    if (data.attachments) {
+      data.attachments.forEach((file) => {
+        myFiles.push({
+          id: file.id, // ID trong Database
+          name: file.originalFileName, // Tên file hiển thị
+          // url: file.fileUrl,       // Link tải/xem file
+          isExisting: true, // Đánh dấu đây là file CŨ
+        });
+      });
+    }
+    renderFile(myFiles);
+
+    document.getElementById("project-id").value = data.id;
     document.getElementById("list-file");
     projectName.value = data.name;
     projectDesc.value = data.description;
@@ -429,7 +442,55 @@ document
     let ids = [...new Set(tasks.flatMap((t) => t.assigneeIds))];
 
     users = await (await fetch(`/api/user?ids=${ids.join(",")}`)).json();
-
     renderListTask(tasks);
     renderTotalTask(tasks);
   });
+
+let deletedFileIds = [];
+let myFiles = [];
+const listFile = document.getElementById("list-file");
+const fileInput = document.getElementById("fileInput");
+
+fileInput.addEventListener("change", (e) => {
+  if (fileInput.files.length > 0) {
+    const newFiles = Array.from(fileInput.files);
+    newFiles.forEach((file) => {
+      if (!myFiles.some((f) => f.name === file.name)) {
+        myFiles.push(file);
+      }
+    });
+    renderFile(myFiles);
+  } else listFile.innerHTML = "";
+});
+function renderFile(files) {
+  let result = "";
+  // Dùng Array.from để ép kiểu về mảng chuẩn
+  files.forEach((file, index) => {
+    result += `
+        <div class="flex items-center gap-2 w-28 bg-blue-50 rounded-full px-3 py-2 mb-2">
+          <span class="truncate flex-1">
+            📄 ${file.name}
+          </span>
+          <button class="shrink-0 text-gray-500 hover:text-red-500" onclick="removeFile(${index})" data-file-id=${file.id}>✕</button>
+        </div>`;
+  });
+
+  listFile.innerHTML = result;
+}
+function removeFile(index) {
+  if (myFiles === null || myFiles.length <= 0) return;
+
+  const file = myFiles[index];
+
+  if (!file) return;
+
+  if (file.id) {
+    deletedFileIds.push(parseInt(file.id));
+  }
+
+  myFiles.splice(index, 1);
+
+  renderFile(myFiles);
+
+  console.log(deletedFileIds);
+}

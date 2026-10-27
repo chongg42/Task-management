@@ -5,8 +5,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-import org.hibernate.annotations.ManyToAny;
-
 import com.example.quanlycongviec.Entity.enums.Gender;
 
 import jakarta.persistence.CascadeType;

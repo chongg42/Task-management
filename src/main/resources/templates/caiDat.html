@@ -18,165 +18,15 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
     />
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "inverse-primary": "#c3c0ff",
-              primary: "#3525cd",
-              "surface-container-low": "#f3f4f5",
-              surface: "#f8f9fa",
-              "primary-fixed-dim": "#c3c0ff",
-              background: "#f8f9fa",
-              "on-surface-variant": "#464555",
-              "on-secondary-container": "#fffbff",
-              "on-surface": "#191c1d",
-              "on-tertiary": "#ffffff",
-              "on-error": "#ffffff",
-              tertiary: "#7e3000",
-              "glass-border": "rgba(255, 255, 255, 0.40)",
-              "inverse-on-surface": "#f0f1f2",
-              "on-primary-fixed": "#0f0069",
-              "on-primary-container": "#dad7ff",
-              "on-primary-fixed-variant": "#3323cc",
-              "on-tertiary-fixed": "#351000",
-              "shadow-tint": "rgba(79, 70, 229, 0.15)",
-              "surface-container": "#edeeef",
-              "surface-container-highest": "#e1e3e4",
-              "tertiary-container": "#a44100",
-              secondary: "#4442e3",
-              "secondary-container": "#5f5ffd",
-              "on-primary": "#ffffff",
-              "on-tertiary-fixed-variant": "#7b2f00",
-              error: "#ba1a1a",
-              "inverse-surface": "#2e3132",
-              "on-tertiary-container": "#ffd2be",
-              "tertiary-fixed-dim": "#ffb695",
-              "on-background": "#191c1d",
-              "primary-fixed": "#e2dfff",
-              "tertiary-fixed": "#ffdbcc",
-              "primary-container": "#4f46e5",
-              success: "#10B981",
-              "secondary-fixed-dim": "#c1c1ff",
-              "surface-container-lowest": "#ffffff",
-              "surface-variant": "#e1e3e4",
-              outline: "#777587",
-              "surface-container-high": "#e7e8e9",
-              "on-secondary-fixed-variant": "#2c24ce",
-              "surface-tint": "#4d44e3",
-              danger: "#EF4444",
-              warning: "#F59E0B",
-              "surface-bright": "#f8f9fa",
-              "error-container": "#ffdad6",
-              "on-error-container": "#93000a",
-              "surface-dim": "#d9dadb",
-              "glass-bg": "rgba(255, 255, 255, 0.75)",
-              "outline-variant": "#c7c4d8",
-              "on-secondary": "#ffffff",
-              "secondary-fixed": "#e1dfff",
-              "on-secondary-fixed": "#09006b",
-            },
-            borderRadius: {
-              DEFAULT: "0.25rem",
-              lg: "0.5rem",
-              xl: "0.75rem",
-              full: "9999px",
-            },
-            spacing: {
-              "margin-desktop": "32px",
-              "stack-sm": "8px",
-              "stack-md": "16px",
-              "margin-mobile": "16px",
-              "container-max": "1440px",
-              gutter: "24px",
-              "stack-lg": "32px",
-            },
-            fontFamily: {
-              "headline-lg": ["Inter"],
-              "headline-md": ["Inter"],
-              "display-lg": ["Inter"],
-              "headline-lg-mobile": ["Inter"],
-              "body-md": ["Inter"],
-              "body-sm": ["Inter"],
-              "label-lg": ["Inter"],
-              "label-md": ["Inter"],
-              "body-lg": ["Inter"],
-            },
-            fontSize: {
-              "headline-lg": [
-                "32px",
-                {
-                  lineHeight: "1.25",
-                  letterSpacing: "-0.01em",
-                  fontWeight: "600",
-                },
-              ],
-              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
-              "display-lg": [
-                "48px",
-                {
-                  lineHeight: "1.2",
-                  letterSpacing: "-0.02em",
-                  fontWeight: "700",
-                },
-              ],
-              "headline-lg-mobile": [
-                "28px",
-                { lineHeight: "1.25", fontWeight: "600" },
-              ],
-              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
-              "body-sm": ["14px", { lineHeight: "1.6", fontWeight: "400" }],
-              "label-lg": [
-                "14px",
-                {
-                  lineHeight: "1.2",
-                  letterSpacing: "0.05em",
-                  fontWeight: "600",
-                },
-              ],
-              "label-md": ["12px", { lineHeight: "1.2", fontWeight: "500" }],
-              "body-lg": ["18px", { lineHeight: "1.5", fontWeight: "400" }],
-            },
-          },
-        },
-      };
-    </script>
-    <style>
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: #f8f9fa;
-      }
-      .glass-card {
-        background: rgba(255, 255, 255, 0.75);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        box-shadow: 0 20px 60px rgba(79, 70, 229, 0.15);
-      }
-      .sidebar-active {
-        background: rgba(53, 37, 205, 0.1);
-        color: #3525cd;
-        border-left: 4px solid #3525cd;
-      }
-      .material-symbols-outlined {
-        font-variation-settings:
-          "FILL" 0,
-          "wght" 400,
-          "GRAD" 0,
-          "opsz" 24;
-      }
-       .active{
-        background-color: rgb(53 37 205 / 0.1);
-        border-left-width: 4px;
-        --tw-border-opacity: 1;
-    border-color: rgb(53 37 205 / var(--tw-border-opacity, 1));
-      }
-    </style>
+    <script th:src="@{/js/setting.js}"></script>
+    <script th:src="@{/js/tailwind-config.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
   </head>
   <body class="bg-background text-on-surface">
     <!-- Side Navigation Bar -->
-    <aside th:replace="~{fragments/layout :: sidebar(activePage='caiDat')}"></aside>
+    <aside
+      th:replace="~{fragments/layout :: sidebar(activePage='caiDat')}"
+    ></aside>
     <!-- Top Navigation Bar -->
     <header
       class="fixed top-0 right-0 left-64 h-16 z-30 bg-glass-bg backdrop-blur-xl border-b border-glass-border flex items-center justify-between px-8"
@@ -325,6 +175,7 @@
               >
                 <div class="relative group">
                   <img
+                    id="profileAvatar"
                     class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-xl"
                     data-alt="A close-up shot of a modern, stylish avatar of a young professional. The person is set against a clean, geometric background with soft violet and indigo tones. The lighting is crisp and modern, matching a high-end productivity SaaS interface. The image emphasizes a friendly and approachable corporate identity."
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAQ9eqygfoQOrViaLu3TaQDNfYtQLcKx5WUoPHVWfhXiE_dwCblN-UHpiDW0k4D7DvJfLG4agJWA5jDBPoXKG1364or4h_VjZ4L8YRSHNig2bah0A76Y3AAJ7VqG0WI0nrPJOn2sQTKGkxnPWcxpA6wIAmxRSpMuwQOVZES76sjyNf_7Y58gCPaS0yrU9xoZiGFzPmL5Stx3KJK-1bX_-faTxD2DT5M3RMAMP6N9xTVF5WHooyGLLNSEjy-JIGqZ2j_JxBf6FIG3U"
@@ -361,6 +212,7 @@
                     >Họ và tên</label
                   >
                   <input
+                    id="inputFullName"
                     class="w-full bg-white/50 border-glass-border rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                     placeholder="Nhập họ tên..."
                     type="text"
@@ -383,6 +235,7 @@
                     >Địa chỉ Email</label
                   >
                   <input
+                    id="inputEmail"
                     class="w-full bg-white/50 border-glass-border rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                     placeholder="email@example.com"
                     type="email"

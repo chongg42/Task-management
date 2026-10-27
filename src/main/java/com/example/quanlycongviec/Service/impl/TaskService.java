@@ -4,22 +4,21 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.hibernate.Hibernate;
 import org.javers.core.Javers;
-import org.javers.core.JaversBuilder;
-import org.javers.core.MappingStyle;
+
 import org.javers.core.diff.Diff;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.quanlycongviec.Controller.AOP.TrackActivity;
+import com.example.quanlycongviec.AOP.TrackActivity;
 import com.example.quanlycongviec.DTO.TaskCompareDto;
+import com.example.quanlycongviec.DTO.UpdateTaskStatusProgressReq;
 import com.example.quanlycongviec.DTO.Request.TaskReq;
 import com.example.quanlycongviec.DTO.Response.TaskRes;
 import com.example.quanlycongviec.DTO.Response.TaskStatusCountRes;
@@ -28,18 +27,21 @@ import com.example.quanlycongviec.Entity.Project;
 import com.example.quanlycongviec.Entity.Task;
 import com.example.quanlycongviec.Entity.TaskAssignees;
 import com.example.quanlycongviec.Entity.User;
+import com.example.quanlycongviec.Entity.enums.AttachmentResource;
 import com.example.quanlycongviec.Entity.enums.TaskStatus;
 import com.example.quanlycongviec.Mapper.TaskMap;
 import com.example.quanlycongviec.Repository.TaskRepo;
 import com.example.quanlycongviec.Repository.UserRepo;
 import com.example.quanlycongviec.Service.AttachmentService;
+import com.example.quanlycongviec.Service.ITask;
+import com.example.quanlycongviec.Utils.SecurityUtils;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class TaskService {
+public class TaskService implements ITask {
     private final UserRepo userRepo;
     private final TaskRepo taskRepo;
     private final TaskMap taskMap;
@@ -63,9 +65,9 @@ public class TaskService {
             if (file == null || file.isEmpty()) {
                 throw new IllegalArgumentException("Bắt buộc phải upload file đính kèm khi hoàn thành công việc!");
             } else {
-                Attachment attachment = attachmentService.creaAttachment(file);
-                attachment.setTask(task);
-                attachment.setProject(task.getProject());
+                Attachment attachment = attachmentService.creaAttachment(file,taskId);
+                attachment.setResourceType(AttachmentResource.TASK);
+                attachment.setResourceId(taskId);
                 attachment.setUser(
                         userRepo.findById(userId).orElseThrow(() -> new RuntimeException("Không tìm thấy user")));
             }
@@ -96,12 +98,6 @@ public class TaskService {
         } else {
             keyword = null;
         }
-        // if (status != null) {
-        // status = null;
-        // }
-        // if (projectId != null && projectId <= 0) {
-        // projectId = null;
-        // }
         return taskRepo.findByProject(projectId, keyword, status, pageable).map(task -> taskMap.toResponse(task));
     }
 
@@ -143,11 +139,11 @@ public class TaskService {
         existingTask.setProject(project);
         existingTask.setDueDate(taskReq.getDueDate());
         existingTask.setProgress(taskReq.getProgress());
-        
+
         saveAssignee(existingTask, taskReq.getAssigneeIds());
 
         TaskCompareDto updatedDto = taskMap.fromEntity(existingTask);
-        Diff diff = javers.compare(updatedDto,oldSnapshotDto );
+        Diff diff = javers.compare(updatedDto, oldSnapshotDto);
 
         if (diff.hasChanges())
             return taskRepo.save(existingTask);
@@ -198,7 +194,59 @@ public class TaskService {
         task.getTaskAssignees().addAll(newAssignees);
     }
 
-    public TaskRes updateTaskPartial(Integer id,TaskReq taskReq){
-        return null;
+    @Override
+    @Transactional
+    public TaskRes updateStatusAndProgress(Integer taskId, UpdateTaskStatusProgressReq req, MultipartFile file) {
+        Task task = taskRepo.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy công việc với ID: " + taskId));
+        String newStatus="";
+        // 2. Cập nhật Progress (nếu có truyền lên) & tự suy ra Status
+        if (req.getProgress() != null) {
+            task.setProgress(req.getProgress());
+
+            if (req.getProgress() == 100) {
+                task.setStatus(TaskStatus.HOAN_THANH);
+                    newStatus=TaskStatus.HOAN_THANH.toString();
+            }
+        }
+
+        // 3. Cập nhật Status (nếu có truyền lên) & tự suy ra Progress
+        if (req.getStatus() != null) {
+            task.setStatus(req.getStatus());
+
+            if (req.getStatus() == TaskStatus.HOAN_THANH) {
+                task.setProgress(100);
+                 newStatus=TaskStatus.HOAN_THANH.toString();
+            }
+          
+        }
+
+        if(newStatus.equals(TaskStatus.HOAN_THANH.toString())){
+             if (file == null || file.isEmpty()) {
+                throw new IllegalArgumentException("Bắt buộc phải upload file đính kèm khi hoàn thành công việc!");
+            } else {
+                
+                Attachment attachment = attachmentService.creaAttachment(file,taskId);
+                attachment.setResourceType(AttachmentResource.TASK);
+                attachment.setResourceId(taskId);
+                attachment.setUser(
+                        userRepo.findById(SecurityUtils.getCurrentUserId()).orElseThrow(() -> new RuntimeException("Không tìm thấy user")));
+            }
+        }
+
+        // 4. Nhờ @Transactional + Dirty Checking, JPA tự cập nhật xuống DB khi kết thúc
+        // hàm
+        return taskMap.toResponse(task);
+
     }
+
+    @Override
+    public Map<TaskStatus, List<TaskRes>> getKanbanBoard() {
+        // TODO Auto-generated method stub
+        List<TaskRes> allTasks = taskRepo.findAllByUser(SecurityUtils.getCurrentUserId()).stream().map(task -> taskMap.toResponse(task))
+                .collect(Collectors.toList());
+
+        return allTasks.stream().collect(Collectors.groupingBy(TaskRes::getStatus));
+    }
+
 }

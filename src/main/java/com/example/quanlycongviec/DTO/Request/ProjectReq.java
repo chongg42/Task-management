@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 @Builder
 public class ProjectReq {
+    
     private String name;
     private String description;
     private ProjectStatus status;
@@ -19,5 +20,6 @@ public class ProjectReq {
     private LocalDateTime dueDate;
     private LocalDateTime startDate;
     private Set<TaskReq> tasks;
+    private Set<Integer> deleteFileIds;
 
 }

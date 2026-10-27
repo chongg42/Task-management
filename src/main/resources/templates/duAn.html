@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="light" lang="vi">
+<html class="light" lang="vi" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -14,416 +14,107 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
-
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <style>
-      .parent:has(.status:checked) {
-        --tw-text-opacity: 1;
-        color: rgb(53 37 205 / var(--tw-text-opacity, 1));
-        --tw-bg-opacity: 1;
-        background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-      }
-      .glass-card {
-        background: rgba(255, 255, 255, 0.75);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        box-shadow: 0 20px 60px rgba(79, 70, 229, 0.15);
-        transition: all 0.3s ease;
-      }
-      .glass-card:hover {
-        box-shadow: 0 30px 80px rgba(79, 70, 229, 0.25);
-        transform: translateY(-4px);
-      }
-      .nav-item-active::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        height: 24px;
-        width: 4px;
-        background-color: #3525cd;
-        border-radius: 0 4px 4px 0;
-      }
-      .custom-scrollbar::-webkit-scrollbar {
-        width: 6px;
-      }
-      .custom-scrollbar::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: rgba(79, 70, 229, 0.2);
-        border-radius: 10px;
-      }
+      .project-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+      .project-card:hover { transform: translateY(-4px); box-shadow: 0 30px 80px rgba(79, 70, 229, 0.22); }
     </style>
   </head>
-  <body class="bg-background font-body-md text-on-surface overflow-hidden">
-    <!-- Sidebar -->
-    <aside
-      th:replace="~{fragments/layout :: sidebar(activePage='duAn')}"
-    ></aside>
-    <!-- Top Navigation Bar -->
-    <header
-      class="fixed top-0 right-0 left-64 h-16 bg-glass-bg backdrop-blur-xl border-b border-glass-border z-30 flex items-center justify-between px-8"
-    >
-      <div class="flex items-center gap-4 flex-1">
-        <div class="relative w-full max-w-md">
-          <span
-            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline"
-            >search</span
-          >
-          <input
-            id="searchInput"
-            class="w-full pl-10 pr-12 py-2 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary/20 text-body-sm transition-all"
-            placeholder="Tìm kiếm dự án, công việc..."
-            type="text"
-          />
-          <kbd
-            class="absolute right-3 top-1/2 -translate-y-1/2 bg-surface-container-highest px-1.5 py-0.5 rounded text-[10px] font-bold text-outline"
-            >⌘K</kbd
-          >
-        </div>
-      </div>
-      <div class="flex items-center gap-4">
-        <button
-          class="p-2 hover:bg-surface-container-highest rounded-full transition-colors relative"
-        >
-          <span class="material-symbols-outlined text-on-surface-variant"
-            >notifications</span
-          >
-          <span
-            class="absolute top-2 right-2 w-2 h-2 bg-danger rounded-full border-2 border-white"
-          ></span>
-        </button>
-        <button
-          class="p-2 hover:bg-surface-container-highest rounded-full transition-colors"
-        >
-          <span class="material-symbols-outlined text-on-surface-variant"
-            >dark_mode</span
-          >
-        </button>
-        <button
-          class="flex items-center gap-2 bg-primary text-white px-5 py-2 rounded-xl font-label-lg hover:shadow-lg hover:shadow-primary/20 transition-all active:scale-95"
-          id="themDuAn"
-        >
-          <span class="material-symbols-outlined text-sm">add</span>
-          Thêm Dự án
-        </button>
-      </div>
-    </header>
-    <!-- Main Content -->
-    <main class="pl-64 pt-16 h-screen overflow-y-auto bg-surface">
-      <div class="p-8 max-w-7xl mx-auto">
-        <!-- Welcome Banner -->
-        <div
-          class="relative overflow-hidden glass-card rounded-3xl p-8 mb-8 flex items-center justify-between"
-          style="--mouse-x: 562px; --mouse-y: 212px"
-        >
-          <div class="relative z-10">
-            <h1 class="font-headline-lg text-headline-lg mb-2">
-              Dự án của bạn 👋
-            </h1>
-            <p class="text-on-surface-variant max-w-md">
-              Quản lý và theo dõi tiến độ các dự án đang triển khai một cách
-              hiệu quả.
-            </p>
-            <div class="flex gap-4 mt-6">
-              <div
-                class="bg-white/50 backdrop-blur rounded-2xl p-4 flex flex-col gap-1 border border-white"
-              >
-                <span
-                  class="text-xs font-bold text-outline uppercase tracking-wider"
-                  >Tổng dự án</span
-                >
-                <span class="text-2xl font-bold">12</span>
-              </div>
-              <div
-                class="bg-white/50 backdrop-blur rounded-2xl p-4 flex flex-col gap-1 border border-white"
-              >
-                <span
-                  class="text-xs font-bold text-outline uppercase tracking-wider"
-                  >Hoàn thành</span
-                >
-                <span class="text-2xl font-bold text-success">08</span>
-              </div>
-              <div
-                class="bg-white/50 backdrop-blur rounded-2xl p-4 flex flex-col gap-1 border border-white"
-              >
-                <span
-                  class="text-xs font-bold text-outline uppercase tracking-wider"
-                  >Trễ hạn</span
-                >
-                <span class="text-2xl font-bold text-danger">01</span>
-              </div>
+  <body class="bg-background font-body-md text-on-surface">
+    <aside th:replace="~{fragments/layout :: sidebar(activePage='duAn')}"></aside>
+    <header th:replace="~{fragments/layout :: header}"></header>
+
+    <main class="ml-64 pt-24 pb-12 px-8 min-h-screen">
+      <div class="max-w-7xl mx-auto">
+        <!-- Banner + thống kê -->
+        <section class="glass-card rounded-3xl p-8 mb-8">
+          <div class="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <h1 class="font-headline-lg text-headline-lg mb-2">Dự án của bạn 👋</h1>
+              <p class="text-on-surface-variant max-w-md">
+                Quản lý và theo dõi tiến độ các dự án bạn tham gia.
+              </p>
+            </div>
+            <button id="themDuAn" class="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-xl font-label-lg hover:shadow-lg hover:shadow-primary/20 transition-all active:scale-95">
+              <span class="material-symbols-outlined text-sm">add</span>
+              Thêm dự án
+            </button>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+            <div class="bg-white/60 rounded-2xl p-4 border border-white">
+              <span class="text-xs font-bold text-outline uppercase tracking-wider">Tổng dự án</span>
+              <p id="stat-total" class="text-2xl font-bold mt-1">—</p>
+            </div>
+            <div class="bg-white/60 rounded-2xl p-4 border border-white">
+              <span class="text-xs font-bold text-outline uppercase tracking-wider">Đang chạy</span>
+              <p id="stat-running" class="text-2xl font-bold text-primary mt-1">—</p>
+            </div>
+            <div class="bg-white/60 rounded-2xl p-4 border border-white">
+              <span class="text-xs font-bold text-outline uppercase tracking-wider">Hoàn thành</span>
+              <p id="stat-done" class="text-2xl font-bold text-success mt-1">—</p>
+            </div>
+            <div class="bg-white/60 rounded-2xl p-4 border border-white">
+              <span class="text-xs font-bold text-outline uppercase tracking-wider">Trễ hạn</span>
+              <p id="stat-late" class="text-2xl font-bold text-danger mt-1">—</p>
             </div>
           </div>
-          <div class="hidden lg:block relative h-48 w-64">
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span
-                class="material-symbols-outlined text-primary text-8xl opacity-20"
-                >work</span
-              >
-            </div>
+        </section>
+
+        <!-- Bộ lọc + chế độ xem -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <div id="status-tabs" class="flex items-center gap-1 bg-surface-container p-1 rounded-xl w-fit">
+            <button data-status="" class="px-5 py-2 rounded-lg font-label-lg">Tất cả</button>
+            <button data-status="DANG_THUC_HIEN" class="px-5 py-2 rounded-lg font-label-lg">Đang chạy</button>
+            <button data-status="TAM_DUNG" class="px-5 py-2 rounded-lg font-label-lg">Tạm dừng</button>
+            <button data-status="HOAN_THANH" class="px-5 py-2 rounded-lg font-label-lg">Hoàn thành</button>
+          </div>
+          <div class="flex items-center bg-surface-container rounded-xl p-1">
+            <button id="view-grid" data-view="grid" aria-label="Dạng lưới" class="p-2 rounded-lg"><span class="material-symbols-outlined">grid_view</span></button>
+            <button id="view-list" data-view="list" aria-label="Dạng danh sách" class="p-2 rounded-lg"><span class="material-symbols-outlined">list</span></button>
           </div>
         </div>
-        <!-- Filters & Actions -->
-        <div
-          class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8"
-        >
-          <div
-            class="flex items-center gap-2 bg-surface-container p-1 rounded-xl w-fit"
-          >
-            <label
-              class="parent px-6 py-2 hover:bg-white/50 rounded-lg font-label-lg text-on-surface-variant transition-all"
-            >
-              Tất cả
-              <input
-                class="hidden status"
-                type="radio"
-                id="all"
-                name="status"
-                value=""
-                checked
-              />
-            </label>
-            <label
-              class="parent px-6 py-2 hover:bg-white/50 rounded-lg font-label-lg text-on-surface-variant transition-all"
-            >
-              Đang chạy
-              <input
-                class="hidden status"
-                type="radio"
-                id="dang-chay"
-                name="status"
-                value="DANG_THUC_HIEN"
-              />
-            </label>
-            <label
-              class="parent px-6 py-2 hover:bg-white/50 rounded-lg font-label-lg text-on-surface-variant transition-all"
-            >
-              Của tôi
-              <input
-                class="hidden status"
-                type="radio"
-                id="dang-chay"
-                name="status"
-                value="DANG_THUC_HIEN"
-              />
-            </label>
-            <label
-              class="parent px-6 py-2 hover:bg-white/50 rounded-lg font-label-lg text-on-surface-variant transition-all"
-            >
-              Hoàn thành
-              <input
-                class="hidden status"
-                type="radio"
-                id="hoan-thanh"
-                name="status"
-                value="HOAN_THANH"
-              />
-            </label>
-          </div>
-          <div class="flex items-center gap-3">
-            <div
-              class="flex items-center gap-2 text-on-surface-variant font-label-lg border border-glass-border px-4 py-2 rounded-xl bg-white cursor-pointer hover:bg-surface-container transition-colors"
-            >
-              <span>Sắp xếp: Mới nhất</span>
-              <span class="material-symbols-outlined text-sm">expand_more</span>
-            </div>
-            <div class="flex items-center bg-surface-container rounded-xl p-1">
-              <button class="p-2 bg-white rounded-lg shadow-sm text-primary">
-                <span class="material-symbols-outlined">grid_view</span>
-              </button>
-              <button
-                class="p-2 text-on-surface-variant hover:bg-white/50 rounded-lg transition-colors"
-              >
-                <span class="material-symbols-outlined">list</span>
-              </button>
-            </div>
-          </div>
+
+        <!-- Danh sách dự án (modal.js bắt sự kiện .btn-update bên trong #projects) -->
+        <div id="projects" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <p class="col-span-full py-10 text-center text-on-surface-variant">Đang tải dự án...</p>
         </div>
-        <!-- Project Grid -->
-        <div
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          id="projects"
-        >
-          <!-- Project Card 1 -->
-          <!-- Project Card 2 -->
-          <!-- Project Card 3 -->
-          <!-- Add New Project Skeleton -->
+
+        <!-- Phân trang -->
+        <div class="mt-8 flex flex-col md:flex-row items-center justify-between gap-4 p-4 bg-white/70 backdrop-blur-xl border border-white/40 rounded-2xl shadow-sm">
+          <div id="range-text" class="text-body-sm text-on-surface-variant"></div>
+          <div id="pagination" class="flex items-center gap-1"></div>
+          <label class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+            Số dự án/trang
+            <select id="page-size" class="px-3 py-1.5 bg-surface-container rounded-lg text-sm font-bold border-0">
+              <option value="6">6</option>
+              <option value="9" selected>9</option>
+              <option value="12">12</option>
+            </select>
+          </label>
         </div>
-        <div
-          class="mt-8 flex flex-col md:flex-row items-center justify-between gap-4 p-4 bg-white/70 backdrop-blur-xl border border-white/40 rounded-2xl shadow-sm"
-        >
-          <div class="text-body-sm text-on-surface-variant">
-            Hiển thị <span class="font-bold text-on-surface">1-9</span> trong số
-            <span class="font-bold text-on-surface">12</span> dự án
-          </div>
-          <div class="flex items-center gap-2" id="pagination"></div>
-          <div class="flex items-center gap-2">
-            <span class="text-body-sm text-on-surface-variant">Số hàng:</span>
-            <div
-              class="flex items-center gap-1 px-3 py-1.5 bg-surface-container rounded-lg cursor-pointer hover:bg-surface-container-highest transition-colors"
-            >
-              <span class="text-body-sm font-bold">9</span>
-              <span class="material-symbols-outlined text-sm">expand_more</span>
-            </div>
-          </div>
-        </div>
-        <!-- Recently Active Section (Asymmetric / Bento Style) -->
-        <div class="mt-12">
-          <h2 class="font-headline-md text-xl mb-6">Hoạt động gần đây</h2>
+
+        <!-- Sắp đến hạn + tiến độ trung bình -->
+        <section class="mt-12">
+          <h2 class="font-headline-md text-xl mb-6">Tổng quan tiến độ</h2>
           <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div class="md:col-span-3 glass-card rounded-2xl p-6">
-              <div class="flex items-center justify-between mb-6">
-                <span class="font-bold text-label-lg">Lịch làm việc</span>
-                <button class="text-primary text-xs font-bold hover:underline">
-                  Xem tất cả
-                </button>
-              </div>
-              <div class="space-y-4">
-                <div
-                  class="flex items-center gap-4 p-3 hover:bg-primary/5 rounded-xl transition-colors"
-                >
-                  <div
-                    class="w-12 h-12 rounded-xl bg-primary/10 flex flex-col items-center justify-center text-primary"
-                  >
-                    <span class="text-xs font-bold">T2</span>
-                    <span class="text-lg font-black">15</span>
-                  </div>
-                  <div class="flex-1">
-                    <p class="font-label-lg">Họp dự án Website Điện thoại</p>
-                    <p class="text-xs text-outline">
-                      09:00 AM - 10:30 AM • Phòng họp A
-                    </p>
-                  </div>
-                  <span class="material-symbols-outlined text-outline"
-                    >chevron_right</span
-                  >
-                </div>
-                <div
-                  class="flex items-center gap-4 p-3 hover:bg-primary/5 rounded-xl transition-colors"
-                >
-                  <div
-                    class="w-12 h-12 rounded-xl bg-surface-container-highest flex flex-col items-center justify-center text-outline"
-                  >
-                    <span class="text-xs font-bold">T3</span>
-                    <span class="text-lg font-black">16</span>
-                  </div>
-                  <div class="flex-1">
-                    <p class="font-label-lg">
-                      Kiểm thử API xác thực người dùng
-                    </p>
-                    <p class="text-xs text-outline">
-                      02:00 PM - 04:00 PM • Remote
-                    </p>
-                  </div>
-                  <span class="material-symbols-outlined text-outline"
-                    >chevron_right</span
-                  >
-                </div>
-              </div>
+              <span class="font-bold text-label-lg">Dự án sắp đến hạn</span>
+              <div id="upcoming" class="space-y-2 mt-4"></div>
             </div>
-            <div
-              class="glass-card rounded-2xl p-6 bg-primary text-white overflow-hidden relative group"
-            >
-              <div class="relative z-10">
-                <p
-                  class="text-white/60 text-xs font-bold uppercase tracking-widest mb-2"
-                >
-                  Thống kê tuần
-                </p>
-                <h3 class="text-3xl font-black mb-4">84%</h3>
-                <p class="text-sm text-white/80 leading-relaxed">
-                  Hiệu suất làm việc của bạn tăng 12% so với tuần trước. Tuyệt
-                  vời!
-                </p>
-                <button
-                  class="mt-6 w-full py-2 bg-white text-primary rounded-xl font-bold text-sm shadow-xl active:scale-95 transition-transform"
-                >
-                  Xem chi tiết
-                </button>
-              </div>
+            <div class="rounded-2xl p-6 bg-primary text-white">
+              <p class="text-white/60 text-xs font-bold uppercase tracking-widest mb-2">Tiến độ trung bình</p>
+              <h3 id="avg-progress" class="text-3xl font-black mb-3">—</h3>
+              <div class="h-2 bg-white/20 rounded-full overflow-hidden"><div id="avg-bar" class="h-full bg-white rounded-full transition-all duration-700" style="width: 0%"></div></div>
+              <p id="avg-note" class="text-sm text-white/80 leading-relaxed mt-4"></p>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </main>
+
     <div th:replace="~{fragments/modalLayout::modalLayout}"></div>
-    <script>
-      // Simple Ripple Effect Logic
-      document.querySelectorAll("button").forEach((button) => {
-        button.addEventListener("click", function (e) {
-          let ripple = document.createElement("span");
-          ripple.classList.add("ripple");
-          this.appendChild(ripple);
-          let x = e.clientX - e.target.offsetLeft;
-          let y = e.clientY - e.target.offsetTop;
-          ripple.style.left = `${x}px`;
-          ripple.style.top = `${y}px`;
-          setTimeout(() => {
-            ripple.remove();
-          }, 600);
-        });
-      });
 
-      // Hover Glow Micro-interaction for Cards
-      const cards = document.querySelectorAll(".glass-card");
-      cards.forEach((card) => {
-        card.addEventListener("mousemove", (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          card.style.setProperty("--mouse-x", `${x}px`);
-          card.style.setProperty("--mouse-y", `${y}px`);
-        });
-      });
-    </script>
-    <style>
-      /* Ripple effect CSS */
-      .ripple {
-        position: absolute;
-        background: rgba(255, 255, 255, 0.3);
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        border-radius: 50%;
-        animation: ripple-animation 0.6s linear;
-      }
-      @keyframes ripple-animation {
-        from {
-          width: 0px;
-          height: 0px;
-          opacity: 0.5;
-        }
-        to {
-          width: 400px;
-          height: 400px;
-          opacity: 0;
-        }
-      }
-
-      /* Glass Card Glow Effect */
-      .glass-card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(
-          400px circle at var(--mouse-x) var(--mouse-y),
-          rgba(79, 70, 229, 0.05),
-          transparent 40%
-        );
-        z-index: 0;
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.3s;
-      }
-      .glass-card:hover::before {
-        opacity: 1;
-      }
-    </style>
-    <script src="js/project.js"></script>
-    <script src="js/modal.js"></script>
+    <script th:src="@{/js/project.js}"></script>
+    <script th:src="@{/js/modal.js}"></script>
   </body>
 </html>

@@ -20,7 +20,6 @@
       rel="stylesheet"
     />
     <style>
-
       .custom-scrollbar::-webkit-scrollbar {
         width: 6px;
         height: 6px;
@@ -36,8 +35,9 @@
         background: rgba(79, 70, 229, 0.2);
       }
     </style>
-    <link href="css/main.css"/>
+    <link href="css/main.css" />
   </head>
+  <script th:src="@{/js/task.js}"></script>
   <body
     class="bg-background text-on-surface font-body-md overflow-hidden flex min-h-screen"
   >
@@ -168,7 +168,7 @@
           class="px-margin-desktop grid grid-cols-4 gap-gutter min-w-[1200px] pb-12 items-start"
         >
           <!-- Column: Todo -->
-          <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-4" id="kanban-todo">
             <div class="flex items-center justify-between px-2">
               <div class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-outline"></span>
@@ -187,117 +187,9 @@
               </button>
             </div>
             <!-- Card 1 -->
-            <div
-              class="glass-card p-6 rounded-[24px] shadow-lg shadow-shadow-tint hover:shadow-xl hover:-translate-y-1 transition-all group cursor-grab active:cursor-grabbing"
-            >
-              <div class="flex justify-between items-start mb-3">
-                <span
-                  class="px-3 py-1 bg-primary/10 text-primary rounded-full text-[11px] font-bold"
-                  >Thiết kế</span
-                >
-                <span
-                  class="px-2 py-1 bg-danger/10 text-danger rounded text-[10px] font-bold"
-                  >Cao</span
-                >
-              </div>
-              <h3
-                class="font-headline-md text-[18px] text-on-surface mb-2 group-hover:text-primary transition-colors"
-              >
-                Thiết kế giao diện Dashboard
-              </h3>
-              <p class="text-body-sm text-on-surface-variant mb-4 line-clamp-2">
-                Tạo mockups cho trang quản trị, tập trung vào UX mượt mà và các
-                thành phần Glassmorphism.
-              </p>
-              <div class="space-y-4">
-                <div class="w-full">
-                  <div
-                    class="flex justify-between text-[11px] text-outline mb-1.5"
-                  >
-                    <span>Tiến độ</span>
-                    <span>25%</span>
-                  </div>
-                  <div
-                    class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
-                  >
-                    <div
-                      class="h-full bg-gradient-to-r from-primary to-secondary rounded-full"
-                      style="width: 25%"
-                    ></div>
-                  </div>
-                </div>
-                <div
-                  class="flex items-center justify-between pt-2 border-t border-glass-border"
-                >
-                  <div class="flex items-center gap-3">
-                    <div
-                      class="flex items-center gap-1 text-[11px] text-outline"
-                    >
-                      <span class="material-symbols-outlined text-sm"
-                        >schedule</span
-                      >
-                      <span>2 ngày nữa</span>
-                    </div>
-                    <div
-                      class="flex items-center gap-1 text-[11px] text-outline"
-                    >
-                      <span class="material-symbols-outlined text-sm"
-                        >comment</span
-                      >
-                      <span>5</span>
-                    </div>
-                  </div>
-                  <img
-                    class="w-7 h-7 rounded-full ring-2 ring-white"
-                    data-alt="Assignee avatar, young professional woman with glasses, neutral expression, modern lighting."
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkb2rAG2TsZG28nD6GeHq8Mx7XoQHmZEvmlq_WEnpoxEfjkW-vPGOndIUbmODVG4Ty6wh0Yd6eT8riUO6EqETMqVVr-oyJtLIR4bnO69zelUHk0N-tusq6zIN84uH-o4Cd4YJABPkel5A-7uXZSVT-dH4lqzxRQNNwWwIC72sn4KSsc0_EvmwZjGEwtMpEF1D5xn6mdbooA8ti0Wnvs-k8fqYiemsb9Szd6xk-lE7N8VyjBbDLz8Uf78aU9AcKLlDAokbbHH5Wi6Y"
-                  />
-                </div>
-              </div>
-            </div>
-            <!-- Card 2 -->
-            <div
-              class="glass-card p-6 rounded-[24px] shadow-lg shadow-shadow-tint hover:shadow-xl hover:-translate-y-1 transition-all group cursor-grab"
-            >
-              <div class="flex justify-between items-start mb-3">
-                <span
-                  class="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-[11px] font-bold"
-                  >Backend</span
-                >
-                <span
-                  class="px-2 py-1 bg-warning/10 text-warning rounded text-[10px] font-bold"
-                  >Trung bình</span
-                >
-              </div>
-              <h3
-                class="font-headline-md text-[18px] text-on-surface mb-2 group-hover:text-primary transition-colors"
-              >
-                API Xác thực người dùng
-              </h3>
-              <p class="text-body-sm text-on-surface-variant mb-4 line-clamp-2">
-                Triển khai JWT auth và phân quyền cho người dùng mới.
-              </p>
-              <div
-                class="flex items-center justify-between pt-2 border-t border-glass-border"
-              >
-                <div class="flex items-center gap-3">
-                  <div class="flex items-center gap-1 text-[11px] text-outline">
-                    <span class="material-symbols-outlined text-sm"
-                      >attach_file</span
-                    >
-                    <span>2</span>
-                  </div>
-                </div>
-                <img
-                  class="w-7 h-7 rounded-full ring-2 ring-white"
-                  data-alt="Assignee avatar, developer portrait, focused expression, studio lighting."
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8sC7_OplQPOzYUU2VcPOCL4mQdzt2fQ_D5BVXI9Ud0LYqRDpT33I5rJt7_FkHtpGkR0lrvU67mjuG0IVtuN8yorikgm-53cQ9E_cT94ccbcQGf7NfZ9EPYc__gLgnIidonYtRm88NOOk8jkVfsnwJ1bwmu-XUBh2GazpgeHhCz3I2i89WctXkSbSLmw6MCRvvy3FnMxHP7Vtcm71BmqLz3AAiRrjOIcB2GNdV7fBbWtlvZHXw1KMUC4bJVnhBl2ahzxbNKbAJ1oU"
-                />
-              </div>
-            </div>
           </div>
           <!-- Column: In Progress -->
-          <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-4" id="kanban-inprogress">
             <div class="flex items-center justify-between px-2">
               <div class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-secondary"></span>
@@ -316,75 +208,9 @@
               </button>
             </div>
             <!-- Card 3 -->
-            <div
-              class="glass-card p-6 rounded-[24px] shadow-lg shadow-shadow-tint hover:shadow-xl hover:-translate-y-1 transition-all group border-l-4 border-secondary"
-            >
-              <div class="flex justify-between items-start mb-3">
-                <span
-                  class="px-3 py-1 bg-tertiary/10 text-tertiary rounded-full text-[11px] font-bold"
-                  >Frontend</span
-                >
-                <span
-                  class="px-2 py-1 bg-danger/10 text-danger rounded text-[10px] font-bold"
-                  >Cao</span
-                >
-              </div>
-              <h3
-                class="font-headline-md text-[18px] text-on-surface mb-2 group-hover:text-primary transition-colors"
-              >
-                Tích hợp thanh toán
-              </h3>
-              <p class="text-body-sm text-on-surface-variant mb-4 line-clamp-2">
-                Kết nối Stripe API và hoàn thiện giao diện checkout.
-              </p>
-              <div class="space-y-4">
-                <div class="w-full">
-                  <div
-                    class="flex justify-between text-[11px] text-outline mb-1.5"
-                  >
-                    <span>Tiến độ</span>
-                    <span>65%</span>
-                  </div>
-                  <div
-                    class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
-                  >
-                    <div
-                      class="h-full bg-gradient-to-r from-primary to-secondary rounded-full"
-                      style="width: 65%"
-                    ></div>
-                  </div>
-                </div>
-                <div
-                  class="flex items-center justify-between pt-2 border-t border-glass-border"
-                >
-                  <div class="flex items-center gap-3">
-                    <div
-                      class="flex items-center gap-1 text-[11px] text-outline"
-                    >
-                      <span class="material-symbols-outlined text-sm"
-                        >schedule</span
-                      >
-                      <span>Ngày mai</span>
-                    </div>
-                  </div>
-                  <div class="flex -space-x-2">
-                    <img
-                      class="w-7 h-7 rounded-full ring-2 ring-white"
-                      data-alt="Portrait of a developer, professional style, clean office lighting."
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvn730SXuT6k9mqjenubqtvQkGeLgMBDztOOZg-nLOHCjYEMtiiF0TS2JYsiHdx2CLN3JGq2MSdKwK9kdbxunSY9RLrFk0jKHYb8LUsp6vbp3U7tg0ZvJqtfx3cqMHAvlctPYCuge0RmuqIFQwGKqBp99jz2XVHtVNP8NAh4cF4hqb_AkTssVolpW0ZJVoWiZGALAiT84D2CGFAYaY8UX-P3DKX4RDg_hSzIP_hblTxQXOxzUmbkGj7O7egC9Shp-hKFPXbV21xWw"
-                    />
-                    <img
-                      class="w-7 h-7 rounded-full ring-2 ring-white"
-                      data-alt="Portrait of a designer, professional style, clean office lighting."
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfcE_CoiZ8leHFBQSpBRznB4Xgnb-SJ1Yj5F-hXkwS8T2qAkyLs1XweZ7bZvwwXc3Kn8XEWnU3tEdev4ckNHDWIy_TbeK1-exgxBYgm3E5d05uOTbGnvC_AZgMtu2fBbNCpCSnBSU4lTGBICDLc4D8k_BSiy_L1si1ynJrGeQ58veyFsHNIHObbje6GojElWhcppSDnmaEtJo5oC_I5oFbnwoUIeFj4i3qMZMvhYcSxq6U3pSLQJnjRcJiHP2VbCGzcverewsPjwM"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
           <!-- Column: Review -->
-          <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-4" id="kanban-review">
             <div class="flex items-center justify-between px-2">
               <div class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-warning"></span>
@@ -403,49 +229,9 @@
               </button>
             </div>
             <!-- Card 4 -->
-            <div
-              class="glass-card p-6 rounded-[24px] shadow-lg shadow-shadow-tint hover:shadow-xl hover:-translate-y-1 transition-all group"
-            >
-              <div class="flex justify-between items-start mb-3">
-                <span
-                  class="px-3 py-1 bg-primary-fixed text-primary rounded-full text-[11px] font-bold"
-                  >Documentation</span
-                >
-                <span
-                  class="px-2 py-1 bg-success/10 text-success rounded text-[10px] font-bold"
-                  >Thấp</span
-                >
-              </div>
-              <h3
-                class="font-headline-md text-[18px] text-on-surface mb-2 group-hover:text-primary transition-colors"
-              >
-                Hướng dẫn sử dụng CMS
-              </h3>
-              <p class="text-body-sm text-on-surface-variant mb-4 line-clamp-2">
-                Viết tài liệu hướng dẫn cho người dùng cuối về cách cập nhật nội
-                dung.
-              </p>
-              <div
-                class="flex items-center justify-between pt-2 border-t border-glass-border"
-              >
-                <div class="flex items-center gap-3">
-                  <div class="flex items-center gap-1 text-[11px] text-outline">
-                    <span class="material-symbols-outlined text-sm"
-                      >comment</span
-                    >
-                    <span>12</span>
-                  </div>
-                </div>
-                <img
-                  class="w-7 h-7 rounded-full ring-2 ring-white"
-                  data-alt="Female documentation specialist, professional attire, soft library background, warm lighting."
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuB72bfDTsu4oas13M9HrJGgzASX4VXbc3zGveSsEr9HZGGT7wWPLOVhitIiuMgXqtWlUfkzU-_xSa7oJmDvH_RfX9jvh3r1k9_mltp8w9_KSeWWbIPwSPLquTVkYZUmEyQOIwJQ778i5NF60Ngq-RRnJOkyNZJc_uCyF6dZ_Q_8rhEx897ds7Cx0z0UpwbNpkzUgIVAIpzWa37bhLtClnhLxbZPyJs3G1C0n4yhMt3xxEWBgU86rLaHR_NTHnJVAvnaz2kWWhWJ_64"
-                />
-              </div>
-            </div>
           </div>
           <!-- Column: Completed -->
-          <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-4" id="kanban-done">
             <div class="flex items-center justify-between px-2">
               <div class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-success"></span>
@@ -461,71 +247,6 @@
               </div>
             </div>
             <!-- Card 5 -->
-            <div
-              class="glass-card p-6 rounded-[24px] shadow-lg shadow-shadow-tint opacity-80 hover:opacity-100 grayscale hover:grayscale-0 transition-all group bg-white/40"
-            >
-              <div class="flex justify-between items-start mb-3">
-                <span
-                  class="px-3 py-1 bg-success/10 text-success rounded-full text-[11px] font-bold"
-                  >Testing</span
-                >
-                <span
-                  class="material-symbols-outlined text-success text-lg"
-                  style="font-variation-settings: &quot;FILL&quot; 1"
-                  >check_circle</span
-                >
-              </div>
-              <h3
-                class="font-headline-md text-[18px] text-on-surface mb-2 line-through opacity-50"
-              >
-                Unit testing module Auth
-              </h3>
-              <div
-                class="flex items-center justify-between pt-2 border-t border-glass-border"
-              >
-                <span class="text-[11px] text-outline italic"
-                  >Hoàn thành bởi Nguyễn Văn An</span
-                >
-                <img
-                  class="w-7 h-7 rounded-full opacity-50"
-                  data-alt="Assignee avatar, user profile image, modern professional aesthetic."
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVtWIf7oSmTBmChxbDGdEqsFlBLYhTemARmmDBsEGq3XUc497YsA0igxHEOUb3ykSCbTBVxsFoXJbqltP4eGtNU_SPUpmi9HaU1VoXqHesoLiglStkfmN9RnHh0nGPI3BOatyusBzuF0xvgk8Si_LXWclmMSrwAuZJ3nVkPulK0a6OxCCdBEND77dahmbVv8q5zaxBpRDta0PwgHDmLUBtwhJYxyouyt5zCtwuIqQyxSO5cUNHky_43upvtyhA25LGd9bidB5Y6i8"
-                />
-              </div>
-            </div>
-            <!-- Card 6 -->
-            <div
-              class="glass-card p-6 rounded-[24px] shadow-lg shadow-shadow-tint opacity-80 hover:opacity-100 transition-all group bg-white/40"
-            >
-              <div class="flex justify-between items-start mb-3">
-                <span
-                  class="px-3 py-1 bg-primary/10 text-primary rounded-full text-[11px] font-bold"
-                  >Research</span
-                >
-                <span
-                  class="material-symbols-outlined text-success text-lg"
-                  style="font-variation-settings: &quot;FILL&quot; 1"
-                  >check_circle</span
-                >
-              </div>
-              <h3
-                class="font-headline-md text-[18px] text-on-surface mb-2 line-through opacity-50"
-              >
-                Phân tích đối thủ cạnh tranh
-              </h3>
-              <div
-                class="flex items-center justify-between pt-2 border-t border-glass-border"
-              >
-                <span class="text-[11px] text-outline italic"
-                  >Đã xong 15/06/2024</span
-                >
-                <img
-                  class="w-7 h-7 rounded-full opacity-50"
-                  data-alt="Assignee avatar, user profile image, professional setting."
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcvqWklhMThzePobNg3cfqwSz95OY_t97I4uDnThbGa5bVs1r1iQyycI3BBhTimDgYIIQ4vkIZWFDq481sdzJQWlw7Q5ohcfEF6dxXY5SYwql8a6KqhFqVAjNgJwJGfWWON7O1Y7tZ4G00iT0tOhXgsZSjp2tcMdcV6zar3mekGRRjSaFuZtOjQurfTaknGqHoS5pL1TpPFz0YJbZcODE8ymV1UvDNgAKB5CrNR0iLwtEF9bJy789RkYv8pTYIqGzFODmBmN5h_7g"
-                />
-              </div>
-            </div>
           </div>
         </div>
       </main>

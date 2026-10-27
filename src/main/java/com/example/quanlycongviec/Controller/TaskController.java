@@ -4,13 +4,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.quanlycongviec.DTO.Request.TaskReq;
+import com.example.quanlycongviec.DTO.UpdateTaskStatusProgressReq;
 import com.example.quanlycongviec.DTO.Response.TaskRes;
 import com.example.quanlycongviec.Entity.enums.TaskStatus;
 import com.example.quanlycongviec.Service.impl.TaskService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/api/tasks")
@@ -30,12 +34,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public class TaskController {
     private final TaskService taskService;
-
-    @GetMapping
-    public ResponseEntity<?> countTaskByStatus(@RequestParam(required = false) String userId) {
-        return ResponseEntity.status(404).body("Không tìm thấy người dùng");
-
-    }
 
     @GetMapping("/status")
     public ResponseEntity<?> countTaskByStatus(@RequestParam(required = false) String userId, HttpSession session) {
@@ -45,8 +43,8 @@ public class TaskController {
 
     // @PatchMapping("/{id}")
     // public ResponseEntity<TaskRes> updateTaskPartial(
-    //         @PathVariable Long id,
-    //         @RequestBody TaskReq req) {
+    // @PathVariable Long id,
+    // @RequestBody TaskReq req) {
     // }
 
     @PutMapping("/{id}")
@@ -55,6 +53,15 @@ public class TaskController {
 
         return ResponseEntity
                 .ok(taskService.updateStatus(id, newStatus, files, (Integer) httpSession.getAttribute("userID")));
+    }
+
+    @PatchMapping("/{id}/status-progress")
+    public ResponseEntity<TaskRes> updateStatusAndProgress(
+            @PathVariable  Integer id,
+            @Valid @RequestPart UpdateTaskStatusProgressReq req,@RequestPart( required = false)  MultipartFile file) {
+
+        TaskRes result = taskService.updateStatusAndProgress(id, req,file);
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/project/{id}")
@@ -71,5 +78,8 @@ public class TaskController {
 
         return ResponseEntity.ok(taskService.findAllByProjectId(projectId));
     }
-
+    @GetMapping("/kaban")
+    public ResponseEntity<Map<TaskStatus, List<TaskRes>>> getKanbanBoard() {
+        return ResponseEntity.ok(taskService.getKanbanBoard());
+    }
 }

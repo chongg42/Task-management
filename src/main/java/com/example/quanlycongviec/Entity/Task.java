@@ -19,7 +19,7 @@ import com.example.quanlycongviec.Entity.enums.TaskStatus;
 public class Task {
 
     @Id
-    
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -51,14 +51,10 @@ public class Task {
     @JoinColumn(name = "comments_id")
     private Comment comment;
 
-    @ManyToMany(      fetch = FetchType.LAZY,
-                cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "task_tag",
-    joinColumns = @JoinColumn(name="task_id"),
-    inverseJoinColumns = @JoinColumn(name="tag_id"))
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "task_tag", joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> tags;
 
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL,
-           orphanRemoval = true)
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<TaskAssignees> taskAssignees;
-}   
+}

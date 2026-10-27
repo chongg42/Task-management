@@ -8,6 +8,6 @@ public class QuanlycongviecApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(QuanlycongviecApplication.class, args);
-	}
 
+	}
 }

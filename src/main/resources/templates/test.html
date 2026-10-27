@@ -1,319 +1,40 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý dự án - Mobile Shop</title>
-    <!-- Nhúng Tailwind CSS qua CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Nhúng FontAwesome để dùng các icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    h1{
+      text-align: center;
+    }
+    table{
+      border-collapse: collapse;
+    }
+    th,td{
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-800 min-h-screen">
-
-    <div class="max-w-7xl mx-auto px-6 py-8">
-        
-        <!-- ================= HEADER DỰ ÁN ================= -->
-        <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
-            <div>
-                <div class="flex items-center gap-3 text-xs font-semibold mb-2">
-                    <span class="bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded">PROJECT ID: #WF-2024-08</span>
-                    <span class="text-gray-500"><i class="fa-regular fa-calendar mr-1"></i> Hạn: 30/08/2024</span>
-                </div>
-                <h1 class="text-4xl font-extrabold text-gray-950 mb-3">Website bán điện thoại - Mobile Shop</h1>
-                <p class="text-gray-600 max-w-2xl leading-relaxed">
-                    Dự án tái thiết kế và phát triển nền tảng thương mại điện tử chuyên biệt cho các thiết bị di động, tập trung vào trải nghiệm mua sắm mượt mà và thanh toán an toàn.
-                </p>
-            </div>
-            
-            <!-- Nút hành động -->
-            <div class="flex items-center gap-3 self-end md:self-start">
-                <button class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition">
-                    <i class="fa-solid fa-share-nodes"></i> Chia sẻ
-                </button>
-                <button class="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium shadow-sm transition">
-                    <i class="fa-solid fa-plus"></i> Thêm công việc
-                </button>
-            </div>
-        </div>
-
-        <!-- Tiến độ & Thành viên -->
-        <div class="flex flex-wrap items-center gap-6 mb-8 border-b border-gray-200 pb-6">
-            <!-- Nhóm avatar -->
-            <div class="flex -space-x-2">
-                <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" alt="Avatar">
-                <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="Avatar">
-                <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150" alt="Avatar">
-                <div class="flex items-center justify-center w-8 h-8 rounded-full border-2 border-white bg-indigo-600 text-white text-xs font-semibold">+12</div>
-            </div>
-            <!-- Thanh tiến độ -->
-            <div class="flex items-center gap-3 w-64">
-                <span class="text-xs font-medium text-gray-500 whitespace-nowrap">Tiến độ tổng thể</span>
-                <div class="w-full bg-gray-200 rounded-full h-2">
-                    <div class="bg-teal-500 h-2 rounded-full" style="width: 75%"></div>
-                </div>
-                <span class="text-xs font-bold text-indigo-600">75%</span>
-            </div>
-        </div>
-
-        <!-- ================= HỆ THỐNG TABS ================= -->
-        <div class="flex border-b border-gray-200 mb-8 overflow-x-auto no-scrollbar">
-            <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn px-4 py-2.5 font-medium text-sm border-b-2 border-indigo-600 text-indigo-600 whitespace-nowrap">Overview</button>
-            <button onclick="switchTab('tasks')" id="tab-tasks" class="tab-btn px-4 py-2.5 font-medium text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 whitespace-nowrap">Tasks (128)</button>
-            <button onclick="switchTab('board')" id="tab-board" class="tab-btn px-4 py-2.5 font-medium text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 whitespace-nowrap">Board</button>
-            <button onclick="switchTab('calendar')" id="tab-calendar" class="tab-btn px-4 py-2.5 font-medium text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 whitespace-nowrap">Calendar</button>
-            <button onclick="switchTab('files')" id="tab-files" class="tab-btn px-4 py-2.5 font-medium text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 whitespace-nowrap">Files (42)</button>
-            <button onclick="switchTab('members')" id="tab-members" class="tab-btn px-4 py-2.5 font-medium text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 whitespace-nowrap">Members</button>
-            <button onclick="switchTab('activity')" id="tab-activity" class="tab-btn px-4 py-2.5 font-medium text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 whitespace-nowrap">Activity</button>
-        </div>
-
-        <!-- ================= NỘI DUNG CÁC MÀN HÌNH ================= -->
-        
-        <!-- MÀN HÌNH 1: OVERVIEW -->
-        <div id="content-overview" class="tab-content block animate-fade-in">
-            <!-- Grid 4 thẻ thống kê nhanh -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                <!-- Tổng công việc -->
-                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-lg"><i class="fa-regular fa-clipboard"></i></div>
-                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded flex items-center gap-0.5"><i class="fa-solid fa-arrow-up"></i> 12%</span>
-                    </div>
-                    <div>
-                        <p class="text-sm font-medium text-gray-500 mb-1">Tổng công việc</p>
-                        <h3 class="text-3xl font-bold text-gray-900">128</h3>
-                    </div>
-                </div>
-                <!-- Đã hoàn thành -->
-                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-lg"><i class="fa-regular fa-circle-check"></i></div>
-                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded flex items-center gap-0.5"><i class="fa-solid fa-arrow-up"></i> 18%</span>
-                    </div>
-                    <div>
-                        <p class="text-sm font-medium text-gray-500 mb-1">Đã hoàn thành</p>
-                        <h3 class="text-3xl font-bold text-gray-900">78</h3>
-                    </div>
-                </div>
-                <!-- Đang thực hiện -->
-                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-10 h-10 bg-amber-50 text-amber-500 rounded-xl flex items-center justify-center text-lg"><i class="fa-regular fa-clock"></i></div>
-                        <span class="text-xs font-medium text-gray-400">Không đổi</span>
-                    </div>
-                    <div>
-                        <p class="text-sm font-medium text-gray-500 mb-1">Đang thực hiện</p>
-                        <h3 class="text-3xl font-bold text-gray-900">32</h3>
-                    </div>
-                </div>
-                <!-- Quá hạn -->
-                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-10 h-10 bg-rose-50 text-rose-500 rounded-xl flex items-center justify-center text-lg"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                        <span class="text-xs font-semibold text-rose-600 bg-rose-50 px-2 py-0.5 rounded flex items-center gap-0.5"><i class="fa-solid fa-arrow-down"></i> 5%</span>
-                    </div>
-                    <div>
-                        <p class="text-sm font-medium text-gray-500 mb-1">Quá hạn</p>
-                        <h3 class="text-3xl font-bold text-gray-900">18</h3>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Grid hàng dưới: Hoạt động & Hiệu suất -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Hoạt động gần đây -->
-                <div class="lg:col-span-2 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-                    <h3 class="text-lg font-bold mb-4">Hoạt động gần đây</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-3">
-                            <img class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="">
-                            <p class="text-sm text-gray-600"><span class="font-semibold text-gray-900">Nguyễn Văn An</span> đã hoàn thành công việc <a href="#" class="text-indigo-600 font-medium hover:underline">Xây dựng API xác thực</a></p>
-                            <span class="text-xs text-gray-400 ml-auto">5 phút trước</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <img class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" alt="">
-                            <p class="text-sm text-gray-600"><span class="font-semibold text-gray-900">Trần Thị B</span> đã tải lên tài liệu thiết kế <a href="#" class="text-indigo-600 font-medium hover:underline">UI_MobileShop_v2.fig</a></p>
-                            <span class="text-xs text-gray-400 ml-auto">1 giờ trước</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Hiệu suất dự án -->
-                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center justify-center">
-                    <h3 class="text-base font-bold text-gray-900 mb-4 self-start">HIỆU SUẤT DỰ ÁN</h3>
-                    <div class="relative w-36 h-36 flex items-center justify-center">
-                        <!-- Vòng tròn tiến độ đơn giản -->
-                        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                            <path class="text-gray-100" stroke-width="3" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                            <path class="text-indigo-600" stroke-dasharray="85, 100" stroke-width="3" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                        </svg>
-                        <div class="absolute text-center">
-                            <span class="text-2xl font-bold text-gray-900">85%</span>
-                            <p class="text-[10px] text-gray-400 font-medium uppercase tracking-wider">Tốt</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- MÀN HÌNH 2: TASKS -->
-        <div id="content-tasks" class="tab-content hidden animate-fade-in">
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                <!-- Thanh công cụ lọc nhanh -->
-                <div class="p-4 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div class="relative w-full sm:w-72">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-                        <input type="text" placeholder="Tìm kiếm công việc..." class="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-indigo-500">
-                    </div>
-                    <div class="flex gap-2">
-                        <select class="px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-600 focus:outline-none bg-white">
-                            <option>Tất cả trạng thái</option>
-                            <option>Đang thực hiện</option>
-                            <option>Quá hạn</option>
-                        </select>
-                    </div>
-                </div>
-                <!-- Bảng danh sách công việc -->
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-gray-50 border-b border-gray-100 text-xs font-semibold uppercase tracking-wider text-gray-500">
-                                <th class="py-3.5 px-6">Tên công việc</th>
-                                <th class="py-3.5 px-6">Người thực hiện</th>
-                                <th class="py-3.5 px-6">Hạn chót</th>
-                                <th class="py-3.5 px-6">Độ ưu tiên</th>
-                                <th class="py-3.5 px-6 text-right">Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-100 text-sm text-gray-600">
-                            <tr>
-                                <td class="py-4 px-6 font-medium text-gray-900">Xây dựng API xác thực người dùng</td>
-                                <td class="py-4 px-6 flex items-center gap-2">
-                                    <img class="w-6 h-6 rounded-full object-cover" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="">
-                                    <span>Nguyễn Văn An</span>
-                                </td>
-                                <td class="py-4 px-6">15/08/2024</td>
-                                <td class="py-4 px-6"><span class="px-2 py-0.5 rounded text-xs font-semibold bg-rose-50 text-rose-600">Cao</span></td>
-                                <td class="py-4 px-6 text-right text-gray-400 hover:text-gray-600 cursor-pointer"><i class="fa-solid fa-ellipsis"></i></td>
-                            </tr>
-                            <tr>
-                                <td class="py-4 px-6 font-medium text-gray-900">Thiết kế Mockup màn hình Giỏ hàng</td>
-                                <td class="py-4 px-6 flex items-center gap-2">
-                                    <img class="w-6 h-6 rounded-full object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" alt="">
-                                    <span>Trần Thị B</span>
-                                </td>
-                                <td class="py-4 px-6 text-rose-500 font-medium">10/08/2024 (Quá hạn)</td>
-                                <td class="py-4 px-6"><span class="px-2 py-0.5 rounded text-xs font-semibold bg-amber-50 text-amber-600">Trung bình</span></td>
-                                <td class="py-4 px-6 text-right text-gray-400 hover:text-gray-600 cursor-pointer"><i class="fa-solid fa-ellipsis"></i></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- MÀN HÌNH 3: KANBAN BOARD -->
-        <div id="content-board" class="tab-content hidden animate-fade-in">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Cột: To Do -->
-                <div class="bg-gray-100 p-4 rounded-xl min-h-[400px]">
-                    <div class="flex items-center justify-between mb-3">
-                        <h4 class="font-bold text-gray-700 text-sm">CẦN LÀM (To Do)</h4>
-                        <span class="bg-gray-200 text-gray-600 text-xs font-bold px-2 py-0.5 rounded-full">1</span>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 space-y-3 cursor-pointer hover:shadow-md transition">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-blue-600">Nghiên cứu</span>
-                        <h5 class="font-semibold text-gray-900 text-sm">Phân tích đối thủ cạnh tranh</h5>
-                        <div class="flex justify-between items-center pt-2">
-                            <span class="text-xs text-gray-400"><i class="fa-regular fa-calendar"></i> 28/08</span>
-                            <img class="w-5 h-5 rounded-full object-cover" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150" alt="">
-                        </div>
-                    </div>
-                </div>
-                <!-- Cột: In Progress -->
-                <div class="bg-amber-50 p-4 rounded-xl min-h-[400px]">
-                    <div class="flex items-center justify-between mb-3">
-                        <h4 class="font-bold text-amber-800 text-sm">ĐANG THỰC HIỆN</h4>
-                        <span class="bg-amber-100 text-amber-700 text-xs font-bold px-2 py-0.5 rounded-full">32</span>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm border border-amber-100 space-y-3 cursor-pointer hover:shadow-md transition">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600">Backend</span>
-                        <h5 class="font-semibold text-gray-900 text-sm">Xây dựng API xác thực</h5>
-                        <div class="flex justify-between items-center pt-2">
-                            <span class="text-xs text-gray-400"><i class="fa-regular fa-calendar"></i> 15/08</span>
-                            <img class="w-5 h-5 rounded-full object-cover" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="">
-                        </div>
-                    </div>
-                </div>
-                <!-- Cột: Done -->
-                <div class="bg-emerald-50 p-4 rounded-xl min-h-[400px]">
-                    <div class="flex items-center justify-between mb-3">
-                        <h4 class="font-bold text-emerald-800 text-sm">ĐÃ HOÀN THÀNH</h4>
-                        <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-0.5 rounded-full">78</span>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm opacity-75 border border-emerald-100 space-y-3">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-600 line-through">UI/UX Design</span>
-                        <h5 class="font-semibold text-gray-500 text-sm line-through">Phác thảo Wireframe Homepage</h5>
-                        <div class="flex justify-between items-center pt-2">
-                            <span class="text-xs text-emerald-600 font-medium"><i class="fa-solid fa-check"></i> Hoàn thành</span>
-                            <img class="w-5 h-5 rounded-full object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- CÁC TAB KHÁC (FILES, MEMBERS, CALENDAR, ACTIVITY...) -->
-        <div id="content-calendar" class="tab-content hidden p-8 text-center text-gray-400 border border-dashed rounded-2xl bg-white">
-            <i class="fa-regular fa-calendar-days text-4xl mb-2"></i><p>Giao diện Lịch (Calendar) đang phát triển...</p>
-        </div>
-        <div id="content-files" class="tab-content hidden p-8 text-center text-gray-400 border border-dashed rounded-2xl bg-white">
-            <i class="fa-regular fa-folder-open text-4xl mb-2"></i><p>Quản lý tài liệu (42 Files) đang phát triển...</p>
-        </div>
-        <div id="content-members" class="tab-content hidden p-8 text-center text-gray-400 border border-dashed rounded-2xl bg-white">
-            <i class="fa-solid fa-users text-4xl mb-2"></i><p>Quản lý Thành viên đang phát triển...</p>
-        </div>
-        <div id="content-activity" class="tab-content hidden p-8 text-center text-gray-400 border border-dashed rounded-2xl bg-white">
-            <i class="fa-solid fa-chart-line text-4xl mb-2"></i><p>Nhật ký hoạt động (Activity) đang phát triển...</p>
-        </div>
-
-    </div>
-
-    <!-- ================= JAVASCRIPT ĐIỀU HƯỚNG TABS ================= -->
-    <script>
-        function switchTab(tabName) {
-            // 1. Ẩn tất cả các khối nội dung
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.add('hidden'));
-            
-            // 2. Bỏ trạng thái active (màu xanh indigo) ở tất cả các nút tab
-            const tabs = document.querySelectorAll('.tab-btn');
-            tabs.forEach(tab => {
-                tab.classList.remove('border-indigo-600', 'text-indigo-600');
-                tab.classList.add('border-transparent', 'text-gray-500');
-            });
-
-            // 3. Hiển thị nội dung của tab được chọn
-            document.getElementById(`content-${tabName}`).classList.remove('hidden');
-
-            // 4. Kích hoạt trạng thái active cho nút bấm tương ứng
-            const activeTab = document.getElementById(`tab-${tabName}`);
-            activeTab.classList.remove('border-transparent', 'text-gray-500');
-            activeTab.classList.add('border-indigo-600', 'text-indigo-600');
-        }
-    </script>
-
-    <!-- Style bổ sung cho hiệu ứng chuyển tab nhẹ nhàng & ẩn thanh cuộn ngang nếu có -->
-    <style>
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-            animation: fadeIn 0.2s ease-out forwards;
-        }
-    </style>
+<body>
+  <div class="container">
+    <h1>Nhà Sách</h1>
+    <table >
+      <tr>
+        <th>STT</th>
+        <th>Mã sách</th>
+        <th>Tên sách</th>
+        <th>Số Trang</th>
+        <th>Tác Giả</th>
+        <th>Giá Tiền</th>
+      </tr>
+    </table>
+  </div>
 </body>
 </html>

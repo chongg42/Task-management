@@ -1,8 +1,7 @@
 package com.example.quanlycongviec.DTO.Response;
 
 import java.time.LocalDateTime;
-
-import com.example.quanlycongviec.DTO.Response.Summary.ProjectSummaryRes;
+import java.util.Map;
 
 import lombok.Builder;
 import lombok.Data;
@@ -18,5 +17,6 @@ public class ActivityRes {
     private String description;
     private LocalDateTime createdAt;
     private UserRes user;
-    private Integer resourceId;
+    private Map<String, Object> metadata;
+    private Integer projectId;
 }

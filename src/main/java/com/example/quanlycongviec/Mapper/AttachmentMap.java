@@ -1,10 +1,6 @@
 package com.example.quanlycongviec.Mapper;
 
-import java.time.LocalDateTime;
-
 import org.springframework.stereotype.Component;
-
-import com.example.quanlycongviec.DTO.Request.AttachmentReq;
 import com.example.quanlycongviec.DTO.Response.AttachmentRes;
 import com.example.quanlycongviec.Entity.Attachment;
 

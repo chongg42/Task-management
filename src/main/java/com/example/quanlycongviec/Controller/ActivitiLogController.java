@@ -20,7 +20,7 @@ public class ActivitiLogController {
 
     @GetMapping
     public ResponseEntity<?> findByProjectId(@RequestParam(name = "id") Integer projectId) {
-        return ResponseEntity.ok(iActivitiLog.findByProjectId(projectId));
+        return ResponseEntity.ok(iActivitiLog.findAllByProjectId(projectId));
     }
 
-}
+} 

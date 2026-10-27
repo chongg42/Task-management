@@ -1,16 +1,12 @@
 <!doctype html>
-<html class="light" lang="en">
+<html class="light" lang="vi">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Register - WorkFlow</title>
+    <title>Đăng nhập - WorkFlow</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
     />
     <link
@@ -83,15 +79,6 @@
               xl: "0.75rem",
               full: "9999px",
             },
-            spacing: {
-              "stack-md": "16px",
-              "stack-lg": "32px",
-              "stack-sm": "8px",
-              "container-max": "1440px",
-              "margin-desktop": "32px",
-              "margin-mobile": "16px",
-              gutter: "24px",
-            },
             fontFamily: {
               "label-lg": ["Inter"],
               "headline-md": ["Inter"],
@@ -103,41 +90,6 @@
               "body-md": ["Inter"],
               "body-sm": ["Inter"],
             },
-            fontSize: {
-              "label-lg": [
-                "14px",
-                {
-                  lineHeight: "1.2",
-                  letterSpacing: "0.05em",
-                  fontWeight: "600",
-                },
-              ],
-              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
-              "headline-lg": [
-                "32px",
-                {
-                  lineHeight: "1.25",
-                  letterSpacing: "-0.01em",
-                  fontWeight: "600",
-                },
-              ],
-              "body-lg": ["18px", { lineHeight: "1.5", fontWeight: "400" }],
-              "headline-lg-mobile": [
-                "28px",
-                { lineHeight: "1.25", fontWeight: "600" },
-              ],
-              "display-lg": [
-                "48px",
-                {
-                  lineHeight: "1.2",
-                  letterSpacing: "-0.02em",
-                  fontWeight: "700",
-                },
-              ],
-              "label-md": ["12px", { lineHeight: "1.2", fontWeight: "500" }],
-              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
-              "body-sm": ["14px", { lineHeight: "1.6", fontWeight: "400" }],
-            },
           },
         },
       };
@@ -146,7 +98,6 @@
       body {
         font-family: "Inter", sans-serif;
         background-color: #f8f9fa;
-        
       }
       .glass-pane {
         background: rgba(255, 255, 255, 0.75);
@@ -193,10 +144,18 @@
           "GRAD" 0,
           "opsz" 24;
       }
+      /* Tùy chỉnh viền nổi bật cho checkbox */
+      .custom-checkbox {
+        border: 1.5px solid #777587 !important;
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+      .custom-checkbox:hover {
+        border-color: #4f46e5 !important;
+      }
     </style>
   </head>
   <body
-    class="min-h-screen flex items-center justify-center p-4 md:p-8 bg-surface overflow-x-hidden"
+    class="h-screen w-screen flex items-center justify-center p-4 md:p-6 bg-surface overflow-hidden"
   >
     <!-- Background Atmospheric Effect -->
     <div class="fixed inset-0 -z-10 overflow-hidden">
@@ -207,198 +166,238 @@
         class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/10 rounded-full blur-[120px]"
       ></div>
     </div>
+
     <main
-      class="w-full max-w-container-max grid lg:grid-cols-2 gap-gutter items-center"
+      class="w-full max-w-[1280px] grid lg:grid-cols-2 gap-6 items-center my-auto"
     >
-      <!-- Left Side: Benefit List & Premium Element -->
-      <div class="hidden lg:flex flex-col gap-stack-lg pr-margin-desktop">
-        <div class="flex items-center gap-stack-sm mb-4">
+      <!-- Left Side: Benefit List -->
+      <div class="hidden lg:flex flex-col gap-4 pr-6">
+        <div class="flex items-center gap-3">
           <div
-            class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center shadow-lg shadow-shadow-tint"
+            class="w-9 h-9 bg-primary-container rounded-xl flex items-center justify-center shadow-lg shadow-shadow-tint"
           >
             <span
-              class="material-symbols-outlined text-white"
+              class="material-symbols-outlined text-white text-[20px]"
               style="font-variation-settings: &quot;FILL&quot; 1"
               >widgets</span
             >
           </div>
-          <span
-            class="font-headline-md text-headline-md text-primary tracking-tight"
+          <span class="text-xl font-bold text-primary tracking-tight"
             >WorkFlow</span
           >
         </div>
-        <div class="space-y-6">
+
+        <div class="space-y-2">
           <h1
-            class="font-display-lg text-display-lg text-on-surface leading-tight"
+            class="text-3xl xl:text-4xl font-bold text-on-surface leading-tight"
           >
-            Elevate your team's
-            <span class="text-primary-container">productivity</span>.
+            Nâng tầm <span class="text-primary-container">năng suất</span> cho
+            đội ngũ của bạn.
           </h1>
-          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
-            Join over 50,000+ high-performance teams using WorkFlow to manage
-            complex projects with glass-clear visibility.
+          <p class="text-sm xl:text-base text-on-surface-variant max-w-lg">
+            Gia nhập cùng hơn 50,000+ đội ngũ hiệu suất cao đang sử dụng
+            WorkFlow để quản lý các dự án phức tạp một cách rõ ràng và minh bạch
+            nhất.
           </p>
         </div>
-        <div class="grid gap-6 mt-8">
-          <div class="flex items-start gap-4 p-6 glass-pane rounded-xl">
+
+        <div class="grid gap-3 mt-2">
+          <div class="flex items-start gap-3 p-4 glass-pane rounded-xl">
             <span
-              class="material-symbols-outlined text-primary-container bg-primary/10 p-2 rounded-lg"
+              class="material-symbols-outlined text-primary-container bg-primary/10 p-2 rounded-lg text-[20px]"
               >bolt</span
             >
             <div>
-              <h3 class="font-label-lg text-label-lg text-on-surface">
-                Boost Productivity
+              <h3 class="text-sm font-semibold text-on-surface">
+                Tăng Cường Năng Suất
               </h3>
-              <p class="font-body-sm text-body-sm text-on-surface-variant">
-                Intelligent task prioritization and automated daily stand-ups.
+              <p class="text-xs text-on-surface-variant">
+                Tự động ưu tiên công việc thông minh và họp giao ban hàng ngày
+                hiệu quả.
               </p>
             </div>
           </div>
-          <div class="flex items-start gap-4 p-6 glass-pane rounded-xl">
+          <div class="flex items-start gap-3 p-4 glass-pane rounded-xl">
             <span
-              class="material-symbols-outlined text-primary-container bg-primary/10 p-2 rounded-lg"
+              class="material-symbols-outlined text-primary-container bg-primary/10 p-2 rounded-lg text-[20px]"
               >groups</span
             >
             <div>
-              <h3 class="font-label-lg text-label-lg text-on-surface">
-                Collaborate Seamlessly
+              <h3 class="text-sm font-semibold text-on-surface">
+                Cộng Tác Mượt Mà
               </h3>
-              <p class="font-body-sm text-body-sm text-on-surface-variant">
-                Real-time multiplayer editing and integrated team communication.
+              <p class="text-xs text-on-surface-variant">
+                Chỉnh sửa thời gian thực đa người dùng và tích hợp kênh trao đổi
+                nhóm.
               </p>
             </div>
           </div>
-          <div class="flex items-start gap-4 p-6 glass-pane rounded-xl">
+          <div class="flex items-start gap-3 p-4 glass-pane rounded-xl">
             <span
-              class="material-symbols-outlined text-primary-container bg-primary/10 p-2 rounded-lg"
+              class="material-symbols-outlined text-primary-container bg-primary/10 p-2 rounded-lg text-[20px]"
               >analytics</span
             >
             <div>
-              <h3 class="font-label-lg text-label-lg text-on-surface">
-                Deep Insights
+              <h3 class="text-sm font-semibold text-on-surface">
+                Báo Cáo Chuyên Sâu
               </h3>
-              <p class="font-body-sm text-body-sm text-on-surface-variant">
-                Visualize bottlenecks with professional-grade Kanban and Gantt
-                views.
+              <p class="text-xs text-on-surface-variant">
+                Theo dõi tiến độ và phát hiện điểm nghẽn với giao diện Kanban và
+                Gantt chuyên nghiệp.
               </p>
             </div>
           </div>
         </div>
-        <!-- Client Proof Mini-Carousel / Static Placeholder -->
-        <div class="mt-8 flex items-center gap-4">
-          <div class="flex -space-x-3">
+
+        <!-- Client Proof -->
+        <div class="mt-2 flex items-center gap-3">
+          <div class="flex -space-x-2">
             <img
-              class="w-10 h-10 rounded-full border-2 border-white object-cover"
-              data-alt="A professional headshot of a smiling female executive in a modern bright office setting. Soft studio lighting, minimalist background with a slight blue tint, sharp focus on eyes, 8k resolution, premium corporate aesthetic."
+              class="w-8 h-8 rounded-full border-2 border-white object-cover"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpasJxsRPheXWnzd0uKOF5BIp0unTJ7DWhkKuXPZvMxmMXbhXGAPXkDNCpsOb-M4E9nge2kGtr333Ycv8caypzmUIjWUiaFBSochbMS1B54itNys6l6YNCnzZVPLzFGDoGIC6FldHZjUfCzWKBGmF3Uel2xM9uPmC2mHaB6t0U5CsvA_3SFIv_xKBxndPSmwJCRl-Z-kE_7v4DWk-KKVKQlmn74V9sX94NkGUypchtZNjX0iUzX4XnnFysbY5nDMnPDxxad7DG_co"
+              alt="Avatar 1"
             />
             <img
-              class="w-10 h-10 rounded-full border-2 border-white object-cover"
-              data-alt="A professional headshot of a creative director with a minimalist workspace behind him. Natural morning light, shallow depth of field, high-end tech enthusiast aesthetic, soft pastel colors, 8k resolution."
+              class="w-8 h-8 rounded-full border-2 border-white object-cover"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoff06TeLdtosLceSUI3Qj0iVD7jnqhWkXR_C5i2q6aOVfY6T88vXm_JFiN__NDhFD1CsFVDq5p3wazNf3-3uTXtCclDqppDQQF75XhfC1APSQCa2E7kSjWtzJ5mskeYVvw9WFkFsu15l4Ac4SZ2LzvajLGcLdEaVbl-n_74iiSF8k1UK6M18B5rJCa12scsBImrBQiaxd-5gksfb-TPfOXknnERTSbB8qR_v2IIEYITOSCaxJjsPbtxtQitcRYXlDGVQGX_L2oDo"
+              alt="Avatar 2"
             />
             <img
-              class="w-10 h-10 rounded-full border-2 border-white object-cover"
-              data-alt="A candid professional photo of a diverse young professional in a high-tech coworking space. Soft focused background with plants and glass walls, bright and airy lighting, sophisticated business casual style, 8k resolution."
+              class="w-8 h-8 rounded-full border-2 border-white object-cover"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-onLbaHLyRhE6708vnwtYWKen_4qBj31yoAIRyy5rcfOnhB-BZAKc8uU5yrwE-CLOO137DQkGpu3AaiC2nqtDUsTXlkjQcSCgWnAJ1-Z5GhWMqIFd09VmkWO_GmUDxKZPEicT-MTSRP2B6hxSZzEjdyd-X1k1yzyhdDFiSykNiN5mwwxigIelqyFgPLIzIyO4853AWL-hODGpsGz5CMf9B8u0Zo-kCIuyQ8Ewl-Hp9tG4jUFL49raak6FqSGLU9_ldjoX8ioxKlc"
+              alt="Avatar 3"
             />
           </div>
-          <p class="font-body-sm text-body-sm text-on-surface-variant">
-            Trusted by leaders at
-            <span class="font-bold text-on-surface">Innovate Corp</span> and
+          <p class="text-xs text-on-surface-variant">
+            Được tin dùng bởi các nhà lãnh đạo tại
+            <span class="font-bold text-on-surface">Innovate Corp</span> và
             <span class="font-bold text-on-surface">Nexus Labs</span>.
           </p>
         </div>
       </div>
-      <!-- Right Side: Registration Card -->
+
+      <!-- Right Side: Auth Card (Trạng thái mặc định: ĐĂNG NHẬP) -->
       <div class="flex justify-center lg:justify-end">
         <div
-          class="glass-pane w-full max-w-md p-8 md:p-10 rounded-3xl flex flex-col gap-stack-md"
+          class="glass-pane w-full max-w-md p-6 md:p-8 rounded-2xl flex flex-col justify-center"
         >
-          <div class="mb-4">
-            <h2 class="font-headline-lg text-headline-lg text-on-surface">
-              Create Account
+          <!-- TAB SWITCHER -->
+          <div class="flex p-1 bg-black/5 rounded-xl mb-4">
+            <button
+              id="tabLoginBtn"
+              onclick="switchTab('login')"
+              class="flex-1 py-2 text-xs font-bold rounded-lg transition-all text-primary-container bg-white shadow-sm"
+            >
+              Đăng Nhập
+            </button>
+            <button
+              id="tabRegisterBtn"
+              onclick="switchTab('register')"
+              class="flex-1 py-2 text-xs font-medium rounded-lg transition-all text-on-surface-variant hover:text-on-surface"
+            >
+              Đăng Ký
+            </button>
+          </div>
+
+          <div class="mb-3">
+            <h2 id="formTitle" class="text-2xl font-bold text-on-surface">
+              Đăng Nhập
             </h2>
-            <p class="font-body-sm text-body-sm text-on-surface-variant">
-              Start your 14-day free trial today.
+            <p id="formSubtitle" class="text-xs text-on-surface-variant">
+              Chào mừng trở lại! Vui lòng nhập thông tin của bạn.
             </p>
           </div>
-          <form class="flex flex-col gap-5" id="registrationForm">
-            <!-- Full Name -->
-            <div class="flex flex-col gap-2">
+
+          <form class="flex flex-col gap-3" id="authForm">
+            <!-- Full Name (Ẩn mặc định cho Đăng nhập) -->
+            <div class="hidden flex-col gap-1" id="fullNameGroup">
               <label
-                class="font-label-lg text-label-lg text-on-surface"
+                class="text-xs font-semibold text-on-surface"
                 for="fullName"
-                >Full Name</label
+                >Họ và Tên</label
               >
               <div class="relative">
                 <span
-                  class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-[20px]"
+                  class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[18px]"
                   >person</span
                 >
                 <input
-                  class="w-full pl-12 pr-4 py-3 bg-white/50 border border-glass-border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-body-md text-body-md"
                   id="fullName"
-                  placeholder="Jane Cooper"
-                  required=""
+                  class="w-full pl-10 pr-4 py-2.5 bg-white/50 border border-glass-border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm"
+                  placeholder="Nguyễn Văn A"
                   type="text"
                 />
               </div>
             </div>
+
             <!-- Email -->
-            <div class="flex flex-col gap-2">
-              <label
-                class="font-label-lg text-label-lg text-on-surface"
-                for="email"
-                >Email Address</label
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-semibold text-on-surface" for="email"
+                >Địa Chỉ Email</label
               >
               <div class="relative">
                 <span
-                  class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-[20px]"
+                  class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[18px]"
                   >mail</span
                 >
                 <input
-                  class="w-full pl-12 pr-4 py-3 bg-white/50 border border-glass-border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-body-md text-body-md"
+                  class="w-full pl-10 pr-4 py-2.5 bg-white/50 border border-glass-border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm"
                   id="email"
-                  placeholder="jane@workflow.so"
+                  placeholder="nguyenvana@workflow.so"
                   required=""
                   type="email"
+                  value="trongnd1@gmail.com"
                 />
               </div>
             </div>
+
             <!-- Password -->
-            <div class="flex flex-col gap-2">
-              <label
-                class="font-label-lg text-label-lg text-on-surface"
-                for="password"
-                >Password</label
-              >
+            <div class="flex flex-col gap-1">
+              <div class="flex justify-between items-center">
+                <label
+                  class="text-xs font-semibold text-on-surface"
+                  for="password"
+                  >Mật Khẩu</label
+                >
+                <!-- Quên mật khẩu (Hiện mặc định khi Đăng nhập) -->
+                <a
+                  id="forgotPasswordLink"
+                  href="#"
+                  class="text-[11px] text-primary-container font-semibold hover:underline"
+                  >Quên mật khẩu?</a
+                >
+              </div>
               <div class="relative">
                 <span
-                  class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-[20px]"
+                  class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[18px]"
                   >lock</span
                 >
                 <input
-                  class="w-full pl-12 pr-12 py-3 bg-white/50 border border-glass-border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-body-md text-body-md"
+                  class="w-full pl-10 pr-10 py-2.5 bg-white/50 border border-glass-border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm"
                   id="password"
                   placeholder="••••••••"
                   required=""
                   type="password"
+                  value="abc123"
                 />
                 <button
-                  class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors"
+                  class="absolute right-3.5 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors"
                   onclick="togglePassword()"
                   type="button"
                 >
                   <span
-                    class="material-symbols-outlined text-[20px]"
+                    class="material-symbols-outlined text-[18px]"
                     id="passwordToggleIcon"
                     >visibility</span
                   >
                 </button>
               </div>
-              <!-- Strength Meter -->
-              <div class="mt-1 flex flex-col gap-1.5">
+
+              <!-- Strength Meter (Ẩn mặc định cho Đăng nhập) -->
+              <div
+                class="hidden mt-1 flex flex-col gap-1"
+                id="strengthMeterGroup"
+              >
                 <div class="flex gap-1">
                   <div
                     class="strength-meter-bar flex-1 bg-surface-variant"
@@ -418,69 +417,92 @@
                   ></div>
                 </div>
                 <span
-                  class="font-label-md text-label-md text-on-surface-variant"
+                  class="text-[11px] text-on-surface-variant"
                   id="strengthLabel"
-                  >Password must be at least 8 characters</span
+                  >Mật khẩu tối thiểu phải có 8 ký tự</span
                 >
               </div>
             </div>
-            <!-- Terms Checkbox -->
-            <label class="flex items-start gap-3 cursor-pointer group mt-2">
-              <div class="relative flex items-center">
+
+            <!-- Checkbox: Ghi nhớ đăng nhập  -->
+            <div id="rememberGroup" class="mt-0.5">
+              <label class="flex items-center gap-2.5 cursor-pointer group">
                 <input
-                  class="peer h-5 w-5 rounded border-glass-border text-primary-container focus:ring-primary-container/20"
-                  required=""
+                  class="custom-checkbox h-4 w-4 rounded text-primary-container focus:ring-primary-container/20 transition-all cursor-pointer"
                   type="checkbox"
                 />
-              </div>
-              <span
-                class="font-body-sm text-body-sm text-on-surface-variant select-none"
-              >
-                I agree to the
-                <a
-                  class="text-primary-container font-semibold hover:underline"
-                  href="#"
-                  >Terms of Service</a
+                <span
+                  class="text-xs text-on-surface-variant select-none font-medium"
+                  >Ghi nhớ đăng nhập trên thiết bị này</span
                 >
-                and
-                <a
-                  class="text-primary-container font-semibold hover:underline"
-                  href="#"
-                  >Privacy Policy</a
-                >.
-              </span>
-            </label>
-            <!-- Sign Up Button -->
+              </label>
+            </div>
+
+            <!-- Checkbox: Điều khoản  -->
+            <div id="termsGroup" class="hidden mt-0.5">
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <div class="relative flex items-center">
+                  <input
+                    class="custom-checkbox h-4 w-4 rounded text-primary-container focus:ring-primary-container/20 transition-all cursor-pointer"
+                    id="termsCheckbox"
+                    type="checkbox"
+                  />
+                </div>
+                <span
+                  class="text-xs text-on-surface-variant select-none leading-tight font-medium"
+                >
+                  Tôi đồng ý với
+                  <a
+                    class="text-primary-container font-semibold hover:underline"
+                    href="#"
+                    >Điều khoản dịch vụ</a
+                  >
+                  và
+                  <a
+                    class="text-primary-container font-semibold hover:underline"
+                    href="#"
+                    >Chính sách bảo mật</a
+                  >.
+                </span>
+              </label>
+            </div>
+
+            <!-- Submit Button -->
             <button
-              class="ripple mt-4 w-full bg-primary-container text-white py-4 rounded-xl font-label-lg text-label-lg shadow-lg shadow-shadow-tint hover:bg-primary transition-all active:scale-[0.98]"
+              id="submitBtn"
+              class="ripple mt-2 w-full bg-primary-container text-white py-3 rounded-xl text-sm font-semibold shadow-md shadow-shadow-tint hover:bg-primary transition-all active:scale-[0.98]"
               type="submit"
             >
-              Sign Up
+              Đăng nhập
             </button>
           </form>
-          <!-- Footer Links -->
-          <div class="mt-4 text-center">
-            <p class="font-body-sm text-body-sm text-on-surface-variant">
-              Already have an account?
-              <a
+
+          <!-- Footer Switcher Prompt -->
+          <div class="mt-3 text-center">
+            <p id="footerPrompt" class="text-xs text-on-surface-variant">
+              Chưa có tài khoản?
+              <button
+                onclick="switchTab('register')"
                 class="text-primary-container font-bold hover:underline"
-                href="#"
-                >Log In</a
               >
+                Đăng ký ngay
+              </button>
             </p>
           </div>
+
           <!-- Divider -->
-          <div class="flex items-center gap-4 my-2">
+          <div class="flex items-center gap-3 my-2">
             <div class="h-px flex-1 bg-glass-border"></div>
-            <span class="font-label-md text-label-md text-outline">OR</span>
+            <span class="text-[11px] font-medium text-outline">HOẶC</span>
             <div class="h-px flex-1 bg-glass-border"></div>
           </div>
-          <!-- Social Sign Up -->
-          <div class="grid grid-cols-2 gap-4">
+
+          <!-- Social Login -->
+          <div class="grid grid-cols-2 gap-3">
             <button
-              class="flex items-center justify-center gap-2 py-3 px-4 bg-white/50 border border-glass-border rounded-xl hover:bg-white transition-all font-label-lg text-label-lg"
+              class="flex items-center justify-center gap-2 py-2 px-3 bg-white/50 border border-glass-border rounded-xl hover:bg-white transition-all text-xs font-semibold"
             >
-              <svg class="w-5 h-5" viewBox="0 0 24 24">
+              <svg class="w-4 h-4" viewBox="0 0 24 24">
                 <path
                   d="M12.48 10.92v3.28h7.84c-.24 1.84-.9 3.34-2.1 4.46-1.5 1.5-3.8 3.08-7.74 3.08-6.14 0-11-4.96-11-11.1s4.86-11.1 11-11.1c3.28 0 5.76 1.28 7.54 3L21 4.7C18.8 2.6 15.6 1.1 12.48 1.1 6.58 1.1 1.48 6.2 1.48 12.1s5.1 11 11 11c3.12 0 5.76-1.02 7.84-3.08 2.1-2.1 2.84-5.1 2.84-7.6 0-.54-.04-1.06-.12-1.5H12.48z"
                   fill="#EA4335"
@@ -489,112 +511,20 @@
               Google
             </button>
             <button
-              class="flex items-center justify-center gap-2 py-3 px-4 bg-white/50 border border-glass-border rounded-xl hover:bg-white transition-all font-label-lg text-label-lg"
+              class="flex items-center justify-center gap-2 py-2 px-3 bg-white/50 border border-glass-border rounded-xl hover:bg-white transition-all text-xs font-semibold"
             >
-              <svg class="w-5 h-5" viewBox="0 0 24 24">
+              <svg class="w-4 h-4" viewBox="0 0 24 24">
                 <path
                   d="M16.365 1.43H13c-3.526 0-5.32 2.374-5.32 5.56v2.565h-2.92v3.91h2.92v9.1h4.15v-9.1h3.33l.42-3.91h-3.75v-2.1c0-1.07.24-1.63 1.62-1.63h2.1V1.43z"
                   fill="#000000"
                 ></path>
               </svg>
-              Github
+              GitHub
             </button>
           </div>
         </div>
       </div>
     </main>
-    <script>
-      // Password Visibility Toggle
-      function togglePassword() {
-        const passwordInput = document.getElementById("password");
-        const icon = document.getElementById("passwordToggleIcon");
-        if (passwordInput.type === "password") {
-          passwordInput.type = "text";
-          icon.textContent = "visibility_off";
-        } else {
-          passwordInput.type = "password";
-          icon.textContent = "visibility";
-        }
-      }
-
-      // Password Strength Meter Logic
-      const passwordInput = document.getElementById("password");
-      const meters = [
-        document.getElementById("meter1"),
-        document.getElementById("meter2"),
-        document.getElementById("meter3"),
-        document.getElementById("meter4"),
-      ];
-      const strengthLabel = document.getElementById("strengthLabel");
-
-      passwordInput.addEventListener("input", (e) => {
-        const val = e.target.value;
-        let strength = 0;
-
-        if (val.length >= 8) strength++;
-        if (val.match(/[A-Z]/)) strength++;
-        if (val.match(/[0-9]/)) strength++;
-        if (val.match(/[^A-Za-z0-9]/)) strength++;
-
-        // Reset meters
-        meters.forEach((m) => {
-          m.className = "strength-meter-bar flex-1 bg-surface-variant";
-        });
-
-        if (val.length > 0) {
-          if (strength <= 1) {
-            meters[0].className = "strength-meter-bar flex-1 bg-error";
-            strengthLabel.textContent = "Weak password";
-            strengthLabel.className = "font-label-md text-label-md text-error";
-          } else if (strength === 2) {
-            meters[0].className = "strength-meter-bar flex-1 bg-warning";
-            meters[1].className = "strength-meter-bar flex-1 bg-warning";
-            strengthLabel.textContent = "Moderate password";
-            strengthLabel.className =
-              "font-label-md text-label-md text-warning";
-          } else if (strength === 3) {
-            meters[0].className =
-              "strength-meter-bar flex-1 bg-primary-container";
-            meters[1].className =
-              "strength-meter-bar flex-1 bg-primary-container";
-            meters[2].className =
-              "strength-meter-bar flex-1 bg-primary-container";
-            strengthLabel.textContent = "Strong password";
-            strengthLabel.className =
-              "font-label-md text-label-md text-primary-container";
-          } else {
-            meters.forEach(
-              (m) => (m.className = "strength-meter-bar flex-1 bg-success"),
-            );
-            strengthLabel.textContent = "Excellent password";
-            strengthLabel.className =
-              "font-label-md text-label-md text-success";
-          }
-        } else {
-          strengthLabel.textContent = "Password must be at least 8 characters";
-          strengthLabel.className =
-            "font-label-md text-label-md text-on-surface-variant";
-        }
-      });
-
-      // Simple form submit feedback
-      document
-        .getElementById("registrationForm")
-        .addEventListener("submit", (e) => {
-          e.preventDefault();
-          const btn = e.target.querySelector('button[type="submit"]');
-          const originalText = btn.textContent;
-          btn.textContent = "Creating Account...";
-          btn.disabled = true;
-          btn.style.opacity = "0.7";
-
-          setTimeout(() => {
-            alert("Welcome to WorkFlow! Registration successful.");
-            btn.textContent = originalText;
-            btn.disabled = false;
-            btn.style.opacity = "1";
-          }, 1500);
-        });
-    </script>
+    <script th:src="@{/js/login.js}"></script>
   </body>
 </html>

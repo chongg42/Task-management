@@ -47,8 +47,8 @@ public class Project {
   @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Task> tasks = new HashSet<>();
 
-  @OneToMany(mappedBy = "project")
-  private Set<Attachment> attachments = new HashSet<>();
+  // @OneToMany(mappedBy = "project")
+  // private Set<Attachment> attachments = new HashSet<>();
 
   // @OneToMany(mappedBy = "project")
   // private Set<ActivityLog> activityLogs = new HashSet<>();

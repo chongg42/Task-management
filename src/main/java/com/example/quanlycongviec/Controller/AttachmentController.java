@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.quanlycongviec.Controller.AOP.TrackActivity;
+import com.example.quanlycongviec.AOP.TrackActivity;
 import com.example.quanlycongviec.DTO.Response.AttachmentRes;
 import com.example.quanlycongviec.Service.AttachmentService;
 
@@ -93,8 +93,8 @@ public class AttachmentController {
             // 4. Trả file về cho Client
             return ResponseEntity.ok()
                     .contentType(MediaType.parseMediaType(contentType))
-                    // Dòng dưới này giúp trình duyệt hiểu là hiển thị trực tiếp (inline) thay vì
-                    // bắt buộc tải xuống (attachment)
+                    // Dòng dưới này giúp trình duyệt hiểu là  bắt buộc tải xuống (attachment) thay vì
+                    //  hiển thị trực tiếp (inline)
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + storageName + "\"")
                     .body(resource);
         } catch (Exception e) {
